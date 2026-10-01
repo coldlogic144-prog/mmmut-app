@@ -48,6 +48,7 @@ data class Notice(
 
 data class TimetableCell(
     val id: String = "",
+    val day: String = "",
     val periodKey: String = "",
     val startPeriod: String = "",
     val endPeriod: String = "",
@@ -87,6 +88,7 @@ data class TimetableEntry(
 
     fun toCell(): TimetableCell = TimetableCell(
         id = id,
+        day = day,
         periodKey = periodDisplay,
         startPeriod = startPeriod,
         endPeriod = endPeriod,

@@ -229,7 +229,15 @@ fun AcademicsScreen(vm: AcademicsViewModel = androidx.lifecycle.viewmodel.compos
                     1 -> LazyColumn(contentPadding = PaddingValues(8.dp)) {
                         d.week.forEach { (day, cells) ->
                             item { Text(day, style = MaterialTheme.typography.titleSmall, modifier = Modifier.padding(8.dp)) }
-                            items(cells) { c -> Text("${c.periodKey} ${c.start}-${c.end} · ${c.subjectCode} ${c.subjectName} [${c.type}]", style = MaterialTheme.typography.bodySmall, modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp)) }
+                            if (cells.isEmpty()) {
+                                item { Text("No classes scheduled.", style = MaterialTheme.typography.bodySmall, modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp)) }
+                            } else {
+                                items(cells) { c ->
+                                    val grp = c.practicalGroup?.let { " ($it)" } ?: c.tutorialGroup?.let { " ($it)" } ?: ""
+                                    val rm = c.room.ifBlank { branch.room }
+                                    Text("${c.periodKey} (${c.start}-${c.end}) · ${c.subjectCode} ${c.subjectName} [${c.type}$grp] · Room $rm", style = MaterialTheme.typography.bodySmall, modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp))
+                                }
+                            }
                         }
                     }
 
