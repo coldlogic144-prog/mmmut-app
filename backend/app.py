@@ -56,12 +56,17 @@ def create_app() -> Flask:
     from .routes.telegram import bp as telegram_bp
     app.register_blueprint(telegram_bp)
 
+    @app.get("/health")
+    def health():
+        """Lightweight health-check endpoint returning HTTP 200 without DB operations."""
+        return jsonify({"ok": True, "status": "healthy"}), 200
+
     @app.get("/")
     def index():
         return jsonify({
             "ok": True,
             "service": "mmmut-ero-backend",
-            "endpoints": ["/api/health", "/api/roster/<roll>",
+            "endpoints": ["/health", "/api/health", "/api/roster/<roll>",
                           "/api/roster/search?q=", "/api/roster/stats",
                           "/api/telegram/config", "/api/telegram/create-token",
                           "/api/telegram/check-membership", "/api/telegram/channel-invite",

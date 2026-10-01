@@ -1,0 +1,82 @@
+# ==============================================================================
+# GitHub Actions Workflow: Backend Keep-Alive & Health Check
+# ==============================================================================
+#
+# WHAT THIS WORKFLOW DOES:
+#   This workflow periodically sends an HTTP GET request to the backend's /health
+#   endpoint. Its primary function is to serve as a keep-alive mechanism that
+#   prevents free-tier hosting platforms (such as Render) from spinning down or
+#   entering sleep mode due to inactivity.
+#
+# HOW TO CONFIGURE BACKEND_URL:
+#   1. Navigate to your GitHub repository: Settings -> Secrets and variables -> Actions.
+#   2. Under "Repository variables" (or "Repository secrets"), click "New repository variable"
+#      (or "New repository secret").
+#   3. Name: BACKEND_URL
+#   4. Value: The base URL of your deployed backend service (e.g., https://mmmut-ero-backend.onrender.com).
+#
+# HOW TO MANUALLY RUN THIS WORKFLOW:
+#   1. Go to the "Actions" tab in your GitHub repository.
+#   2. Select "Backend Health Check" from the left sidebar workflow list.
+#   3. Click the "Run workflow" dropdown, select the branch, and click "Run workflow".
+#
+# DISCLAIMER:
+#   This workflow is solely a keep-alive and health-check ping mechanism. It helps
+#   mitigate inactivity shutdowns on free-tier hosting, but it does NOT guarantee
+#   24/7 server uptime or replace a dedicated uptime monitoring infrastructure.
+# ==============================================================================
+
+name: Backend Health Check
+
+"on":
+  schedule:
+    # Run every 14 minutes to prevent free-tier services (e.g. Render) from spinning down
+    - cron: '*/14 * * * *'
+  workflow_dispatch:
+
+jobs:
+  health-check:
+    name: Backend Health Check Ping
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Perform Backend Health Check
+        env:
+          BACKEND_URL: ${{ secrets.BACKEND_URL || vars.BACKEND_URL }}
+        run: |
+          if [ -z "$BACKEND_URL" ]; then
+            echo "::error::BACKEND_URL environment variable is not configured."
+            echo "Please set BACKEND_URL as a Repository Secret or Repository Variable in GitHub repository settings."
+            exit 1
+          fi
+
+          # Strip trailing slash if present to ensure proper URL construction
+          BASE_URL="${BACKEND_URL%/}"
+          HEALTH_ENDPOINT="${BASE_URL}/health"
+
+          echo "=================================================="
+          echo " Starting Backend Health Check Ping"
+          echo " Timestamp : $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
+          echo " Target     : ${HEALTH_ENDPOINT}"
+          echo "=================================================="
+
+          # Send GET request with connection timeout, request timeout, failure detection, and detailed output
+          RESPONSE=$(curl -sS --fail \
+            --connect-timeout 10 \
+            --max-time 30 \
+            --write-out "\nHTTP_STATUS:%{http_code}\nTIME_TOTAL:%{time_total}s\n" \
+            "${HEALTH_ENDPOINT}" 2>&1)
+          CURL_EXIT=$?
+
+          if [ $CURL_EXIT -eq 0 ]; then
+            echo "Response Output:"
+            echo "$RESPONSE"
+            echo "=================================================="
+            echo "Health check succeeded."
+          else
+            echo "Error Output:"
+            echo "$RESPONSE"
+            echo "=================================================="
+            echo "::error::Health check failed with curl exit code $CURL_EXIT"
+            exit $CURL_EXIT
+          fi
