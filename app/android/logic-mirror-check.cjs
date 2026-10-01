@@ -46,4 +46,51 @@ function routeFor(type, refId){ const t=String(type).toLowerCase();
 assert.strictEqual(routeFor('academic','abc'),'notice/abc');
 assert.strictEqual(routeFor('examination','x'),'academics');
 assert.strictEqual(routeFor('emergency','z'),'notice/z');
+
+// Timetable filtering engine (mirrors ScheduleEngine.filterEntriesForStudent)
+function filterTimetable(entries, b, sem, sec, tg, pg) {
+  const bN = b.toLowerCase(), sN = sec.toUpperCase(), tN = tg.toUpperCase(), pN = pg.toUpperCase();
+  return entries.filter(e => {
+    if (e.branch.toLowerCase() !== bN || e.semester !== sem || e.section.toUpperCase() !== sN) return false;
+    if (e.classType === 'LECTURE') {
+      return (e.tutorialGroup == null || tN === 'N/A' || e.tutorialGroup.toUpperCase() === tN) &&
+             (e.practicalGroup == null || pN === 'N/A' || e.practicalGroup.toUpperCase() === pN);
+    }
+    if (e.classType === 'TUTORIAL') {
+      if (e.tutorialGroup == null) return true;
+      if (tN === 'N/A' || !tN) return false;
+      return e.tutorialGroup.toUpperCase() === tN;
+    }
+    if (e.classType === 'PRACTICAL') {
+      if (e.practicalGroup == null) return true;
+      if (pN === 'N/A' || !pN) return false;
+      return e.practicalGroup.toUpperCase() === pN;
+    }
+    return true;
+  });
+}
+
+const SAMPLE_ENTRIES = [
+  { id: '1', branch: 'civil', section: 'A', semester: 1, classType: 'LECTURE', tutorialGroup: null, practicalGroup: null, subjectCode: 'BSM-131' },
+  { id: '2', branch: 'civil', section: 'A', semester: 1, classType: 'TUTORIAL', tutorialGroup: 'T1', practicalGroup: null, subjectCode: 'BSM-110' },
+  { id: '3', branch: 'civil', section: 'A', semester: 1, classType: 'TUTORIAL', tutorialGroup: 'T2', practicalGroup: null, subjectCode: 'BSM-110' },
+  { id: '4', branch: 'civil', section: 'A', semester: 1, classType: 'PRACTICAL', tutorialGroup: null, practicalGroup: 'P1', subjectCode: 'BCE-121' },
+  { id: '5', branch: 'civil', section: 'A', semester: 1, classType: 'PRACTICAL', tutorialGroup: null, practicalGroup: 'P2', subjectCode: 'BSM-131' }
+];
+
+const t1p1 = filterTimetable(SAMPLE_ENTRIES, 'civil', 1, 'A', 'T1', 'P1');
+assert.ok(t1p1.some(e => e.tutorialGroup === 'T1'));
+assert.ok(!t1p1.some(e => e.tutorialGroup === 'T2'));
+assert.ok(t1p1.some(e => e.practicalGroup === 'P1'));
+assert.ok(!t1p1.some(e => e.practicalGroup === 'P2'));
+
+const t2p2 = filterTimetable(SAMPLE_ENTRIES, 'civil', 1, 'A', 'T2', 'P2');
+assert.ok(t2p2.some(e => e.tutorialGroup === 'T2'));
+assert.ok(!t2p2.some(e => e.tutorialGroup === 'T1'));
+assert.ok(t2p2.some(e => e.practicalGroup === 'P2'));
+assert.ok(!t2p2.some(e => e.practicalGroup === 'P1'));
+
+const t1p2 = filterTimetable(SAMPLE_ENTRIES, 'civil', 1, 'A', 'T1', 'P2');
+assert.ok(t1p2.some(e => e.tutorialGroup === 'T1') && t1p2.some(e => e.practicalGroup === 'P2'));
+
 console.log('android-logic-mirror: ALL CHECKS PASSED');
