@@ -1,0 +1,22 @@
+{
+  "project_info": {
+    "project_number": "734576815247",
+    "project_id": "student-erp-77605",
+    "storage_bucket": "student-erp-77605.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "REPLACE_WITH_ANDROID_APP_ID_FROM_CONSOLE",
+        "android_client_info": { "package_name": "com.mmmut.ero" }
+      },
+      "api_key": [{ "current_key": "REPLACE_WITH_ANDROID_API_KEY" }],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

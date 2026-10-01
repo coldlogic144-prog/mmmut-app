@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#1e3a8a" />
+    <meta name="description"
+        content="MMMUT ERP — The Ledger. Academic portal for attendance tracking, timetables, syllabus, notices and student services." />
+    <title>MMMUT ERP — Academic Portal &amp; Student Ledger</title>
+
+    <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+
+    <!-- Modern Modular CSS Architecture -->
+    <link rel="stylesheet" href="./frontend/css/base.css" />
+    <link rel="stylesheet" href="./frontend/css/layout.css" />
+    <link rel="stylesheet" href="./frontend/css/components.css" />
+    <link rel="stylesheet" href="./frontend/css/pages.css" />
+</head>
+
+<body>
+
+    <!-- Loading Screen -->
+    <div id="loadingScreen">
+        <div class="brand-mark" style="width:48px;height:48px;font-size:24px;margin-bottom:6px;">M</div>
+        <div class="loader-ring"></div>
+        <div class="loading-msg" id="loadingMsg">Opening academic ledger…</div>
+    </div>
+
+    <!-- Global Toast Notifications -->
+    <div id="toast" class="toast"></div>
+
+    <!-- ============================================================ -->
+    <!-- AUTHENTICATION SCREEN (LOGIN & SIGNUP)                        -->
+    <!-- ============================================================ -->
+    <div id="authScreen" style="display:none;">
+        <div class="auth-wrap">
+            <!-- Left Branding Banner -->
+            <div class="auth-side">
+                <div>
+                    <div class="auth-mark">MMMUT · Gorakhpur</div>
+                    <div class="auth-title">The <em>Ledger.</em><br />Your academic life,<br />organized.</div>
+                    <div class="auth-sub">Track attendance lecture by lecture, preview daily timetables, and monitor
+                        academic progress with clarity.</div>
+                    <div class="period-strip">
+                        <div class="period-chip">I</div>
+                        <div class="period-chip">II</div>
+                        <div class="period-chip">III</div>
+                        <div class="period-chip">IV</div>
+                        <div class="period-chip">V</div>
+                        <div class="period-chip">VI</div>
+                        <div class="period-chip">VII</div>
+                        <div class="period-chip">VIII</div>
+                    </div>
+                </div>
+                <div class="auth-foot">Session 2026–27 · M.M.M. University of Technology</div>
+            </div>
+
+            <!-- Right Form Section -->
+            <div class="auth-main">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" id="tabLogin" onclick="switchAuthTab('login')">Sign in</button>
+                    <button class="auth-tab" id="tabSignup" onclick="switchAuthTab('signup')">Create account</button>
+                </div>
+
+                <!-- Login Form -->
+                <div id="loginForm">
+                    <div class="field">
+                        <label id="loginIdentifierLabel" for="loginUsername">Username</label>
+                        <input id="loginUsername" placeholder="e.g. rahul.cse26" autocomplete="username" />
+                    </div>
+                    <div class="field">
+                        <label for="loginPassword">Password</label>
+                        <input id="loginPassword" type="password" placeholder="••••••••"
+                            autocomplete="current-password" />
+                    </div>
+                    <button class="btn-primary" onclick="handleLogin()">Sign in to ERP</button>
+                    <div class="auth-error" id="loginError" role="alert"></div>
+                    <div class="auth-hint">
+                        Don't have an account yet? <a href="javascript:void(0)" onclick="switchAuthTab('signup')"
+                            style="color:var(--primary);font-weight:600;">Create one here</a>
+                    </div>
+                </div>
+
+                <!-- Signup Form -->
+                <div id="signupForm" style="display:none;">
+                    <div class="field">
+                        <label for="suName">Full Name</label>
+                        <input id="suName" placeholder="e.g. Rahul Kumar" autocomplete="name" />
+                    </div>
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="suUsername">Username</label>
+                            <input id="suUsername" placeholder="rahul.cse26" />
+                        </div>
+                        <div class="field">
+                            <label for="suPassword">Password</label>
+                            <input id="suPassword" type="password" placeholder="••••••••" />
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="suBranch">Branch</label>
+                            <select id="suBranch" onchange="populateSectionOptions()"></select>
+                        </div>
+                        <div class="field">
+                            <label for="suSection">Section</label>
+                            <select id="suSection"></select>
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="suHostel">Hostel / Day Scholar</label>
+                            <select id="suHostel">
+                                <option value="Day Scholar">Day Scholar</option>
+                                <option value="Tagore Hostel">Tagore Hostel</option>
+                                <option value="VS Hostel">VS Hostel</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="suGender">Gender</label>
+                            <select id="suGender">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn-primary" onclick="handleSignup()">Create student account</button>
+                    <div class="auth-error" id="signupError" role="alert"></div>
+                    <div class="auth-hint">
+                        Already have an account? <a href="javascript:void(0)" onclick="switchAuthTab('login')"
+                            style="color:var(--primary);font-weight:600;">Sign in here</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- MAIN APPLICATION (DASHBOARD & SHELL)                          -->
+    <!-- ============================================================ -->
+    <div id="app">
+        <div class="app-layout-wrapper">
+
+            <!-- Desktop Sidebar Navigation -->
+            <aside class="app-sidebar">
+                <div class="sidebar-header">
+                    <div class="brand-mark">M</div>
+                    <div>
+                        <div class="brand-name">MMMUT ERP</div>
+                        <div class="brand-sub">The Ledger</div>
+                    </div>
+                </div>
+
+                <nav class="sidebar-nav">
+                    <button class="sidebar-link active" onclick="scrollToSection('mainShell')">
+                        <span class="icon">📊</span>
+                        <span>Dashboard</span>
+                    </button>
+                    <button class="sidebar-link" onclick="scrollToSection('timetableSection')">
+                        <span class="icon">📅</span>
+                        <span>Today's Periods</span>
+                    </button>
+                    <button class="sidebar-link" onclick="scrollToSection('attendanceSection')">
+                        <span class="icon">📈</span>
+                        <span>Attendance Tracker</span>
+                    </button>
+                    <button class="sidebar-link" onclick="scrollToSection('historyCard')">
+                        <span class="icon">📋</span>
+                        <span>Attendance History</span>
+                    </button>
+                    <button class="sidebar-link" id="sidebarLedgerBtn" onclick="toggleLedgerSection(true)">
+                        <span class="icon">📑</span>
+                        <span>Syllabus Tracker</span>
+                    </button>
+                    <button class="sidebar-link" onclick="scrollToSection('postsTopCard')">
+                        <span class="icon">📢</span>
+                        <span>Announcements</span>
+                    </button>
+                    <button class="sidebar-link" onclick="scrollToSection('feedbackCard')">
+                        <span class="icon">💬</span>
+                        <span>Help &amp; Feedback</span>
+                    </button>
+                    <button class="sidebar-link" onclick="toggleChessClub(true)">
+                        <span class="icon">♟️</span>
+                        <span>Chess Club</span>
+                    </button>
+                    <button class="sidebar-link" id="sidebarTelegramBtn" onclick="toggleTelegramSection(true)">
+                        <span class="icon" style="display:inline-flex;align-items:center;justify-content:center;color:#0088cc;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+                            </svg>
+                        </span>
+                        <span>Telegram</span>
+                    </button>
+                    <button class="sidebar-link" id="sidebarAdminBtn" onclick="openAdminPanel()" style="display:none;">
+                        <span class="icon">🛡️</span>
+                        <span>Admin Panel</span>
+                    </button>
+                </nav>
+
+                <div class="sidebar-footer">
+                    <div class="user-pill" onclick="openProfileModal()"
+                        style="width:100%;justify-content:space-between;background:transparent;border:none;padding:0;">
+                        <div style="display:flex;align-items:center;gap:10px;">
+                            <div class="avatar" id="sidebarAvatar">—</div>
+                            <div style="text-align:left;">
+                                <div class="user-pill-name" id="sidebarName">—</div>
+                                <div class="user-pill-branch" id="sidebarBranch">—</div>
+                            </div>
+                        </div>
+                        <span style="font-size:16px;color:var(--text-light);">⚙️</span>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Backdrop for Mobile Sidebar Drawer -->
+            <div class="sidebar-backdrop" onclick="toggleSidebar(false)"></div>
+
+            <!-- Main Workspace Area -->
+            <div class="app-main">
+                <!-- Topbar Header -->
+                <header class="topbar">
+                    <div class="topbar-left">
+                        <button class="sidebar-toggle-btn" onclick="toggleSidebar()"
+                            aria-label="Toggle Navigation Menu">☰</button>
+                        <div class="brand" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="cursor:pointer;" title="Scroll to top">
+                            <div class="brand-title-wrap">
+                                <div class="page-title">The Ledger</div>
+                                <div class="page-subtitle" id="todayLabel">—</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="topbar-right">
+                        <!-- Announcements Notification Bell -->
+                        <button class="btn-icon" id="notifBell" onclick="scrollToPosts()" title="Announcements"
+                            aria-label="Announcements">
+                            🔔
+                            <span class="badge-dot" id="notifBadge" style="display:none;">0</span>
+                        </button>
+
+                        <!-- User Profile Dropdown Menu -->
+                        <div class="user-menu-container" id="userMenuContainer">
+                            <button class="user-pill" id="userMenuToggleBtn" onclick="toggleUserMenu()" aria-haspopup="true" aria-expanded="false" title="Account Menu">
+                                <div class="avatar" id="pillAvatar">—</div>
+                                <div class="user-pill-text">
+                                    <div class="user-pill-name" id="pillName">—</div>
+                                    <div class="user-pill-branch" id="pillBranch">—</div>
+                                </div>
+                                <span class="dropdown-chevron" aria-hidden="true">▾</span>
+                            </button>
+
+                            <div class="user-dropdown-menu" id="userDropdownMenu" role="menu" aria-label="User account menu">
+                                <div class="dropdown-user-header">
+                                    <div class="avatar" id="dropdownAvatar">—</div>
+                                    <div class="dropdown-user-details">
+                                        <div class="dropdown-name" id="dropdownName">Student</div>
+                                        <div class="dropdown-meta" id="dropdownMeta">B.Tech Session 2026–27</div>
+                                    </div>
+                                </div>
+                                <div class="dropdown-divider"></div>
+                                
+                                <button class="dropdown-item" role="menuitem" onclick="openProfileModal(); toggleUserMenu(false);">
+                                    <span class="item-icon">👤</span>
+                                    <span>Profile &amp; Settings</span>
+                                </button>
+
+                                <button class="dropdown-item" id="dropdownAdminBtn" role="menuitem" onclick="handleDropdownAdmin(); toggleUserMenu(false);">
+                                    <span class="item-icon" id="dropdownAdminIcon">⚙️</span>
+                                    <span id="dropdownAdminLabel">Admin Console</span>
+                                </button>
+
+                                <button class="dropdown-item" id="dropdownPushNotifBtn" role="menuitem" onclick="enablePushNotifications(); toggleUserMenu(false);">
+                                    <span class="item-icon">🔔</span>
+                                    <span>Push Notifications</span>
+                                </button>
+
+                                <a class="dropdown-item" role="menuitem" href="https://www.mediafire.com/file/q924finlss1x9mz/app-debug.apk/file" target="_blank" onclick="toggleUserMenu(false);">
+                                    <span class="item-icon">📱</span>
+                                    <span>Download Android APK</span>
+                                </a>
+
+                                <div class="dropdown-divider"></div>
+
+                                <button class="dropdown-item dropdown-item-danger" role="menuitem" onclick="handleLogout(); toggleUserMenu(false);">
+                                    <span class="item-icon">🚪</span>
+                                    <span>Sign Out</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Hidden compatibility elements to ensure existing JS querySelectors and ID lookups continue to work seamlessly without errors -->
+                        <div style="display:none !important;" aria-hidden="true">
+                            <a href="https://www.mediafire.com/file/q924finlss1x9mz/app-debug.apk/file" target="_blank" class="btn-download-app">📱 APK</a>
+                            <button class="btn-topbar-telegram" onclick="toggleTelegramSection(true)">Telegram</button>
+                            <a class="btn-chess" href="chess/chess.html">♟️ Chess</a>
+                            <button class="btn-ghost" id="pushNotifBtn" onclick="enablePushNotifications()">🔔 Notifications</button>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- Shell Content -->
+                <main class="shell" id="mainShell">
+
+                    <!-- 1. Compact Institutional Welcome Banner -->
+                    <div class="welcome-hero">
+                        <div class="welcome-info">
+                            <h1>Welcome back, <span id="welcomeStudentName">Student</span></h1>
+                            <p>B.Tech Session 2026–27 · Madan Mohan Malaviya University of Technology</p>
+                        </div>
+                        <div class="welcome-badges">
+                            <div class="welcome-chip">✓ Roll Verified</div>
+                            <div class="welcome-chip">⏱️ Active Term</div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Official Announcements Feed Card -->
+                    <div class="card" id="postsTopCard">
+                        <div class="card-head">
+                            <div>
+                                <div class="card-eyebrow">📢 Official Notices</div>
+                                <div class="card-title">Latest Announcements</div>
+                            </div>
+                            <button class="btn-secondary" style="padding:6px 14px;font-size:12.5px;"
+                                onclick="renderPostsFeed(true)">View all</button>
+                        </div>
+                        <div id="postsFeedContent"></div>
+                    </div>
+
+                    <!-- Compact Dashboard Quick Actions Strip -->
+                    <div class="quick-actions-bar">
+                        <div class="qa-item" onclick="toggleTelegramSection(true)">
+                            <span class="qa-icon" style="color:#0088cc;display:inline-flex;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+                            </span>
+                            <div class="qa-text">
+                                <span class="qa-title">Telegram Channel</span>
+                                <span class="qa-sub">Private Community</span>
+                            </div>
+                        </div>
+                        <a class="qa-item" href="chess/chess.html" style="text-decoration:none;">
+                            <span class="qa-icon">♟️</span>
+                            <div class="qa-text">
+                                <span class="qa-title">Chess Club</span>
+                                <span class="qa-sub">Campus Matches</span>
+                            </div>
+                        </a>
+                        <div class="qa-item" onclick="toggleLedgerSection(true)">
+                            <span class="qa-icon" style="color:var(--primary);display:inline-flex;">📑</span>
+                            <div class="qa-text">
+                                <span class="qa-title">Syllabus Tracker</span>
+                                <span class="qa-sub">Track Units &amp; Topics</span>
+                            </div>
+                        </div>
+                        <div class="qa-item" onclick="openFeedbackForm()">
+                            <span class="qa-icon">💬</span>
+                            <div class="qa-text">
+                                <span class="qa-title">Help &amp; Support</span>
+                                <span class="qa-sub">Submit Feedback</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3 & 4. Primary Academic 2-Column Grid (Periods & Attendance Balanced) -->
+                    <div class="shell-grid">
+                        <!-- Column 1: Today's Periods Schedule -->
+                        <div id="timetableSection">
+                            <div class="card">
+                                <div class="card-head">
+                                    <div>
+                                        <div class="card-eyebrow">Bell Schedule</div>
+                                        <div class="card-title">Today's Periods</div>
+                                    </div>
+                                    <div class="tabbar">
+                                        <button class="tab-btn active" id="tabToday"
+                                            onclick="setScheduleView('today')">Today</button>
+                                        <button class="tab-btn" id="tabWeek" onclick="setScheduleView('week')">Full
+                                            week</button>
+                                        <button class="tab-btn" id="tabImage"
+                                            onclick="setScheduleView('image')">Image</button>
+                                    </div>
+                                </div>
+                                <div id="todayView"></div>
+                                <div id="weekView" style="display:none;"></div>
+                                <div id="imageView" style="display:none;">
+                                    <div
+                                        style="overflow-x:auto; border-radius:var(--radius-sm); border:1px solid var(--surface-border);">
+                                        <canvas id="ttCanvas"></canvas>
+                                    </div>
+                                    <button class="btn-primary" style="margin-top:14px;"
+                                        onclick="downloadTimetableImage()">Download PNG</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Column 2: Attendance Summary -->
+                        <div id="attendanceSection">
+                            <!-- Overall Attendance Card -->
+                            <div class="card">
+                                <div class="card-eyebrow">Academic Standing</div>
+                                <div class="card-title" style="margin-bottom:14px;">Attendance Summary</div>
+                                
+                                <div class="overall-ring-wrap">
+                                    <div>
+                                        <div class="overall-num" id="overallPct">—</div>
+                                        <div class="overall-sub">cumulative attendance</div>
+                                    </div>
+                                    <div class="overall-counts-box" id="overallCounts">—</div>
+                                </div>
+
+                                <div class="target-row">
+                                    <label for="targetPct">Target Minimum:</label>
+                                    <select id="targetPct" onchange="renderAttendanceStats()">
+                                        <option value="75" selected>75% Minimum</option>
+                                        <option value="80">80% Target</option>
+                                        <option value="90">90% Dean's List</option>
+                                    </select>
+                                </div>
+
+                                <div class="overall-leave" id="overallLeave"></div>
+                                <div id="subjectStats" style="margin-top:16px;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. Secondary Information 2-Column Grid -->
+                    <div class="secondary-grid">
+                        <!-- Column 1: History & Syllabus -->
+                        <div style="display:flex;flex-direction:column;gap:18px;">
+                            <!-- Attendance History Card -->
+                            <div class="card" id="historyCard">
+                                <div class="card-eyebrow">📋 Past &amp; Upcoming</div>
+                                <div class="card-title" style="margin-bottom:14px;">Attendance History</div>
+                                <div class="history-nav">
+                                    <button class="nav-btn" id="histPrev" onclick="navigateHistoryDate(-1)"
+                                        title="Previous day" aria-label="Previous day">‹</button>
+                                    <span class="date-display" id="histDateDisplay">—</span>
+                                    <button class="nav-btn" id="histNext" onclick="navigateHistoryDate(1)"
+                                        title="Next day" aria-label="Next day">›</button>
+                                    <button class="nav-btn today-btn" onclick="goToTodayHistory()">Today</button>
+                                </div>
+                                <div id="historyView"></div>
+                            </div>
+
+                            <!-- Syllabus Tracker (Ledger) Preview Card — replaces old static Curriculum viewer.
+                                 Single source of truth is The Ledger full view; this is a live preview. -->
+                            <div class="syllabus-card ledger-preview-card" id="syllabusCard">
+                                <div class="card-head">
+                                    <div>
+                                        <div class="card-eyebrow">📑 Syllabus Tracker</div>
+                                        <div class="card-title">Course Progress</div>
+                                    </div>
+                                    <button class="btn-secondary" style="padding:6px 14px;font-size:12px;"
+                                        onclick="toggleLedgerSection(true)">📑 Open Tracker</button>
+                                </div>
+                                <div id="dashboardLedgerPreview">
+                                    <div class="syllabus-loading">Loading your syllabus progress…</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Column 2: Feedback, Campus Community & Resources -->
+                        <div style="display:flex;flex-direction:column;gap:18px;">
+                            <!-- Help & Feedback Card -->
+                            <div class="card" id="feedbackCard">
+                                <div class="card-head">
+                                    <div>
+                                        <div class="card-eyebrow">💬 Student Support</div>
+                                        <div class="card-title">Help &amp; Feedback</div>
+                                    </div>
+                                    <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                                        <button class="btn-primary" style="padding:6px 14px;font-size:12px;width:auto;"
+                                            onclick="openFeedbackForm()">➕ New</button>
+                                        <button class="btn-secondary" style="padding:6px 14px;font-size:12px;"
+                                            onclick="openMyFeedback()">📋 My Tickets</button>
+                                        <button class="btn-secondary" style="padding:6px 14px;font-size:12px;"
+                                            onclick="openRatingModal()">⭐ Rate</button>
+                                    </div>
+                                </div>
+                                <div id="feedbackPreviewContent" style="font-size:13px;color:var(--text-muted);">
+                                    <div style="display:flex;gap:16px;flex-wrap:wrap;padding:4px 0;">
+                                        <span>📌 <span id="fbTotalCount">0</span> total</span>
+                                        <span>🟡 <span id="fbOpenCount">0</span> open</span>
+                                        <span>🟢 <span id="fbResolvedCount">0</span> resolved</span>
+                                        <span style="cursor:pointer;color:var(--primary);font-weight:600;"
+                                            onclick="openMyFeedback()">View all →</span>
+                                    </div>
+                                    <div id="fbLatestPreview"
+                                        style="margin-top:8px;font-size:12.5px;color:var(--text-muted);">No feedback
+                                        yet.</div>
+                                </div>
+                            </div>
+
+                            <!-- Community Posts Card -->
+                            <div class="card" id="communityPostsCard">
+                                <div class="card-head">
+                                    <div>
+                                        <div class="card-eyebrow">📝 Community</div>
+                                        <div class="card-title">Campus Feed</div>
+                                    </div>
+                                    <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                                        <button class="btn-primary" id="cpNewPostBtn"
+                                            style="padding:6px 14px;font-size:12px;width:auto;display:none;"
+                                            onclick="openCreatePost()">✏️ New Post</button>
+                                    </div>
+                                </div>
+                                <div id="communityPostsFeed"
+                                    style="max-height:450px;overflow-y:auto;padding-right:4px;">
+                                    <div style="text-align:center;padding:24px 0;color:var(--text-muted);">Loading
+                                        posts…</div>
+                                </div>
+                            </div>
+
+                            <!-- Upcoming Calendar Events -->
+                            <div class="card">
+                                <div class="card-eyebrow">Academic Schedule</div>
+                                <div class="card-title" style="margin-bottom:14px;">Upcoming Dates</div>
+                                <div id="eventsList"></div>
+                            </div>
+
+                            <!-- Quick Academic Links -->
+                            <div class="card">
+                                <div class="card-eyebrow">Official Resources</div>
+                                <div class="card-title" style="margin-bottom:16px;">MMMUT Portals</div>
+                                <button class="btn-secondary" style="width:100%;justify-content:flex-start;"
+                                    onclick="window.open('https://drive.google.com/file/d/1mHw1emQ9i92HIoq7jw6YWKGpPnFV7wMO/view?usp=drivesdk','_blank')">📄
+                                    Time Table PDF</button>
+                                <button class="btn-secondary"
+                                    style="width:100%;justify-content:flex-start;margin-top:8px;"
+                                    onclick="window.open('https://share.google/uOrpx8BFFizpBu9C2','_blank')">📢 MMMUT
+                                    Notices Portal</button>
+                                <button class="btn-secondary"
+                                    style="width:100%;justify-content:flex-start;margin-top:8px;"
+                                    onclick="window.open('https://drive.google.com/file/d/1vENgYXFOKl-1O6eAALAfBYHR95a8b8EX/view?usp=drivesdk','_blank')">📖
+                                    Academic Calendar 2026–27</button>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+
+<!-- ============================================================ -->
+    <!-- CHESS CLUB VIEW                                               -->
+    <!-- ============================================================ -->
+    <div id="chessClubView">
+        <div
+            style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:12px;">
+            <div>
+                <h1 style="font-size:26px; font-weight:800;">♟️ Chess Club</h1>
+                <p style="color:var(--text-muted); font-size:14px; margin-top:2px;">Think. Play. Improve. Campus Chess Community</p>
+            </div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <a href="chess/chess.html" class="btn-primary" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px; padding:8px 16px; font-size:13px;">
+                    <span>♟️ Open Live Chess Arena</span>
+                </a>
+                <button class="btn-secondary" onclick="toggleChessClub(false)">← Back to MMMUT ERP</button>
+            </div>
+        </div>
+
+        <div class="chess-tabs" id="chessTabs">
+            <button class="tab-btn active" data-tab="home" onclick="switchChessTab('home')">🏠 Home</button>
+            <button class="tab-btn" data-tab="members" onclick="switchChessTab('members')">👥 Members</button>
+            <button class="tab-btn" data-tab="leaderboard" onclick="switchChessTab('leaderboard')">🏆
+                Leaderboard</button>
+            <button class="tab-btn" data-tab="events" onclick="switchChessTab('events')">📅 Events</button>
+            <button class="tab-btn" data-tab="challenges" onclick="switchChessTab('challenges')">⚔️ Challenges</button>
+            <button class="tab-btn" data-tab="games" onclick="switchChessTab('games')">🎮 My Games</button>
+            <button class="tab-btn" data-tab="activity" onclick="switchChessTab('activity')">📜 Activity</button>
+        </div>
+
+        <!-- Home -->
+        <div id="chessTab-home" class="chess-tab-content">
+            <div class="chess-card">
+                <div class="card-head">
+                    <div>
+                        <div class="card-eyebrow">♟️ Chess Club</div>
+                        <div class="card-title">Welcome to the Chess Club</div>
+                    </div>
+                </div>
+                <div style="display:flex; flex-wrap:wrap; gap:20px; align-items:center;">
+                    <div style="flex:1; min-width:200px;">
+                        <p style="font-size:14px; color:var(--text-muted); margin-bottom:14px; line-height:1.5;">
+                            A community for chess enthusiasts at MMMUT. Join, challenge others, track your rating, and
+                            participate in events.
+                        </p>
+                        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                            <a href="chess/chess.html" class="btn-primary" style="text-decoration:none; width:auto; padding:9px 20px; display:inline-flex; align-items:center; gap:6px;">
+                                <span>♟️ Play Live Matches</span>
+                            </a>
+                            <button class="btn-secondary" id="chessJoinBtn" style="width:auto; padding:9px 20px;"
+                                onclick="handleChessJoin()">Join Club</button>
+                            <button class="btn-danger" id="chessLeaveBtn"
+                                style="width:auto; padding:9px 20px; display:none;" onclick="handleChessLeave()">Leave
+                                Club</button>
+                        </div>
+                        <div style="margin-top:16px; font-size:13.5px; font-weight:600;">
+                            <span>👥 <span id="chessMemberCount">0</span> members</span>
+                        </div>
+                    </div>
+                    <div
+                        style="flex:1; min-width:200px; background:var(--surface-subtle); border-radius:var(--radius-sm); padding:16px; border:1px solid var(--surface-border);">
+                        <div style="font-weight:700; margin-bottom:8px; font-size:13.5px;">🏆 Upcoming Tournament</div>
+                        <div id="chessNextEvent">
+                            <div style="font-size:13px; color:var(--text-muted);">No upcoming events.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chess-card">
+                <div class="card-head">
+                    <div>
+                        <div class="card-eyebrow">🏅 Leaderboard</div>
+                        <div class="card-title">Top 3 Players</div>
+                    </div>
+                    <button class="btn-secondary" style="padding:6px 14px; font-size:12px;"
+                        onclick="switchChessTab('leaderboard')">View all</button>
+                </div>
+                <div id="chessLeaderboardPreview">
+                    <div style="padding:12px 0; color:var(--text-muted);">Loading...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Members -->
+        <div id="chessTab-members" class="chess-tab-content" style="display:none;">
+            <div class="chess-card">
+                <div class="card-head">
+                    <div>
+                        <div class="card-eyebrow">👥 Members</div>
+                        <div class="card-title">All Club Members</div>
+                    </div>
+                    <span id="chessMemberCount2" style="font-size:13px; color:var(--text-muted); font-weight:600;">0
+                        members</span>
+                </div>
+                <div id="chessMembersList">
+                    <div style="padding:12px 0; color:var(--text-muted);">Loading...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Leaderboard -->
+        <div id="chessTab-leaderboard" class="chess-tab-content" style="display:none;">
+            <div class="chess-card">
+                <div class="card-head">
+                    <div>
+                        <div class="card-eyebrow">🏆 Leaderboard</div>
+                        <div class="card-title">Club Rankings</div>
+                    </div>
+                </div>
+                <div id="chessLeaderboardFull">
+                    <div style="padding:12px 0; color:var(--text-muted);">Loading...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Events -->
+        <div id="chessTab-events" class="chess-tab-content" style="display:none;">
+            <div class="chess-card">
+                <div class="card-head">
+                    <div>
+                        <div class="card-eyebrow">📅 Events</div>
+                        <div class="card-title">Upcoming &amp; Past</div>
+                    </div>
+                    <button class="btn-primary" id="chessEventCreateBtn"
+                        style="padding:6px 14px; font-size:12px; width:auto; display:none;"
+                        onclick="openChessEventForm()">➕ New Event</button>
+                </div>
+                <div id="chessEventsList">
+                    <div style="padding:12px 0; color:var(--text-muted);">Loading...</div>
+                </div>
+            </div>
+            <!-- Event creation form (admin) -->
+            <div id="chessEventForm" style="display:none; margin-top:20px;">
+                <div class="chess-card">
+                    <div class="card-head">
+                        <div>
+                            <div class="card-eyebrow">✏️ Create Event</div>
+                            <div class="card-title">New Chess Event</div>
+                        </div>
+                        <button class="btn-secondary" onclick="closeChessEventForm()">Cancel</button>
+                    </div>
+                    <form onsubmit="submitChessEvent(event)">
+                        <div class="field"><label>Title</label><input id="chessEventTitle"
+                                placeholder="e.g. Sunday Blitz" required /></div>
+                        <div class="field-row">
+                            <div class="field"><label>Date</label><input type="date" id="chessEventDate" required />
+                            </div>
+                            <div class="field"><label>Time</label><input type="time" id="chessEventTime" required />
+                            </div>
+                        </div>
+                        <div class="field"><label>Time Control</label><input id="chessEventTimeControl"
+                                placeholder="e.g. 10+5" /></div>
+                        <div class="field"><label>Description</label><textarea id="chessEventDesc" rows="2"
+                                placeholder="Event description"></textarea></div>
+                        <button type="submit" class="btn-primary" style="width:auto; padding:10px 24px;">Create
+                            Event</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Challenges -->
+        <div id="chessTab-challenges" class="chess-tab-content" style="display:none;">
+            <div class="chess-card">
+                <div class="card-head">
+                    <div>
+                        <div class="card-eyebrow">⚔️ Challenges</div>
+                        <div class="card-title">Challenge a Member</div>
+                    </div>
+                </div>
+                <div style="margin-bottom:14px; display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+                    <label style="font-weight:600; font-size:13.5px;">Select opponent:</label>
+                    <select id="chessChallengeOpponent"
+                        style="padding:8px 12px; border-radius:var(--radius-xs); border:1px solid var(--surface-border); background:#fff; font-size:13px;"></select>
+                    <button class="btn-primary" style="width:auto; padding:8px 20px;"
+                        onclick="sendChessChallenge()">Challenge</button>
+                </div>
+                <div id="chessChallengesList">
+                    <div style="padding:12px 0; color:var(--text-muted);">Loading...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- My Games -->
+        <div id="chessTab-games" class="chess-tab-content" style="display:none;">
+            <div class="chess-card">
+                <div class="card-head">
+                    <div>
+                        <div class="card-eyebrow">🎮 My Games</div>
+                        <div class="card-title">Game History</div>
+                    </div>
+                </div>
+                <div id="chessGamesList">
+                    <div style="padding:12px 0; color:var(--text-muted);">Loading...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Activity -->
+        <div id="chessTab-activity" class="chess-tab-content" style="display:none;">
+            <div class="chess-card">
+                <div class="card-head">
+                    <div>
+                        <div class="card-eyebrow">📜 Activity</div>
+                        <div class="card-title">Recent Club Activity</div>
+                    </div>
+                </div>
+                <div id="chessActivityList">
+                    <div style="padding:12px 0; color:var(--text-muted);">Loading...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- THE LEDGER (SYLLABUS TRACKER) VIEW                           -->
+    <!-- ============================================================ -->
+    <div id="ledgerView" style="display:none;">
+        <div class="ledger-page-header">
+            <div>
+                <div class="ledger-badge-eyebrow">
+                    <span>MMMUT · GORAKHPUR</span>
+                    <span id="ledgerSyncBadge" class="ledger-sync-badge synced">
+                        <span class="sync-dot"></span><span>Cloud Synced</span>
+                    </span>
+                </div>
+                <h1 class="ledger-title">The Ledger</h1>
+                <p class="ledger-subtitle">Syllabus tracker: open any course, then tick topics and units off as you cover them.</p>
+            </div>
+            <div class="ledger-header-actions">
+                <button class="btn-secondary" onclick="toggleLedgerSection(false)">← Back to MMMUT ERP</button>
+            </div>
+        </div>
+
+        <!-- Summary Statistics Card Grid -->
+        <div class="ledger-summary-grid">
+            <div class="ledger-stat-card">
+                <div class="stat-top">
+                    <span class="stat-icon">🎓</span>
+                    <span class="stat-label">Programme Completed</span>
+                </div>
+                <div class="stat-val" id="ledgerStatPct">0%</div>
+                <div class="stat-desc"><span id="ledgerStatCredits">0 / 0</span> credits cleared</div>
+            </div>
+            <div class="ledger-stat-card">
+                <div class="stat-top">
+                    <span class="stat-icon">✅</span>
+                    <span class="stat-label">Topics Covered</span>
+                </div>
+                <div class="stat-val" id="ledgerStatTopicsDone">0</div>
+                <div class="stat-desc">Syllabus units mastered</div>
+            </div>
+            <div class="ledger-stat-card">
+                <div class="stat-top">
+                    <span class="stat-icon">⏳</span>
+                    <span class="stat-label">Remaining Topics</span>
+                </div>
+                <div class="stat-val" id="ledgerStatTopicsRemaining">0</div>
+                <div class="stat-desc">Topics to complete</div>
+            </div>
+            <div class="ledger-stat-card">
+                <div class="stat-top">
+                    <span class="stat-icon">📊</span>
+                    <span class="stat-label">Active Semester Progress</span>
+                </div>
+                <div class="stat-val-sm" id="ledgerStatSemProgress">0/0 credits (0%)</div>
+                <div class="ledger-prog-bar-wrap">
+                    <div class="ledger-prog-bar"><i id="ledgerSemProgressBar" style="width:0%"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter Controls Bar -->
+        <div class="ledger-controls-card">
+            <div class="ledger-controls-row">
+                <div class="ledger-field branch-field">
+                    <label for="ledgerBranchSelect">Engineering Branch</label>
+                    <div class="select-wrap">
+                        <select id="ledgerBranchSelect" onchange="handleLedgerBranchChange(this.value)"></select>
+                    </div>
+                </div>
+                <div class="ledger-field search-field">
+                    <label for="ledgerSearchInput">Search Courses &amp; Topics</label>
+                    <div class="search-input-wrap">
+                        <span class="search-icon">🔍</span>
+                        <input type="search" id="ledgerSearchInput" class="ledger-search-input" 
+                            placeholder="e.g. Hardy-Cross, eigenvalues, compilers, circuits..." 
+                            oninput="handleLedgerSearchInput(this.value)" autocomplete="off" />
+                        <button type="button" id="ledgerSearchClearBtn" class="search-clear-btn" 
+                            onclick="clearLedgerSearch()" style="display:none;" aria-label="Clear search">✕</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Semester & Elective Chips Strip -->
+            <div class="ledger-strip-wrap">
+                <div class="ledger-semester-strip" id="ledgerSemesterStrip"></div>
+            </div>
+        </div>
+
+        <!-- Courses & Syllabus Units Container -->
+        <div id="ledgerCourseList" class="ledger-course-container"></div>
+
+        <!-- Ledger Footer & Reset Bar -->
+        <div class="ledger-footer-bar">
+            <div class="footer-info">
+                <span>Curriculum data grounded in MMMUT Academic Regulations (w.e.f. 2024-25). Progress is synced with your authenticated Firebase account.</span>
+            </div>
+            <button type="button" class="btn-ledger-reset" onclick="openLedgerResetModal()">
+                🗑️ Reset this branch
+            </button>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- TELEGRAM SECTION VIEW                                        -->
+    <!-- ============================================================ -->
+    <div id="telegramView">
+        <div class="telegram-page-header">
+            <div>
+                <h1 style="font-size:26px; font-weight:800; display:flex; align-items:center; gap:10px;">
+                    <span style="color:#0088cc; display:inline-flex;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+                        </svg>
+                    </span>
+                    Telegram
+                </h1>
+                <p style="color:var(--text-muted); font-size:14px; margin-top:2px;">Official University Community &amp; Direct Messaging</p>
+            </div>
+            <button class="btn-secondary" id="btnBackFromTelegram" onclick="toggleTelegramSection(false)">← Back to MMMUT ERP</button>
+        </div>
+
+        <!-- In-ERP Telegram Browser Portal & Launch Gateway -->
+        <div id="telegramLaunchPortal" class="tg-portal-card" style="display:none; margin-bottom:20px; background:var(--surface); border:1px solid var(--surface-border); border-left:4px solid #0088cc; border-radius:var(--radius-sm); padding:18px 20px; box-shadow:var(--shadow-xs);">
+            <div class="tg-portal-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:10px;">
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <span style="font-size:22px; color:#0088cc;">🌐</span>
+                    <div>
+                        <h4 id="tgPortalTitle" style="margin:0; font-size:15px; font-weight:700; color:var(--text-main);">Telegram Access Portal</h4>
+                        <div id="tgPortalUrl" style="font-size:12px; color:var(--text-muted); font-family:var(--font-mono, monospace); word-break:break-all;">https://...</div>
+                    </div>
+                </div>
+                <button class="btn-secondary" onclick="closeTelegramPortal()" style="padding:4px 10px; font-size:12px;">✕ Close</button>
+            </div>
+            <p style="font-size:13px; color:var(--text-muted); line-height:1.5; margin:0 0 14px;">
+                Choose how to open this Telegram destination. To avoid launching the external native mobile app, select <strong>Open in Browser Mode</strong>.
+            </p>
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:12px;">
+                <button id="btnPortalOpenWeb" class="btn-primary" style="background:#0088cc; border-color:#0088cc;">
+                    <span>🌐 Open in Browser Mode</span>
+                </button>
+                <button id="btnPortalOpenTab" class="btn-secondary">
+                    <span>↗ Open in New Tab</span>
+                </button>
+                <button class="btn-secondary" onclick="toggleTelegramSection(false)">
+                    <span>← Back to MMMUT ERP</span>
+                </button>
+            </div>
+            <div style="font-size:11.5px; color:var(--text-light); background:var(--surface-sunken, #f8fafc); border:1px solid var(--surface-border); border-radius:6px; padding:8px 12px; display:flex; align-items:center; gap:8px;">
+                <span>🔒</span>
+                <span><strong>Security Isolation Notice:</strong> Official Telegram servers enforce <code>X-Frame-Options: deny</code> to protect credentials. Browser Mode opens the official Telegram service.</span>
+            </div>
+        </div>
+
+        <!-- Dynamic State Machine Container for Private Telegram Access -->
+        <div id="telegramStateContainer" style="margin-bottom:24px;">
+            <!-- Populated dynamically by renderTelegramUI() -->
+            <div class="tg-state-card">
+                <div class="tg-state-header">
+                    <span class="tg-stage-pill">Stage 1 of 2</span>
+                    <span class="tg-status-badge tg-badge-neutral">Checking Access…</span>
+                </div>
+                <h3 class="tg-state-title">Telegram Access Verification</h3>
+                <p class="tg-state-desc">Loading your Telegram access status from MMMUT ERP…</p>
+            </div>
+        </div>
+
+        <!-- Channel & Community Grid -->
+        <div class="telegram-grid">
+            <!-- Student Channel Card -->
+            <div class="telegram-channel-card">
+                <div>
+                    <div class="card-head">
+                        <div>
+                            <div class="card-eyebrow">📢 Student Broadcast</div>
+                            <h3 class="channel-meta-title" id="telegramChannelName">Roomhub</h3>
+                        </div>
+                        <span style="font-size:12px; font-weight:700; background:#dbeafe; color:#1e40af; padding:4px 8px; border-radius:9999px;">Verified</span>
+                    </div>
+                    <p class="channel-meta-desc" id="telegramChannelDesc">
+                        Official MMMUT Private Student Channel. Access official university announcements, semester schedules, exam circulars, and departmental updates directly on Telegram.
+                    </p>
+                    <ul class="telegram-channel-features">
+                        <li><span>⚡</span> <span>Real-time official notices &amp; circulars</span></li>
+                        <li><span>📅</span> <span>Timetable and examination updates</span></li>
+                        <li><span>🎓</span> <span>Campus events &amp; academic alerts</span></li>
+                    </ul>
+                </div>
+                <div>
+                    <button class="btn-telegram-channel" style="width:100%;" onclick="openTelegramChannel()">
+                        <span>Open Channel</span>
+                        <span>↗</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Telegram Web & App Access Info Card -->
+            <div class="telegram-channel-card">
+                <div>
+                    <div class="card-head">
+                        <div>
+                            <div class="card-eyebrow">🌐 Web &amp; App Ecosystem</div>
+                            <h3 class="channel-meta-title">Seamless Experience</h3>
+                        </div>
+                    </div>
+                    <p class="channel-meta-desc">
+                        Open Telegram in your browser or through the installed Telegram application on your computer or mobile device.
+                    </p>
+                    <ul class="telegram-channel-features">
+                        <li><span>💾</span> <span><strong>Persistent Session:</strong> Login once, stay logged in as long as Telegram remembers you.</span></li>
+                        <li><span>📱</span> <span><strong>Cross-Platform:</strong> Works on Windows desktop, laptops, tablets, and Android.</span></li>
+                        <li><span>🚀</span> <span><strong>Fast &amp; Direct:</strong> No intermediaries, no proxy delays.</span></li>
+                    </ul>
+                </div>
+                <div>
+                    <button class="btn-secondary" style="width:100%; justify-content:center;" onclick="openTelegramWeb()">
+                        <span>Launch Telegram Web</span>
+                        <span>↗</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Privacy & Security Notice -->
+        <div class="telegram-security-card">
+            <div class="sec-icon">🔒</div>
+            <div>
+                <h4>Zero Credential Storage &amp; Privacy First</h4>
+                <p>
+                    MMMUT ERP does not collect, prompt for, or store your Telegram password, OTPs, or authentication tokens. All authentication is performed directly and securely through official Telegram services.
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+                <footer class="app-foot">
+                    Madan Mohan Malaviya University of Technology, Gorakhpur · Session 2026–27
+                </footer>
+            </div>
+        </div>
+
+        <!-- Mobile Bottom Navigation Bar -->
+        <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+            <div class="mobile-nav-items">
+                <button class="mobile-nav-item active" id="mobNavHome" onclick="scrollToSection('mainShell')" title="Home / Dashboard">
+                    <span class="nav-icon">🏠</span>
+                    <span>Home</span>
+                </button>
+                <button class="mobile-nav-item" id="mobNavTimetable" onclick="scrollToSection('timetableSection')" title="Timetable &amp; Periods">
+                    <span class="nav-icon">📅</span>
+                    <span>Timetable</span>
+                </button>
+                <button class="mobile-nav-item" id="mobNavAttendance" onclick="scrollToSection('attendanceSection')" title="Attendance Tracker">
+                    <span class="nav-icon">📈</span>
+                    <span>Attendance</span>
+                </button>
+                <button class="mobile-nav-item" id="mobNavTelegram" onclick="toggleTelegramSection(true)" title="Telegram Access">
+                    <span class="nav-icon" style="color:#0088cc;display:inline-flex;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+                        </svg>
+                    </span>
+                    <span>Telegram</span>
+                </button>
+                <button class="mobile-nav-item" id="mobNavMore" onclick="toggleSidebar(true)" title="More ERP Pages">
+                    <span class="nav-icon">☰</span>
+                    <span>More</span>
+                </button>
+            </div>
+        </nav>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- MODALS & OVERLAYS                                             -->
+    <!-- ============================================================ -->
+
+    <!-- Ledger Reset Confirmation Modal -->
+    <div class="feedback-overlay" id="ledgerResetModal">
+        <div class="feedback-panel" style="max-width:440px;">
+            <div class="feedback-panel-header">
+                <h2>⚠️ Reset Branch Progress</h2>
+                <button class="close-btn" onclick="closeLedgerResetModal()" aria-label="Close">✕</button>
+            </div>
+            <div class="feedback-panel-body" style="padding:20px;">
+                <p style="font-size:14px;color:var(--text-main);line-height:1.5;margin-bottom:12px;">
+                    Are you sure you want to reset your syllabus progress for <strong id="ledgerResetBranchName">this branch</strong>?
+                </p>
+                <div style="background:var(--danger-bg);border:1px solid var(--danger-border);border-radius:var(--radius-sm);padding:12px;margin-bottom:16px;">
+                    <p style="font-size:12.5px;color:var(--danger-text);margin:0;line-height:1.5;">
+                        • All marked topics, units, and courses for this branch will be cleared from your cloud account.<br/>
+                        • Your progress in other branches will remain untouched.<br/>
+                        • This action cannot be undone.
+                    </p>
+                </div>
+                <div style="display:flex;justify-content:flex-end;gap:10px;">
+                    <button type="button" class="btn-secondary" onclick="closeLedgerResetModal()">Cancel</button>
+                    <button type="button" class="btn-primary" style="background:var(--danger);border-color:var(--danger);color:#fff;" onclick="confirmLedgerReset()">Yes, Reset Progress</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Post Overlay (Admin only) -->
+    <div class="feedback-overlay" id="createPostOverlay">
+        <div class="feedback-panel" style="max-width:560px;">
+            <div class="feedback-panel-header">
+                <h2>✏️ Create Announcement</h2>
+                <button class="close-btn" onclick="closeCreatePost()" aria-label="Close">✕</button>
+            </div>
+            <div class="feedback-panel-body">
+                <form id="createPostForm" onsubmit="submitCommunityPost(event)">
+                    <div class="field">
+                        <label for="cpTitle">Title</label>
+                        <input id="cpTitle" placeholder="Post title" maxlength="100" required />
+                    </div>
+                    <div class="field">
+                        <label for="cpContent">Content</label>
+                        <textarea id="cpContent" placeholder="What's the update?" rows="4" required></textarea>
+                    </div>
+                    <div class="field">
+                        <label for="cpImage">Image <span
+                                style="font-weight:400;color:var(--text-muted);">(optional)</span></label>
+                        <input type="file" id="cpImage" accept="image/*" onchange="previewCommunityPostImage()" />
+                        <img id="cpImagePreview" class="cp-image-preview" style="display:none;" alt="Preview" />
+                    </div>
+                    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;">
+                        <button type="submit" class="btn-primary" style="width:auto;padding:10px 28px;">Publish</button>
+                        <button type="button" class="btn-secondary" onclick="closeCreatePost()">Cancel</button>
+                    </div>
+                    <div id="cpFormError" style="margin-top:12px;font-size:13px;color:var(--danger);display:none;">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Feedback Submission Form Overlay -->
+    <div class="feedback-overlay" id="feedbackFormOverlay">
+        <div class="feedback-panel">
+            <div class="feedback-panel-header">
+                <h2>💬 Submit Support Ticket</h2>
+                <button class="close-btn" onclick="closeFeedbackForm()" aria-label="Close">✕</button>
+            </div>
+            <div class="feedback-panel-body">
+                <form id="feedbackForm" onsubmit="submitFeedback(event)">
+                    <div class="field">
+                        <label for="fbCategory">Category</label>
+                        <select id="fbCategory" required>
+                            <option value="">Select a category…</option>
+                            <option value="bug">🐞 Bug Report</option>
+                            <option value="feature">💡 Feature Suggestion</option>
+                            <option value="timetable">📅 Timetable Issue</option>
+                            <option value="calendar">📆 Academic Calendar Issue</option>
+                            <option value="notice">📢 Notice Issue</option>
+                            <option value="help">❓ Need Help</option>
+                            <option value="general">📝 General Feedback</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="fbSubject">Subject <span style="font-weight:400;color:var(--text-muted);">(max 100
+                                chars)</span></label>
+                        <input id="fbSubject" placeholder="Brief subject line" maxlength="100" required />
+                    </div>
+                    <div class="field">
+                        <label for="fbMessage">Description <span
+                                style="font-weight:400;color:var(--text-muted);">(20–2000 chars)</span></label>
+                        <textarea id="fbMessage" placeholder="Describe the issue or feedback in detail…" rows="4"
+                            required></textarea>
+                        <div style="font-size:11.5px;color:var(--text-muted);margin-top:4px;" id="fbCharCount">0 / 2000
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="fbPriority">Priority</label>
+                            <select id="fbPriority">
+                                <option value="low">Low</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="high">High</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="fbScreenshot">Screenshot <span
+                                    style="font-weight:400;color:var(--text-muted);">(optional)</span></label>
+                            <input type="file" id="fbScreenshot" accept="image/*" />
+                        </div>
+                    </div>
+                    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;">
+                        <button type="submit" class="btn-primary" style="width:auto;padding:10px 28px;">Submit
+                            Ticket</button>
+                        <button type="button" class="btn-secondary" onclick="closeFeedbackForm()">Cancel</button>
+                    </div>
+                    <div id="fbFormError" style="margin-top:12px;font-size:13px;color:var(--danger);display:none;">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- My Feedback Tickets Overlay -->
+    <div class="feedback-overlay" id="myFeedbackOverlay">
+        <div class="feedback-panel" style="max-width:760px;">
+            <div class="feedback-panel-header">
+                <h2>📋 My Support Tickets</h2>
+                <button class="close-btn" onclick="closeMyFeedback()" aria-label="Close">✕</button>
+            </div>
+            <div class="feedback-panel-body" id="myFeedbackBody">
+                <div style="text-align:center;padding:36px 0;color:var(--text-muted);">Loading…</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rating Modal -->
+    <div class="feedback-overlay" id="ratingModal">
+        <div class="feedback-panel" style="max-width:480px;">
+            <div class="feedback-panel-header">
+                <h2>⭐ Rate ERP Portal</h2>
+                <button class="close-btn" onclick="closeRatingModal()" aria-label="Close">✕</button>
+            </div>
+            <div class="feedback-panel-body">
+                <p style="font-size:14px;color:var(--text-muted);margin-bottom:14px;">How would you rate your experience
+                    with The Ledger?</p>
+                <div class="feedback-rating-stars" id="ratingStars">
+                    <span data-val="1" class="star-off">★</span>
+                    <span data-val="2" class="star-off">★</span>
+                    <span data-val="3" class="star-off">★</span>
+                    <span data-val="4" class="star-off">★</span>
+                    <span data-val="5" class="star-off">★</span>
+                </div>
+                <div class="field" style="margin-top:14px;">
+                    <label for="ratingComment">Comment <span
+                            style="font-weight:400;color:var(--text-muted);">(optional)</span></label>
+                    <textarea id="ratingComment" placeholder="Share your suggestions…" rows="3"></textarea>
+                </div>
+                <button class="btn-primary" style="width:auto;padding:10px 28px;margin-top:6px;"
+                    onclick="submitRating()">Submit Rating</button>
+                <div id="ratingFormError" style="margin-top:12px;font-size:13px;color:var(--danger);display:none;">
+                </div>
+                <div id="ratingExisting" style="margin-top:14px;font-size:13px;color:var(--text-muted);display:none;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile & Security Modal -->
+    <div class="profile-overlay" id="profileModal">
+        <div class="profile-panel">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">
+                <h2 style="margin:0;">👤 Student Profile &amp; Security</h2>
+                <button class="close-btn" onclick="closeProfileModal()" aria-label="Close">✕</button>
+            </div>
+            <div class="field">
+                <label for="profileName">Full Name</label>
+                <input id="profileName" disabled />
+            </div>
+            <div class="field">
+                <label for="profileUsername">Username</label>
+                <input id="profileUsername" disabled />
+            </div>
+            <div class="field-row">
+                <div class="field">
+                    <label for="profileBranch">Branch</label>
+                    <input id="profileBranch" disabled />
+                </div>
+                <div class="field">
+                    <label for="profileSection">Section</label>
+                    <select id="profileSection"></select>
+                </div>
+            </div>
+            <div class="field-row">
+                <div class="field">
+                    <label for="profileHostel">Hostel</label>
+                    <select id="profileHostel">
+                        <option value="Day Scholar">Day Scholar</option>
+                        <option value="Tagore Hostel">Tagore Hostel</option>
+                        <option value="VS Hostel">VS Hostel</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="profileGender">Gender</label>
+                    <select id="profileGender">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                        <option value="Not specified">Not specified</option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn-primary" onclick="saveProfile()">Save Profile</button>
+
+            <hr />
+
+            <h3 style="font-size:16px;font-weight:700;margin-bottom:12px;">Security &amp; Password</h3>
+            <div class="field">
+                <label for="profileOldPassword">Current Password</label>
+                <input id="profileOldPassword" type="password" placeholder="Enter current password" />
+            </div>
+            <div class="field">
+                <label for="profileNewPassword">New Password</label>
+                <input id="profileNewPassword" type="password" placeholder="Min 6 characters" />
+            </div>
+            <div class="field">
+                <label for="profileConfirmPassword">Confirm New Password</label>
+                <input id="profileConfirmPassword" type="password" placeholder="Re-enter new password" />
+            </div>
+            <button class="btn-primary" onclick="changePassword()" style="margin-top:4px;">Change Password</button>
+        </div>
+    </div>
+
+    <!-- Admin Panel Drawer -->
+    <div class="admin-overlay" id="adminPanel">
+        <div class="admin-panel">
+            <div class="admin-panel-header">
+                <h2>⚙️ Admin Control Panel</h2>
+                <button class="close-btn" onclick="closeAdminPanel()" aria-label="Close">✕</button>
+            </div>
+            <div class="admin-tabs" id="adminTabs">
+                <button class="admin-tab active" data-tab="dashboard" onclick="switchAdminTab('dashboard')">📊
+                    Dashboard</button>
+                <button class="admin-tab" data-tab="users" onclick="switchAdminTab('users')">👥 Users</button>
+                <button class="admin-tab" data-tab="timetable" onclick="switchAdminTab('timetable')">📅
+                    Timetable</button>
+                <button class="admin-tab" data-tab="calendar" onclick="switchAdminTab('calendar')">📆 Calendar</button>
+                <button class="admin-tab" data-tab="holidays" onclick="switchAdminTab('holidays')">🏖️ Holidays</button>
+                <button class="admin-tab" data-tab="posts" onclick="switchAdminTab('posts')">📢 Announcements</button>
+                <button class="admin-tab" data-tab="requests" onclick="switchAdminTab('requests')">👥 Admin
+                    Requests</button>
+                <button class="admin-tab" data-tab="feedback" onclick="switchAdminTab('feedback')">💬 Feedback</button>
+                <button class="admin-tab" data-tab="telegram" onclick="switchAdminTab('telegram')">✈️ Telegram Access</button>
+            </div>
+            <div class="admin-panel-body" id="adminBody">
+                <div class="tab-content active" id="tab-dashboard">
+                    <div id="adminDashboardContent">Loading dashboard…</div>
+                </div>
+                <div class="tab-content" id="tab-users">
+                    <div id="adminUsersContent">Loading users…</div>
+                </div>
+                <div class="tab-content" id="tab-timetable">
+                    <div id="adminTimetableContent">Loading timetable editor…</div>
+                </div>
+                <div class="tab-content" id="tab-calendar">
+                    <div id="adminCalendarContent">Loading calendar editor…</div>
+                </div>
+                <div class="tab-content" id="tab-holidays">
+                    <div id="adminHolidaysContent">Loading holidays…</div>
+                </div>
+                <div class="tab-content" id="tab-posts">
+                    <div id="adminPostsContent">Loading announcements…</div>
+                </div>
+                <div class="tab-content" id="tab-requests">
+                    <div id="adminRequestsContent">Loading requests…</div>
+                </div>
+                <div class="tab-content" id="tab-feedback">
+                    <div id="adminFeedbackContent">Loading feedback…</div>
+                </div>
+                <div class="tab-content" id="tab-telegram">
+                    <div id="adminTelegramContent">Loading Telegram applications…</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Reply Modal -->
+    <div class="feedback-overlay" id="adminReplyModal">
+        <div class="feedback-panel" style="max-width:540px;">
+            <div class="feedback-panel-header">
+                <h2>💬 Reply to Support Ticket</h2>
+                <button class="close-btn" onclick="closeAdminReplyModal()" aria-label="Close">✕</button>
+            </div>
+            <div class="feedback-panel-body fb-reply-modal">
+                <div style="font-size:13px;color:var(--text-muted);margin-bottom:12px;" id="replyTicketInfo">Ticket: —
+                </div>
+                <textarea class="reply-textarea" id="adminReplyText" placeholder="Type your reply here…"></textarea>
+                <div class="reply-actions">
+                    <button class="btn-primary" style="width:auto;padding:10px 26px;" onclick="submitAdminReply()">Send
+                        Reply</button>
+                    <button class="btn-secondary" onclick="closeAdminReplyModal()">Cancel</button>
+                </div>
+                <div id="adminReplyError" style="margin-top:12px;font-size:13px;color:var(--danger);display:none;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- LEDGER AI CHAT ASSISTANT                                     -->
+    <!-- ============================================================ -->
+    <button class="ledger-ai-fab" id="ledgerAiFab" onclick="toggleLedgerAI()" aria-label="Toggle Campus Support" title="Campus Support">
+        💬
+        <span class="badge-dot" id="aiBadgeDot" style="display:none;">•</span>
+    </button>
+
+    <div class="ledger-ai-chat" id="ledgerAiChat">
+        <div class="ledger-ai-header">
+            <div class="brand">
+                <span class="icon">🤖</span>
+                <div>
+                    <div class="title">Ledger AI</div>
+                    <div class="sub">Academic Assistant</div>
+                </div>
+            </div>
+            <div class="actions">
+                <button onclick="clearLedgerAI()" title="Clear conversation"
+                    aria-label="Clear conversation">🗑️</button>
+                <button onclick="toggleLedgerAI()" title="Close chat" aria-label="Close chat">✕</button>
+            </div>
+        </div>
+
+        <div class="ledger-ai-messages" id="ledgerAiMessages">
+            <div class="empty-state" id="ledgerAiEmpty">
+                <div class="big-icon">📚</div>
+                <div style="font-weight:700;">Ask me anything about your academics</div>
+                <div class="sub">Attendance · Timetable · Syllabus · Study planning</div>
+            </div>
+        </div>
+
+        <div class="ledger-ai-error" id="ledgerAiError"></div>
+
+        <div class="ledger-ai-input">
+            <textarea id="ledgerAiInput" rows="1" placeholder="Ask Ledger AI…" onkeydown="handleLedgerAIKeydown(event)"
+                oninput="autoResizeLedgerInput(this)"></textarea>
+            <button class="send-btn" id="ledgerAiSendBtn" onclick="sendLedgerAIMessage()" title="Send message"
+                aria-label="Send message">➤</button>
+        </div>
+    </div>
+
+    <!-- UI Interaction Helper Scripts -->
+    <script>
+        // Sidebar Toggle Helper for Mobile & Desktop
+        window.toggleSidebar = function (force) {
+            const sb = document.querySelector('.app-sidebar');
+            const bd = document.querySelector('.sidebar-backdrop');
+            if (!sb) return;
+            const open = (typeof force === 'boolean') ? force : !sb.classList.contains('open');
+            if (open) {
+                sb.classList.add('open');
+                if (bd) bd.classList.add('active');
+            } else {
+                sb.classList.remove('open');
+                if (bd) bd.classList.remove('active');
+            }
+        };
+
+        // Smooth Scroll Helper (with sticky header offset & view restoration)
+        window.scrollToSection = function (id) {
+            window.toggleSidebar(false);
+            const tgView = document.getElementById('telegramView');
+            const chessView = document.getElementById('chessClubView');
+            const ledgerView = document.getElementById('ledgerView');
+            const mainShell = document.getElementById('mainShell');
+            if (tgView) tgView.style.display = 'none';
+            if (chessView) chessView.style.display = 'none';
+            if (ledgerView) ledgerView.style.display = 'none';
+            if (mainShell) mainShell.style.display = 'block';
+
+            if (id === 'mainShell' || id === 'home') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                window.updateActiveNav('mobNavHome');
+                return;
+            }
+
+            const el = document.getElementById(id);
+            if (el) {
+                const topbar = document.querySelector('.topbar');
+                const headerOffset = topbar ? topbar.offsetHeight + 10 : 60;
+                const elementPosition = el.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                window.scrollTo({
+                    top: Math.max(0, offsetPosition),
+                    behavior: 'smooth'
+                });
+            }
+
+            if (id === 'timetableSection') window.updateActiveNav('mobNavTimetable');
+            else if (id === 'attendanceSection') window.updateActiveNav('mobNavAttendance');
+            else window.updateActiveNav(null);
+        };
+
+        window.updateActiveNav = function(activeId) {
+            document.querySelectorAll('.mobile-nav-item').forEach(btn => {
+                if (activeId && btn.id === activeId) {
+                    btn.classList.add('active');
+                } else if (activeId) {
+                    btn.classList.remove('active');
+                }
+            });
+        };
+
+        // Sync student pill into welcome hero, sidebar & user dropdown
+        const observer = new MutationObserver(() => {
+            const pName = document.getElementById('pillName');
+            const pBranch = document.getElementById('pillBranch');
+            const pAvatar = document.getElementById('pillAvatar');
+            const wName = document.getElementById('welcomeStudentName');
+            const sName = document.getElementById('sidebarName');
+            const sBranch = document.getElementById('sidebarBranch');
+            const sAvatar = document.getElementById('sidebarAvatar');
+            const dName = document.getElementById('dropdownName');
+            const dMeta = document.getElementById('dropdownMeta');
+            const dAvatar = document.getElementById('dropdownAvatar');
+
+            if (pName && wName && pName.textContent !== '—') {
+                wName.textContent = pName.textContent;
+            }
+            if (pName && sName) sName.textContent = pName.textContent;
+            if (pBranch && sBranch) sBranch.textContent = pBranch.textContent;
+            if (pAvatar && sAvatar) sAvatar.textContent = pAvatar.textContent;
+            if (pName && dName && pName.textContent !== '—') dName.textContent = pName.textContent;
+            if (pBranch && dMeta && pBranch.textContent !== '—') dMeta.textContent = pBranch.textContent;
+            if (pAvatar && dAvatar && pAvatar.textContent !== '—') dAvatar.textContent = pAvatar.textContent;
+        });
+        const pillNode = document.getElementById('pillName');
+        if (pillNode) {
+            observer.observe(pillNode, { childList: true, characterData: true, subtree: true });
+        }
+
+        // User Profile Dropdown Navigation
+        window.toggleUserMenu = function(open) {
+            const menu = document.getElementById('userDropdownMenu');
+            const btn = document.getElementById('userMenuToggleBtn');
+            if (!menu) return;
+            const isShown = menu.classList.contains('show');
+            const willOpen = open !== undefined ? open : !isShown;
+            if (willOpen) {
+                const pName = document.getElementById('pillName')?.textContent || 'Student';
+                const pBranch = document.getElementById('pillBranch')?.textContent || 'B.Tech';
+                const pAvatar = document.getElementById('pillAvatar')?.textContent || 'ST';
+                const dName = document.getElementById('dropdownName');
+                const dMeta = document.getElementById('dropdownMeta');
+                const dAvatar = document.getElementById('dropdownAvatar');
+                if (dName && pName !== '—') dName.textContent = pName;
+                if (dMeta && pBranch !== '—') dMeta.textContent = pBranch;
+                if (dAvatar && pAvatar !== '—') dAvatar.textContent = pAvatar;
+
+                const dAdmin = document.getElementById('dropdownAdminBtn');
+                const dAdminLabel = document.getElementById('dropdownAdminLabel');
+                const dAdminIcon = document.getElementById('dropdownAdminIcon');
+                if (dAdmin && dAdminLabel) {
+                    if (typeof isAdmin !== 'undefined' && isAdmin) {
+                        dAdmin.style.display = 'flex';
+                        dAdminLabel.textContent = 'Admin Console';
+                        if (dAdminIcon) dAdminIcon.textContent = '⚙️';
+                    } else if (typeof adminRequested !== 'undefined' && adminRequested) {
+                        dAdmin.style.display = 'flex';
+                        dAdminLabel.textContent = 'Request Pending';
+                        if (dAdminIcon) dAdminIcon.textContent = '⏳';
+                    } else {
+                        dAdmin.style.display = 'flex';
+                        dAdminLabel.textContent = 'Request Admin Role';
+                        if (dAdminIcon) dAdminIcon.textContent = '👤';
+                    }
+                }
+                menu.classList.add('show');
+                if (btn) btn.setAttribute('aria-expanded', 'true');
+            } else {
+                menu.classList.remove('show');
+                if (btn) btn.setAttribute('aria-expanded', 'false');
+            }
+        };
+
+        window.handleDropdownAdmin = function() {
+            if (typeof isAdmin !== 'undefined' && isAdmin) {
+                if (typeof openAdminPanel === 'function') openAdminPanel();
+            } else if (typeof adminRequested !== 'undefined' && !adminRequested) {
+                if (typeof requestAdminRole === 'function') requestAdminRole();
+            } else if (typeof alert === 'function') {
+                alert('Your admin role request is currently pending review.');
+            }
+        };
+
+        document.addEventListener('click', function(e) {
+            const container = document.getElementById('userMenuContainer');
+            if (container && !container.contains(e.target)) {
+                window.toggleUserMenu(false);
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                window.toggleUserMenu(false);
+            }
+        });
+    </script>
+
+    <!-- Import Map for Firebase CDN Modules -->
+    <script type="importmap">
+        {
+            "imports": {
+                "firebase/app": "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js",
+                "firebase/auth": "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js",
+                "firebase/firestore": "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js",
+                "firebase/storage": "https://www.gstatic.com/firebasejs/12.17.1/firebase-storage.js",
+                "firebase/app-check": "https://www.gstatic.com/firebasejs/12.17.1/firebase-app-check.js",
+                "firebase/ai": "https://www.gstatic.com/firebasejs/12.17.1/firebase-ai.js",
+                "firebase/messaging": "https://www.gstatic.com/firebasejs/12.17.1/firebase-messaging.js"
+            }
+        }
+    </script>
+
+    <!-- Application Entry Point (Composed ES Module) -->
+    <script type="module" src="./frontend/js/app.js"></script>
+</body>
+
+</html>

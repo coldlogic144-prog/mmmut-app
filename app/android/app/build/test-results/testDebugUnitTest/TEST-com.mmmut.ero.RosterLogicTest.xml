@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.mmmut.ero.RosterLogicTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-10-01T05:03:36" hostname="LAPTOP-0ECMS234" time="0.042">
+  <properties/>
+  <testcase name="branchMapping_matchesWeb" classname="com.mmmut.ero.RosterLogicTest" time="0.042"/>
+  <testcase name="rollPattern_is10Digits" classname="com.mmmut.ero.RosterLogicTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

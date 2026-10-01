@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="mmmut_gold">#C9A227</color>
+    <color name="mmmut_indigo">#1A237E</color>
+    <color name="mmmut_maroon">#7B1E1E</color>
+    <string name="app_name">MMMUT Student</string>
+    <string name="gcm_defaultSenderId" translatable="false">734576815247</string>
+    <string name="google_api_key" translatable="false">AIzaSyDMLvLIZkPFO5nsVQBr2IA-8BRB5Hzb3Xo</string>
+    <string name="google_app_id" translatable="false">1:734576815247:android:com.mmmut.ero</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDMLvLIZkPFO5nsVQBr2IA-8BRB5Hzb3Xo</string>
+    <string name="google_storage_bucket" translatable="false">student-erp-77605.firebasestorage.app</string>
+    <string name="project_id" translatable="false">student-erp-77605</string>
+    <style name="Theme.MMMUT" parent="android:Theme.Material.Light.NoActionBar"/>
+</resources>
