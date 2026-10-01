@@ -45,8 +45,9 @@ fun HomeScreen(
             val branch = AcademicDataExtra.getBranch(p.branchId)
 
             val nowTimeStr = SimpleDateFormat("HH:mm", Locale.US).format(Date())
-            val currentCell = d.todayCells.firstOrNull { it.subjectCode != "—" && nowTimeStr >= it.start && nowTimeStr <= it.end }
-            val nextCell = currentCell ?: d.todayCells.firstOrNull { it.subjectCode != "—" && nowTimeStr < it.start }
+            val currentCell = com.mmmut.ero.data.local.ScheduleEngine.getCurrentClass(d.todayCells, nowTimeStr)
+            val nextCell = com.mmmut.ero.data.local.ScheduleEngine.getNextClass(d.todayCells, nowTimeStr)
+            val activeOrNext = currentCell ?: nextCell
 
             LazyColumn(
                 Modifier.fillMaxSize(),
@@ -101,10 +102,11 @@ fun HomeScreen(
                 }
 
                 // Current / Next Class Indicator
-                if (nextCell != null) {
+                if (activeOrNext != null) {
                     item {
                         Card(
-                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
+                            colors = if (currentCell != null) CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
+                            else CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
                             modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 4.dp)
                         ) {
                             Row(
@@ -117,10 +119,12 @@ fun HomeScreen(
                                     Text(
                                         if (currentCell != null) "CLASS IN PROGRESS NOW" else "NEXT UPCOMING CLASS TODAY",
                                         style = MaterialTheme.typography.labelSmall,
-                                        color = MaterialTheme.colorScheme.secondary
+                                        color = if (currentCell != null) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondary
                                     )
-                                    Text("${nextCell.subjectCode} — ${nextCell.subjectName}", style = MaterialTheme.typography.titleSmall)
-                                    Text("Period ${nextCell.periodKey} (${nextCell.start} - ${nextCell.end}) · Room ${branch.room}", style = MaterialTheme.typography.bodySmall)
+                                    Text("${activeOrNext.subjectCode} — ${activeOrNext.subjectName}", style = MaterialTheme.typography.titleSmall)
+                                    val groupTag = activeOrNext.practicalGroup?.let { " · Group $it" } ?: activeOrNext.tutorialGroup?.let { " · Group $it" } ?: ""
+                                    val classRoom = activeOrNext.room.ifBlank { branch.room }
+                                    Text("Period ${activeOrNext.periodKey} (${activeOrNext.start} - ${activeOrNext.end}) · ${activeOrNext.type}${groupTag} · Room $classRoom", style = MaterialTheme.typography.bodySmall)
                                 }
                             }
                         }
@@ -142,7 +146,7 @@ fun HomeScreen(
                         )
                     }
                 } else {
-                    items(d.todayCells, key = { it.periodKey + (it.tutorialGroup ?: "") + (it.practicalGroup ?: "") }) { cell ->
+                    items(d.todayCells, key = { it.id.ifBlank { it.periodKey + (it.tutorialGroup ?: "") + (it.practicalGroup ?: "") } }) { cell ->
                         Card(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -162,7 +166,9 @@ fun HomeScreen(
                                     }
                                     Text(cell.subjectName, style = MaterialTheme.typography.titleSmall)
                                     if (cell.subjectCode != "—") {
-                                        Text("${cell.subjectCode} · ${cell.type} · Room ${branch.room}", style = MaterialTheme.typography.bodySmall)
+                                        val groupTag = cell.practicalGroup?.let { " · Group $it" } ?: cell.tutorialGroup?.let { " · Group $it" } ?: ""
+                                        val classRoom = cell.room.ifBlank { branch.room }
+                                        Text("${cell.subjectCode} · ${cell.type}${groupTag} · Room $classRoom", style = MaterialTheme.typography.bodySmall)
                                     }
                                 }
                             }

@@ -298,11 +298,7 @@ fun AuthScreen(
                 listOf("T1", "T2", "N/A").forEach { tg ->
                     FilterChip(
                         selected = selectedTutGroup == tg,
-                        onClick = {
-                            selectedTutGroup = tg
-                            if (tg == "T1") selectedPracGroup = "P1"
-                            if (tg == "T2") selectedPracGroup = "P2"
-                        },
+                        onClick = { selectedTutGroup = tg },
                         label = { Text("Group $tg") },
                         colors = FilterChipDefaults.filterChipColors(
                             selectedContainerColor = MaterialTheme.colorScheme.primary,
@@ -319,11 +315,7 @@ fun AuthScreen(
                 listOf("P1", "P2", "N/A").forEach { pg ->
                     FilterChip(
                         selected = selectedPracGroup == pg,
-                        onClick = {
-                            selectedPracGroup = pg
-                            if (pg == "P1") selectedTutGroup = "T1"
-                            if (pg == "P2") selectedTutGroup = "T2"
-                        },
+                        onClick = { selectedPracGroup = pg },
                         label = { Text("Group $pg") },
                         colors = FilterChipDefaults.filterChipColors(
                             selectedContainerColor = MaterialTheme.colorScheme.primary,

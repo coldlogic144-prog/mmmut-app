@@ -20,28 +20,32 @@ class LocalTimetableRepository : TimetableRepository {
         branchId: String,
         section: String,
         tutorialGroup: String,
-        practicalGroup: String
+        practicalGroup: String,
+        semester: Int
     ): Map<String, List<TimetableCell>> {
-        val branch = AcademicDataExtra.getBranch(branchId)
-        val sec = section.ifBlank { branch.sections.firstOrNull() ?: "A" }
-
-        val map = mutableMapOf<String, List<TimetableCell>>()
-        AcademicData.DAYS.forEach { day ->
-            val dayRawCells = ScheduleEngine.dayCells(branch, sec, day)
-            val filtered = ScheduleEngine.filterCellsForStudent(dayRawCells, tutorialGroup, practicalGroup)
-            map[day] = filtered
-        }
-        return map
+        return ScheduleEngine.getWeek(
+            branchId = branchId,
+            semester = semester,
+            section = section,
+            tutorialGroup = tutorialGroup,
+            practicalGroup = practicalGroup
+        )
     }
 
     override suspend fun todayCells(
         branchId: String,
         section: String,
         tutorialGroup: String,
-        practicalGroup: String
+        practicalGroup: String,
+        semester: Int
     ): List<TimetableCell> {
-        val day = com.mmmut.ero.util.TimeUtils.todayName() ?: "Monday"
-        return weekCells(branchId, section, tutorialGroup, practicalGroup)[day] ?: emptyList()
+        return ScheduleEngine.getToday(
+            branchId = branchId,
+            semester = semester,
+            section = section,
+            tutorialGroup = tutorialGroup,
+            practicalGroup = practicalGroup
+        )
     }
 }
 

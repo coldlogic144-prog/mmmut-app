@@ -101,7 +101,8 @@ fun TimetableScreen(
                                     color = MaterialTheme.colorScheme.primary
                                 )
                                 Text("${next.subjectCode} — ${next.subjectName}", style = MaterialTheme.typography.titleSmall)
-                                Text("Period ${next.periodKey} (${next.start} - ${next.end}) · Room ${data.room}", style = MaterialTheme.typography.bodySmall)
+                                val groupTag = next.practicalGroup?.let { "Group $it · " } ?: next.tutorialGroup?.let { "Group $it · " } ?: ""
+                                Text("Period ${next.periodKey} (${next.start} - ${next.end}) · ${next.type} · ${groupTag}Room ${next.room.ifBlank { data.room }}", style = MaterialTheme.typography.bodySmall)
                             }
                         }
                     }
@@ -120,26 +121,39 @@ fun TimetableScreen(
                             )
                         }
 
-                        items(data.todayCells, key = { it.periodKey + (it.tutorialGroup ?: "") + (it.practicalGroup ?: "") }) { cell ->
-                            val isCurrent = data.currentCell?.periodKey == cell.periodKey
-
-                            if (cell.periodKey == "V" && data.todayCells.any { it.periodKey == "IV" }) {
+                        if (data.todayCells.isEmpty()) {
+                            item {
                                 Card(
                                     colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
-                                    modifier = Modifier.fillMaxWidth()
+                                    modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp)
                                 ) {
-                                    Box(Modifier.padding(12.dp), contentAlignment = Alignment.Center) {
-                                        Text("🍱 LUNCH BREAK · 12:30 PM - 02:00 PM", style = MaterialTheme.typography.labelMedium)
+                                    Box(Modifier.padding(16.dp), contentAlignment = Alignment.Center) {
+                                        Text("No classes scheduled for today.", style = MaterialTheme.typography.bodyMedium)
                                     }
                                 }
                             }
+                        } else {
+                            items(data.todayCells, key = { it.id.ifBlank { it.periodKey + (it.tutorialGroup ?: "") + (it.practicalGroup ?: "") } }) { cell ->
+                                val isCurrent = data.currentCell?.id == cell.id || (data.currentCell != null && data.currentCell.periodKey == cell.periodKey && data.currentCell.subjectCode == cell.subjectCode)
 
-                            TimetableClassCard(
-                                cell = cell,
-                                room = data.room,
-                                isCurrent = isCurrent,
-                                onClick = { detailCell = cell }
-                            )
+                                if (cell.periodKey.startsWith("V") && data.todayCells.any { it.periodKey == "IV" || it.periodKey.startsWith("I") }) {
+                                    Card(
+                                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
+                                        modifier = Modifier.fillMaxWidth()
+                                    ) {
+                                        Box(Modifier.padding(12.dp), contentAlignment = Alignment.Center) {
+                                            Text("🍱 LUNCH BREAK · 12:30 PM - 02:00 PM", style = MaterialTheme.typography.labelMedium)
+                                        }
+                                    }
+                                }
+
+                                TimetableClassCard(
+                                    cell = cell,
+                                    room = data.room,
+                                    isCurrent = isCurrent,
+                                    onClick = { detailCell = cell }
+                                )
+                            }
                         }
                     }
                 } else { // Full Week View
@@ -163,24 +177,37 @@ fun TimetableScreen(
                             contentPadding = PaddingValues(16.dp),
                             verticalArrangement = Arrangement.spacedBy(10.dp)
                         ) {
-                            items(dayCells, key = { it.periodKey + (it.tutorialGroup ?: "") + (it.practicalGroup ?: "") }) { cell ->
-                                if (cell.periodKey == "V" && dayCells.any { it.periodKey == "IV" }) {
+                            if (dayCells.isEmpty()) {
+                                item {
                                     Card(
                                         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
-                                        modifier = Modifier.fillMaxWidth()
+                                        modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp)
                                     ) {
-                                        Box(Modifier.padding(12.dp), contentAlignment = Alignment.Center) {
-                                            Text("🍱 LUNCH BREAK · 12:30 PM - 02:00 PM", style = MaterialTheme.typography.labelMedium)
+                                        Box(Modifier.padding(16.dp), contentAlignment = Alignment.Center) {
+                                            Text("No classes scheduled for $selectedDay.", style = MaterialTheme.typography.bodyMedium)
                                         }
                                     }
                                 }
+                            } else {
+                                items(dayCells, key = { it.id.ifBlank { it.periodKey + (it.tutorialGroup ?: "") + (it.practicalGroup ?: "") } }) { cell ->
+                                    if (cell.periodKey.startsWith("V") && dayCells.any { it.periodKey == "IV" || it.periodKey.startsWith("I") }) {
+                                        Card(
+                                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
+                                            modifier = Modifier.fillMaxWidth()
+                                        ) {
+                                            Box(Modifier.padding(12.dp), contentAlignment = Alignment.Center) {
+                                                Text("🍱 LUNCH BREAK · 12:30 PM - 02:00 PM", style = MaterialTheme.typography.labelMedium)
+                                            }
+                                        }
+                                    }
 
-                                TimetableClassCard(
-                                    cell = cell,
-                                    room = data.room,
-                                    isCurrent = false,
-                                    onClick = { detailCell = cell }
-                                )
+                                    TimetableClassCard(
+                                        cell = cell,
+                                        room = data.room,
+                                        isCurrent = false,
+                                        onClick = { detailCell = cell }
+                                    )
+                                }
                             }
                         }
                     }
@@ -196,18 +223,14 @@ fun TimetableScreen(
                         title = { Text("Configure Timetable Groups") },
                         text = {
                             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                                Text("Your timetable may contain different parallel classes for different groups.", style = MaterialTheme.typography.bodySmall)
+                                Text("Your timetable contains parallel classes. Select your assigned groups to filter applicable classes.", style = MaterialTheme.typography.bodySmall)
 
                                 Text("Tutorial Group", style = MaterialTheme.typography.labelMedium)
                                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                                     listOf("T1", "T2", "N/A").forEach { tg ->
                                         FilterChip(
                                             selected = tempTut == tg,
-                                            onClick = {
-                                                tempTut = tg
-                                                if (tg == "T1") tempPrac = "P1"
-                                                if (tg == "T2") tempPrac = "P2"
-                                            },
+                                            onClick = { tempTut = tg },
                                             label = { Text("Group $tg") },
                                             colors = FilterChipDefaults.filterChipColors(
                                                 selectedContainerColor = MaterialTheme.colorScheme.primary,
@@ -222,11 +245,7 @@ fun TimetableScreen(
                                     listOf("P1", "P2", "N/A").forEach { pg ->
                                         FilterChip(
                                             selected = tempPrac == pg,
-                                            onClick = {
-                                                tempPrac = pg
-                                                if (pg == "P1") tempTut = "T1"
-                                                if (pg == "P2") tempTut = "T2"
-                                            },
+                                            onClick = { tempPrac = pg },
                                             label = { Text("Group $pg") },
                                             colors = FilterChipDefaults.filterChipColors(
                                                 selectedContainerColor = MaterialTheme.colorScheme.primary,
@@ -260,7 +279,8 @@ fun TimetableScreen(
                             Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                                 Text("Period: ${cell.periodKey} (${cell.start} - ${cell.end})")
                                 Text("Class Type: ${cell.type}")
-                                Text("Room: ${data.room}")
+                                Text("Room: ${cell.room.ifBlank { data.room }}")
+                                if (cell.instructor.isNotBlank()) Text("Faculty / Teacher: ${cell.instructor}")
                                 Text("Branch: ${data.branchName}")
                                 Text("Semester: Semester ${data.profile.semester}")
                                 Text("Section: Section ${data.profile.section}")
@@ -301,6 +321,9 @@ fun TimetableClassCard(
                     Text("Period ${cell.periodKey}", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
                     Text("•", style = MaterialTheme.typography.labelSmall)
                     Text("${cell.start} - ${cell.end}", style = MaterialTheme.typography.labelSmall)
+                    if (isCurrent) {
+                        Text("• NOW", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.error)
+                    }
                 }
 
                 Spacer(Modifier.height(2.dp))
@@ -329,7 +352,11 @@ fun TimetableClassCard(
                                 label = { Text("Group ${cell.practicalGroup}") }
                             )
                         }
-                        Text("Room $room", style = MaterialTheme.typography.bodySmall)
+                        val classRoom = cell.room.ifBlank { room }
+                        Text("Room $classRoom", style = MaterialTheme.typography.bodySmall)
+                    }
+                    if (cell.instructor.isNotBlank()) {
+                        Text("Faculty: ${cell.instructor}", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.secondary)
                     }
                 }
             }

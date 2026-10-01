@@ -165,11 +165,7 @@ fun ProfileScreen(
                                     listOf("T1", "T2", "N/A").forEach { tg ->
                                         FilterChip(
                                             selected = editTutGroup == tg,
-                                            onClick = {
-                                                editTutGroup = tg
-                                                if (tg == "T1") editPracGroup = "P1"
-                                                if (tg == "T2") editPracGroup = "P2"
-                                            },
+                                            onClick = { editTutGroup = tg },
                                             label = { Text("Group $tg") },
                                             colors = FilterChipDefaults.filterChipColors(
                                                 selectedContainerColor = MaterialTheme.colorScheme.primary,
@@ -184,11 +180,7 @@ fun ProfileScreen(
                                     listOf("P1", "P2", "N/A").forEach { pg ->
                                         FilterChip(
                                             selected = editPracGroup == pg,
-                                            onClick = {
-                                                editPracGroup = pg
-                                                if (pg == "P1") editTutGroup = "T1"
-                                                if (pg == "P2") editTutGroup = "T2"
-                                            },
+                                            onClick = { editPracGroup = pg },
                                             label = { Text("Group $pg") },
                                             colors = FilterChipDefaults.filterChipColors(
                                                 selectedContainerColor = MaterialTheme.colorScheme.primary,

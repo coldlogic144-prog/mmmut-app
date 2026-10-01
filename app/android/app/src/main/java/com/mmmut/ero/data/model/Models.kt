@@ -47,7 +47,10 @@ data class Notice(
 )
 
 data class TimetableCell(
+    val id: String = "",
     val periodKey: String = "",
+    val startPeriod: String = "",
+    val endPeriod: String = "",
     val subjectCode: String = "",
     val subjectName: String = "",
     val type: String = "",
@@ -55,27 +58,50 @@ data class TimetableCell(
     val end: String = "",
     val tutorialGroup: String? = null,
     val practicalGroup: String? = null,
-    val room: String = "TL-206"
+    val room: String = "TL-206",
+    val instructor: String = "",
+    val notes: String = ""
 )
 
 data class TimetableEntry(
+    val id: String = "",
     val academicSession: String = "2025-26",
     val branch: String = "civil",
     val section: String = "A",
     val semester: Int = 1,
     val day: String = "Monday",
-    val period: String = "I",
+    val startPeriod: String = "I",
+    val endPeriod: String = "I",
     val startTime: String = "09:10",
     val endTime: String = "10:00",
     val subjectCode: String = "",
     val subjectName: String = "",
     val classType: String = "LECTURE", // LECTURE, TUTORIAL, PRACTICAL, LUNCH, FREE
-    val tutorialGroup: String? = null, // "T1", "T2", or null
-    val practicalGroup: String? = null, // "P1", "P2", or null
+    val tutorialGroup: String? = null, // "T1", "T2", or null (for all)
+    val practicalGroup: String? = null, // "P1", "P2", "P3", "P4", or null (for all)
     val room: String = "TL-206",
-    val teacher: String = "",
+    val instructor: String = "",
     val notes: String = ""
-)
+) {
+    val periodDisplay: String get() = if (startPeriod == endPeriod) startPeriod else "$startPeriod-$endPeriod"
+
+    fun toCell(): TimetableCell = TimetableCell(
+        id = id,
+        periodKey = periodDisplay,
+        startPeriod = startPeriod,
+        endPeriod = endPeriod,
+        subjectCode = subjectCode,
+        subjectName = subjectName,
+        type = classType.lowercase().replaceFirstChar { it.uppercase() },
+        start = startTime,
+        end = endTime,
+        tutorialGroup = tutorialGroup,
+        practicalGroup = practicalGroup,
+        room = room,
+        instructor = instructor,
+        notes = notes
+    )
+}
 
 data class SubjectInfo(
     val code: String = "",

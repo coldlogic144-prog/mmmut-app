@@ -19,8 +19,8 @@ interface AttendanceRepository {
 }
 
 interface TimetableRepository {
-    suspend fun weekCells(branchId: String, section: String, tutorialGroup: String = "T1", practicalGroup: String = "P1"): Map<String, List<TimetableCell>>
-    suspend fun todayCells(branchId: String, section: String, tutorialGroup: String = "T1", practicalGroup: String = "P1"): List<TimetableCell>
+    suspend fun weekCells(branchId: String, section: String, tutorialGroup: String = "T1", practicalGroup: String = "P1", semester: Int = 1): Map<String, List<TimetableCell>>
+    suspend fun todayCells(branchId: String, section: String, tutorialGroup: String = "T1", practicalGroup: String = "P1", semester: Int = 1): List<TimetableCell>
 }
 
 interface CalendarRepository {

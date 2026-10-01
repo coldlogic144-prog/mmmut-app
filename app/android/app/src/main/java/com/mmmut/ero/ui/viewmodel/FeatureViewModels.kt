@@ -36,7 +36,15 @@ class AcademicsViewModel(
                 val profile = auth.currentProfile() ?: run {
                     _state.value = UiState.Error("Session expired. Please log in again."); return@launch
                 }
-                val week = try { tt.weekCells(profile.branchId, profile.section, profile.tutorialGroup, profile.practicalGroup) } catch (_: Exception) { emptyMap() }
+                val week = try {
+                    tt.weekCells(
+                        branchId = profile.branchId,
+                        section = profile.section,
+                        tutorialGroup = profile.tutorialGroup,
+                        practicalGroup = profile.practicalGroup,
+                        semester = profile.semester
+                    )
+                } catch (_: Exception) { emptyMap() }
                 val map = when (val r = att.loadMap(profile.uid)) {
                     is RepoResult.Ok -> r.value; is RepoResult.Err -> emptyMap()
                 }

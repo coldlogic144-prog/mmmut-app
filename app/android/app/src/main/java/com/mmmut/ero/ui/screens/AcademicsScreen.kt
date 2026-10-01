@@ -103,7 +103,7 @@ fun AcademicsScreen(vm: AcademicsViewModel = androidx.lifecycle.viewmodel.compos
                             if (todayCells.none { it.subjectCode != "—" }) {
                                 item { Text("No classes scheduled for today.", style = MaterialTheme.typography.bodySmall) }
                             } else {
-                                items(todayCells.filter { it.subjectCode != "—" }, key = { it.periodKey }) { cell ->
+                                items(todayCells.filter { it.subjectCode != "—" }, key = { it.id.ifBlank { "${it.periodKey}::${it.subjectCode}" } }) { cell ->
                                     val key = "${cell.periodKey}::${cell.subjectCode}"
                                     val currentStatus = todayMap[key]
 

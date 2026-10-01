@@ -45,25 +45,21 @@ class TimetableViewModel(
                 return@launch
             }
             val branch = AcademicDataExtra.getBranch(profile.branchId)
-            val weekGrid = try { ttRepo.weekCells(profile.branchId, profile.section, profile.tutorialGroup, profile.practicalGroup) } catch (_: Exception) { emptyMap() }
+            val weekGrid = try {
+                ttRepo.weekCells(
+                    branchId = profile.branchId,
+                    section = profile.section,
+                    tutorialGroup = profile.tutorialGroup,
+                    practicalGroup = profile.practicalGroup,
+                    semester = profile.semester
+                )
+            } catch (_: Exception) { emptyMap() }
             val todayName = TimeUtils.todayName() ?: "Monday"
             val todayCells = weekGrid[todayName] ?: emptyList()
 
             val nowTimeStr = SimpleDateFormat("HH:mm", Locale.US).format(Date())
-            var currentCell: TimetableCell? = null
-            var nextCell: TimetableCell? = null
-
-            for (cell in todayCells) {
-                if (cell.subjectCode == "—") continue
-                if (nowTimeStr >= cell.start && nowTimeStr <= cell.end) {
-                    currentCell = cell
-                } else if (nowTimeStr < cell.start && nextCell == null) {
-                    nextCell = cell
-                }
-            }
-            if (currentCell == null && nextCell == null) {
-                nextCell = todayCells.firstOrNull { it.subjectCode != "—" }
-            }
+            val currentCell = com.mmmut.ero.data.local.ScheduleEngine.getCurrentClass(todayCells, nowTimeStr)
+            val nextCell = com.mmmut.ero.data.local.ScheduleEngine.getNextClass(todayCells, nowTimeStr)
 
             _state.value = UiState.Success(
                 TimetableScreenData(

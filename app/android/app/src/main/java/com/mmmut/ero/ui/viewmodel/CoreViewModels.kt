@@ -33,7 +33,15 @@ class HomeViewModel(
                 val profile = auth.currentProfile() ?: run {
                     _state.value = UiState.Error("Session expired. Please log in again."); return@launch
                 }
-                val today = try { timetable.todayCells(profile.branchId, profile.section, profile.tutorialGroup, profile.practicalGroup) } catch (_: Exception) { emptyList() }
+                val today = try {
+                    timetable.todayCells(
+                        branchId = profile.branchId,
+                        section = profile.section,
+                        tutorialGroup = profile.tutorialGroup,
+                        practicalGroup = profile.practicalGroup,
+                        semester = profile.semester
+                    )
+                } catch (_: Exception) { emptyList() }
                 val notices = when (val r = noticeRepo.notices()) {
                     is com.mmmut.ero.core.RepoResult.Ok -> r.value
                     is com.mmmut.ero.core.RepoResult.Err -> emptyList()
