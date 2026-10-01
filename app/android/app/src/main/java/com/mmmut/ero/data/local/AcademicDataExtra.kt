@@ -31,7 +31,21 @@ object AcademicDataExtra {
             SubjectDef("BSM-140", "Environmental Science & Green Chemistry", 3, 0, 2),
             SubjectDef("BEE-110", "Basic Electrical Engineering", 3, 0, 2),
             SubjectDef("BEC-106", "Electronic Components Testing & Measurement", 2, 0, 4),
-            SubjectDef("BHS-102", "Technical Writing & Professional Communication", 2, 1, 2)))
+            SubjectDef("BHS-102", "Technical Writing & Professional Communication", 2, 1, 2))),
+        Branch("bba", "Management Studies — BBA", listOf("A", "B"), "TL-113 / TL-114", listOf(
+            SubjectDef("BBA-114", "Financial Accounting", 3, 1, 0),
+            SubjectDef("BBA-115", "Principles & Practices of Management", 3, 1, 0),
+            SubjectDef("BBA-116", "Quantitative Techniques for Business Research", 3, 1, 0),
+            SubjectDef("BBA-A01", "Industrial Psychology", 2, 1, 0),
+            SubjectDef("BHM-121", "Intellectual Property Rights", 2, 1, 0),
+            SubjectDef("AUC-108", "Business Communication for Managers", 2, 0, 0))),
+        Branch("bpharm", "Department of Pharmacy — B.Pharm", listOf("A"), "L-115 / CH-206", listOf(
+            SubjectDef("BPT101T", "Human Anatomy & Physiology I", 3, 1, 0),
+            SubjectDef("BPT102T", "Basics of Python Programming", 3, 0, 2),
+            SubjectDef("BPT103T", "General Pharmacy", 3, 0, 2),
+            SubjectDef("BPT104T", "Healthcare Psychology & Comm Skills", 2, 1, 0),
+            SubjectDef("BPT105T", "Introduction to Pharmacognosy", 3, 0, 2),
+            SubjectDef("BPT106T", "Pharmaceutical Inorganic Chemistry", 3, 0, 2)))
     )
     val ALL_BRANCHES: List<Branch> get() = AcademicData.BRANCHES + MORE_BRANCHES
     fun getBranch(id: String): Branch = ALL_BRANCHES.firstOrNull { it.id == id } ?: AcademicData.BRANCHES[1]

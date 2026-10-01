@@ -7,7 +7,20 @@ import com.mmmut.ero.data.model.StudentProfile
 interface AuthRepository {
     suspend fun currentProfile(): StudentProfile?
     suspend fun signIn(usernameOrRoll: String, password: String, useRoll: Boolean): RepoResult<StudentProfile>
-    suspend fun signUp(username: String, password: String, name: String, branchId: String, section: String, hostel: String, gender: String, rollNumber: String): RepoResult<StudentProfile>
+    suspend fun signUp(
+        username: String,
+        password: String,
+        name: String,
+        branchId: String,
+        semester: Int,
+        section: String,
+        tutorialGroup: String,
+        practicalGroup: String,
+        hostel: String,
+        roomNumber: String,
+        gender: String,
+        rollNumber: String
+    ): RepoResult<StudentProfile>
     suspend fun signOut()
     suspend fun resolveRollToUsername(roll: String): RepoResult<String>
 }

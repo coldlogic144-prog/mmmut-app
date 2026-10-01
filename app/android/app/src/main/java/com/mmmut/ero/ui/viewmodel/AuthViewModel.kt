@@ -41,10 +41,24 @@ class AuthViewModel(
         }
     }
 
-    fun signUp(u: String, pw: String, name: String, branch: String, sec: String, hostel: String, gender: String, roll: String, onOk: (StudentProfile) -> Unit) {
+    fun signUp(
+        u: String,
+        pw: String,
+        name: String,
+        branch: String,
+        semester: Int,
+        sec: String,
+        tutGroup: String,
+        pracGroup: String,
+        hostel: String,
+        roomNumber: String,
+        gender: String,
+        roll: String,
+        onOk: (StudentProfile) -> Unit
+    ) {
         viewModelScope.launch {
             _busy.value = true; _error.value = null
-            when (val r = repo.signUp(u, pw, name, branch, sec, hostel, gender, roll)) {
+            when (val r = repo.signUp(u, pw, name, branch, semester, sec, tutGroup, pracGroup, hostel, roomNumber, gender, roll)) {
                 is RepoResult.Ok -> { _state.value = UiState.Success(r.value); onOk(r.value) }
                 is RepoResult.Err -> { _error.value = r.message; _state.value = UiState.Error(r.message) }
             }

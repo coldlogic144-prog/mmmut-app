@@ -103,8 +103,7 @@ class FirebaseTelegramRepository(
             db.collection("telegramApplications").document(uid).update(
                 mapOf(
                     "telegramUsername" to clean,
-                    "telegramUserId" to clean,
-                    "status" to "ADMIN_APPROVED"
+                    "telegramUserId" to clean
                 )
             ).await()
             RepoResult.Ok(Unit)

@@ -21,7 +21,15 @@ fun NoticesScreen(onOpen: (String) -> Unit, vm: NoticesViewModel = androidx.life
         OutlinedTextField(query, { query = it }, label = { Text("Search notices") }, modifier = Modifier.fillMaxWidth().padding(12.dp), singleLine = true)
         Row(Modifier.padding(horizontal = 12.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             listOf("all", "general", "academic", "examination", "hostel", "events", "emergency").forEach { c ->
-                FilterChip(selected = cat == c, onClick = { cat = c }, label = { Text(c) })
+                FilterChip(
+                    selected = cat == c,
+                    onClick = { cat = c },
+                    label = { Text(c.replaceFirstChar { it.uppercase() }) },
+                    colors = FilterChipDefaults.filterChipColors(
+                        selectedContainerColor = MaterialTheme.colorScheme.primary,
+                        selectedLabelColor = MaterialTheme.colorScheme.onPrimary
+                    )
+                )
             }
         }
         when (val s = state) {

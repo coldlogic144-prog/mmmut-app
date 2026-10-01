@@ -16,20 +16,32 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
 class LocalTimetableRepository : TimetableRepository {
-    override suspend fun weekCells(branchId: String, section: String): Map<String, List<TimetableCell>> {
+    override suspend fun weekCells(
+        branchId: String,
+        section: String,
+        tutorialGroup: String,
+        practicalGroup: String
+    ): Map<String, List<TimetableCell>> {
         val branch = AcademicDataExtra.getBranch(branchId)
         val sec = section.ifBlank { branch.sections.firstOrNull() ?: "A" }
-        val grid = ScheduleEngine.buildWeekGrid(branch, sec)
-        return grid.mapValues { (_, day) ->
-            AcademicData.TEACH_PERIODS.map { p ->
-                val u = day[p.key]!!
-                TimetableCell(p.key, u.code, u.name, u.type, p.start, p.end)
-            }
+
+        val map = mutableMapOf<String, List<TimetableCell>>()
+        AcademicData.DAYS.forEach { day ->
+            val dayRawCells = ScheduleEngine.dayCells(branch, sec, day)
+            val filtered = ScheduleEngine.filterCellsForStudent(dayRawCells, tutorialGroup, practicalGroup)
+            map[day] = filtered
         }
+        return map
     }
-    override suspend fun todayCells(branchId: String, section: String): List<TimetableCell> {
-        val day = com.mmmut.ero.util.TimeUtils.todayName() ?: return emptyList()
-        return weekCells(branchId, section)[day] ?: emptyList()
+
+    override suspend fun todayCells(
+        branchId: String,
+        section: String,
+        tutorialGroup: String,
+        practicalGroup: String
+    ): List<TimetableCell> {
+        val day = com.mmmut.ero.util.TimeUtils.todayName() ?: "Monday"
+        return weekCells(branchId, section, tutorialGroup, practicalGroup)[day] ?: emptyList()
     }
 }
 

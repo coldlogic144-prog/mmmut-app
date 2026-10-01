@@ -2,6 +2,8 @@ package com.mmmut.ero.navigation
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.MenuBook
+import androidx.compose.material.icons.automirrored.filled.Send
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -9,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavType
 import androidx.navigation.compose.*
 import androidx.navigation.navArgument
+import com.mmmut.ero.data.repository.FirebaseAuthRepository
 import com.mmmut.ero.notifications.NotificationDeepLink
 import com.mmmut.ero.ui.screens.*
 
@@ -17,6 +20,19 @@ fun AppNav(initialDeepLink: String? = null) {
     val nav = rememberNavController()
     var authed by remember { mutableStateOf(false) }
     var booted by remember { mutableStateOf(false) }
+    var isAdminUser by remember { mutableStateOf(false) }
+
+    val authRepo = remember { FirebaseAuthRepository() }
+
+    LaunchedEffect(authed) {
+        if (authed) {
+            val p = try { authRepo.currentProfile() } catch (_: Exception) { null }
+            isAdminUser = p?.isAdmin == true
+        } else {
+            isAdminUser = false
+        }
+    }
+
     LaunchedEffect(initialDeepLink) {
         NotificationDeepLink.parseUri(initialDeepLink)?.let {
             if (booted && authed) {
@@ -24,27 +40,43 @@ fun AppNav(initialDeepLink: String? = null) {
             }
         }
     }
-    val tabs = listOf(
-        Routes.HOME to "Home", Routes.ACADEMICS to "Academics", Routes.NOTICES to "Notices",
-        Routes.HOSTEL to "Hostel", Routes.PROFILE to "Profile"
+
+    val baseTabs = mutableListOf(
+        Routes.HOME to "Home",
+        Routes.TIMETABLE to "Schedule",
+        Routes.SYLLABUS to "Syllabus",
+        Routes.NOTICES to "Notices",
+        Routes.TELEGRAM to "Telegram",
+        Routes.PROFILE to "Profile"
     )
+    if (isAdminUser) {
+        baseTabs.add(Routes.ADMIN to "Admin")
+    }
+
     val back by nav.currentBackStackEntryAsState()
     val route = back?.destination?.route
-    val showBar = authed && (route in tabs.map { it.first } || route == Routes.NOTIFICATIONS || route == Routes.TELEGRAM || route?.startsWith("notice/") == true)
+    val showBar = authed && (route in baseTabs.map { it.first } || route == Routes.ACADEMICS || route == Routes.HOSTEL || route == Routes.NOTIFICATIONS || route?.startsWith("notice/") == true)
+
     Scaffold(bottomBar = {
         if (showBar) NavigationBar {
-            tabs.forEach { (r, label) ->
-                NavigationBarItem(selected = route == r || (r == Routes.NOTICES && route?.startsWith("notice/") == true),
+            baseTabs.forEach { (r, label) ->
+                NavigationBarItem(
+                    selected = route == r || (r == Routes.NOTICES && route?.startsWith("notice/") == true),
                     onClick = { nav.navigate(r) { popUpTo(Routes.HOME); launchSingleTop = true } },
                     icon = {
                         Icon(when (r) {
                             Routes.HOME -> Icons.Default.Home
-                            Routes.ACADEMICS -> Icons.Default.School
+                            Routes.TIMETABLE -> Icons.Default.Schedule
+                            Routes.SYLLABUS -> Icons.AutoMirrored.Filled.MenuBook
                             Routes.NOTICES -> Icons.Default.Notifications
-                            Routes.HOSTEL -> Icons.Default.Hotel
-                            else -> Icons.Default.Person
+                            Routes.TELEGRAM -> Icons.AutoMirrored.Filled.Send
+                            Routes.PROFILE -> Icons.Default.Person
+                            Routes.ADMIN -> Icons.Default.AdminPanelSettings
+                            else -> Icons.Default.School
                         }, contentDescription = label)
-                    }, label = { Text(label) })
+                    },
+                    label = { Text(label, maxLines = 1) }
+                )
             }
         }
     }) { pad ->
@@ -73,6 +105,8 @@ fun AppNav(initialDeepLink: String? = null) {
                     onTelegram = { nav.navigate(Routes.TELEGRAM) }
                 )
             }
+            composable(Routes.TIMETABLE) { TimetableScreen() }
+            composable(Routes.SYLLABUS) { SyllabusScreen() }
             composable(Routes.ACADEMICS) { AcademicsScreen() }
             composable(Routes.NOTICES) { NoticesScreen(onOpen = { nav.navigate(Routes.noticeDetail(it)) }) }
             composable(Routes.NOTICE_DETAIL, arguments = listOf(navArgument("noticeId") { type = NavType.StringType })) {
@@ -91,6 +125,7 @@ fun AppNav(initialDeepLink: String? = null) {
             composable(Routes.HOSTEL) { HostelScreen(onOpen = { nav.navigate(Routes.noticeDetail(it)) }) }
             composable(Routes.NOTIFICATIONS) { NotificationsScreen(onOpen = { nav.navigate(Routes.noticeDetail(it)) }) }
             composable(Routes.TELEGRAM) { TelegramScreen(onBack = { nav.popBackStack() }) }
+            composable(Routes.ADMIN) { AdminScreen() }
         }
     }
 }

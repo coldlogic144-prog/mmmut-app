@@ -4,6 +4,7 @@ import com.mmmut.ero.data.auth.AuthEmail
 import com.mmmut.ero.data.local.AcademicData
 import com.mmmut.ero.data.local.AcademicDataExtra
 import com.mmmut.ero.data.local.ScheduleEngine
+import com.mmmut.ero.data.local.SyllabusData
 import com.mmmut.ero.data.repository.tokenDocId as repoTokenDocId
 import com.mmmut.ero.util.TokenId
 import com.mmmut.ero.notifications.NotificationDeepLink
@@ -50,7 +51,7 @@ class ScheduleEngineTest {
     @Test fun buildWeekGrid_coversAllDaysAndPeriods() {
         val branch = AcademicDataExtra.getBranch("cse")
         val grid = ScheduleEngine.buildWeekGrid(branch, "A")
-        assertEquals(5, grid.size)
+        assertEquals(AcademicData.DAYS.size, grid.size)
         grid.values.forEach { day -> assertEquals(8, day.size) }
     }
     @Test fun buildWeekGrid_isDeterministic() {
@@ -64,6 +65,40 @@ class ScheduleEngineTest {
         assertEquals(TokenId.docId(t), TokenId.docId(t))
         assertTrue(TokenId.docId(t).startsWith("android_"))
         assertEquals(TokenId.docId(t), repoTokenDocId(t))
+    }
+}
+
+class TimetableGroupFilterTest {
+    @Test fun groupFiltering_filtersT2WhenT1() {
+        val branch = AcademicDataExtra.getBranch("civil")
+        val mondayCells = ScheduleEngine.dayCells(branch, "A", "Monday")
+        val filteredT1 = ScheduleEngine.filterCellsForStudent(mondayCells, "T1", "P1")
+        val tutCells = filteredT1.filter { it.type == "Tutorial" }
+        assertTrue(tutCells.all { it.tutorialGroup == null || it.tutorialGroup == "T1" })
+    }
+
+    @Test fun groupFiltering_filtersP2WhenP1() {
+        val branch = AcademicDataExtra.getBranch("civil")
+        val mondayCells = ScheduleEngine.dayCells(branch, "A", "Monday")
+        val filteredP1 = ScheduleEngine.filterCellsForStudent(mondayCells, "T1", "P1")
+        val pracCells = filteredP1.filter { it.type == "Practical" }
+        assertTrue(pracCells.all { it.practicalGroup == null || it.practicalGroup == "P1" })
+    }
+}
+
+class SyllabusDataTest {
+    @Test fun syllabus_loadsExactUnits() {
+        val sub = SyllabusData.getSyllabusForSubject("civil", "BSM-110", "Engineering Mathematics I", emptySet())
+        assertEquals(4, sub.units.size)
+        assertEquals("Unit I", sub.units[0].unitNumber)
+        assertTrue(sub.units[0].topics.size >= 5)
+    }
+
+    @Test fun syllabus_tracksCompletion() {
+        val completedSet = setOf("t|civil|BSM-110|0|0", "t|civil|BSM-110|0|1")
+        val sub = SyllabusData.getSyllabusForSubject("civil", "BSM-110", "Engineering Mathematics I", completedSet)
+        assertEquals(2, sub.completedTopics)
+        assertTrue(sub.percent > 0.0)
     }
 }
 

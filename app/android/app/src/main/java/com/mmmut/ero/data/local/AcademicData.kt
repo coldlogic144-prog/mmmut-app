@@ -7,21 +7,25 @@ data class BuiltinEvent(val start: String, val end: String, val title: String)
 
 object AcademicData {
     val PERIODS = listOf(
-        Period("I", "09:10", "10:00", "I"), Period("II", "10:00", "10:50", "II"),
-        Period("III", "10:50", "11:40", "III"), Period("IV", "11:40", "12:30", "IV"),
-        Period("LUNCH", "12:30", "14:10", "Lunch"),
-        Period("V", "14:10", "15:00", "V"), Period("VI", "15:00", "15:50", "VI"),
-        Period("VII", "15:50", "16:40", "VII"), Period("VIII", "16:40", "17:30", "VIII")
+        Period("I", "09:10", "10:00", "I"),
+        Period("II", "10:00", "10:50", "II"),
+        Period("III", "10:50", "11:40", "III"),
+        Period("IV", "11:40", "12:30", "IV"),
+        Period("LUNCH", "12:30", "14:00", "Lunch Break"),
+        Period("V", "14:00", "14:45", "V"),
+        Period("VI", "14:45", "15:30", "VI"),
+        Period("VII", "15:30", "16:15", "VII"),
+        Period("VIII", "16:15", "17:00", "VIII")
     )
     val TEACH_PERIODS = PERIODS.filter { it.key != "LUNCH" }
-    val DAYS = listOf("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
+    val DAYS = listOf("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
     val ROSTER_BRANCH_TO_ID = mapOf(
         "CED" to "civil", "CSD" to "cse", "EED" to "ee", "ECD" to "ece",
         "IOT" to "eceiot", "MED" to "me", "CHD" to "chemical", "ITC" to "it"
     )
     val ROLL_NUMBER_PATTERN = Regex("^\\d{10}$")
     fun rosterBranchToId(b: String): String = ROSTER_BRANCH_TO_ID[b.trim().uppercase()] ?: "civil"
-    fun getBranch(id: String): Branch = BRANCHES.firstOrNull { it.id == id } ?: BRANCHES[1]
+    fun getBranch(id: String): Branch = BRANCHES.firstOrNull { it.id == id } ?: BRANCHES[0]
     val BRANCHES = listOf(
         Branch("civil", "B.Tech — Civil Engineering", listOf("A", "B"), "TL-206", listOf(
             SubjectDef("BSM-110", "Engineering Mathematics I", 3, 1, 0),

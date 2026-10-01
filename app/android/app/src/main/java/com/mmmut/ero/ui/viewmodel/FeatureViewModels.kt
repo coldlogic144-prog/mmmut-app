@@ -28,6 +28,7 @@ class AcademicsViewModel(
 ) : ViewModel() {
     private val _state = MutableStateFlow<UiState<AcademicsData>>(UiState.Loading)
     val state: StateFlow<UiState<AcademicsData>> = _state
+
     fun load() {
         viewModelScope.launch {
             _state.value = UiState.Loading
@@ -35,7 +36,7 @@ class AcademicsViewModel(
                 val profile = auth.currentProfile() ?: run {
                     _state.value = UiState.Error("Session expired. Please log in again."); return@launch
                 }
-                val week = try { tt.weekCells(profile.branchId, profile.section) } catch (_: Exception) { emptyMap() }
+                val week = try { tt.weekCells(profile.branchId, profile.section, profile.tutorialGroup, profile.practicalGroup) } catch (_: Exception) { emptyMap() }
                 val map = when (val r = att.loadMap(profile.uid)) {
                     is RepoResult.Ok -> r.value; is RepoResult.Err -> emptyMap()
                 }
@@ -55,6 +56,22 @@ class AcademicsViewModel(
             } catch (_: Exception) { _state.value = UiState.Error("Could not load academics. Check your connection and retry.") }
         }
     }
+
+    fun setAttendance(periodKey: String, subjectCode: String, status: String) {
+        val cur = (_state.value as? UiState.Success)?.data ?: return
+        viewModelScope.launch {
+            val today = com.mmmut.ero.util.TimeUtils.dateKey()
+            val mutable = cur.map.mapValues { it.value.toMutableMap() }.toMutableMap()
+            val day = mutable.getOrPut(today) { mutableMapOf() }
+            val key = "$periodKey::$subjectCode"
+            day[key] = status
+            val merged = cur.map.toMutableMap()
+            merged[today] = day.toMap()
+            _state.value = UiState.Success(cur.copy(map = merged))
+            att.saveMap(cur.profile.uid, merged)
+        }
+    }
+
     fun toggleAttendance(periodKey: String, subjectCode: String, onSaved: (Map<String, Map<String, String>>) -> Unit) {
         val cur = (_state.value as? UiState.Success)?.data ?: return
         viewModelScope.launch {
@@ -75,6 +92,7 @@ class AcademicsViewModel(
 class HostelViewModel(private val repo: HostelRepository = FirestoreHostelRepository()) : ViewModel() {
     private val _state = MutableStateFlow<UiState<List<Notice>>>(UiState.Loading)
     val state: StateFlow<UiState<List<Notice>>> = _state
+
     fun load() {
         viewModelScope.launch {
             _state.value = UiState.Loading
@@ -86,9 +104,40 @@ class HostelViewModel(private val repo: HostelRepository = FirestoreHostelReposi
     }
 }
 
+class NoticesViewModel(private val repo: NoticeRepository = FirestoreNoticeRepository()) : ViewModel() {
+    private val _state = MutableStateFlow<UiState<List<Notice>>>(UiState.Loading)
+    val state: StateFlow<UiState<List<Notice>>> = _state
+
+    fun load() {
+        viewModelScope.launch {
+            _state.value = UiState.Loading
+            when (val r = repo.notices()) {
+                is RepoResult.Ok -> _state.value = if (r.value.isEmpty()) UiState.Empty else UiState.Success(r.value)
+                is RepoResult.Err -> _state.value = UiState.Error(r.message)
+            }
+        }
+    }
+}
+
+class NoticeDetailViewModel(private val repo: NoticeRepository = FirestoreNoticeRepository()) : ViewModel() {
+    private val _state = MutableStateFlow<UiState<Notice>>(UiState.Loading)
+    val state: StateFlow<UiState<Notice>> = _state
+
+    fun load(id: String) {
+        viewModelScope.launch {
+            _state.value = UiState.Loading
+            when (val r = repo.notice(id)) {
+                is RepoResult.Ok -> _state.value = UiState.Success(r.value)
+                is RepoResult.Err -> _state.value = UiState.Error(r.message)
+            }
+        }
+    }
+}
+
 class NotificationsViewModel : ViewModel() {
     private val _history = MutableStateFlow<List<StoredNotification>>(emptyList())
     val history: StateFlow<List<StoredNotification>> = _history
+
     fun load(ctx: android.content.Context) {
         viewModelScope.launch {
             try { _history.value = com.mmmut.ero.notifications.NotificationHistoryStore(ctx).all() }
@@ -102,6 +151,7 @@ class VerifyRollViewModel(private val repo: RosterRepository = RosterRepositoryI
     val busy: StateFlow<Boolean> = _busy
     private val _msg = MutableStateFlow<String?>(null)
     val msg: StateFlow<String?> = _msg
+
     fun claim(roll: String, onOk: () -> Unit) {
         viewModelScope.launch {
             _busy.value = true; _msg.value = null

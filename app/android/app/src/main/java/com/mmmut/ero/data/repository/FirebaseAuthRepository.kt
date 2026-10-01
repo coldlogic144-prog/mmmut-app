@@ -72,8 +72,24 @@ class FirebaseAuthRepository : AuthRepository {
         } catch (_: Exception) { RepoResult.Err("Could not resolve roll number (network error). Try username login.") }
     }
 
-    override suspend fun signUp(username: String, password: String, name: String, branchId: String, section: String, hostel: String, gender: String, rollNumber: String): RepoResult<StudentProfile> {
-        return FirebaseSignupHelper(apiBaseProvider = { "" }).signUp(username, password, name, branchId, section, hostel, gender, rollNumber)
+    override suspend fun signUp(
+        username: String,
+        password: String,
+        name: String,
+        branchId: String,
+        semester: Int,
+        section: String,
+        tutorialGroup: String,
+        practicalGroup: String,
+        hostel: String,
+        roomNumber: String,
+        gender: String,
+        rollNumber: String
+    ): RepoResult<StudentProfile> {
+        return FirebaseSignupHelper(apiBaseProvider = { "" }).signUp(
+            username, password, name, branchId, semester, section,
+            tutorialGroup, practicalGroup, hostel, roomNumber, gender, rollNumber
+        )
     }
 
     internal suspend fun profileOf(uid: String, fallbackUsername: String?): StudentProfile? {
@@ -81,25 +97,54 @@ class FirebaseAuthRepository : AuthRepository {
             val snap = db.collection(FirestoreCollections.USERS).document(uid).get().await()
             if (!snap.exists()) {
                 if (fallbackUsername != null) {
-                    val rec = hashMapOf<String, Any>("name" to fallbackUsername, "username" to fallbackUsername,
-                        "branchId" to "cse", "section" to "A", "hostel" to "Day Scholar",
-                        "gender" to "Not specified", "isAdmin" to false, "adminRequested" to false,
-                        "migrationStatus" to "verified", "rollNumber" to "", "rollNumberVerified" to false,
-                        "pendingRollNumber" to "", "migrationReviewReason" to "",
-                        "createdAt" to System.currentTimeMillis(), "lastReadPosts" to 0)
+                    val rec = hashMapOf<String, Any>(
+                        "name" to fallbackUsername,
+                        "username" to fallbackUsername,
+                        "branchId" to "cse",
+                        "semester" to 1,
+                        "section" to "A",
+                        "tutorialGroup" to "T1",
+                        "practicalGroup" to "P1",
+                        "hostel" to "Day Scholar",
+                        "roomNumber" to "",
+                        "gender" to "Not specified",
+                        "isAdmin" to false,
+                        "adminRequested" to false,
+                        "migrationStatus" to "verified",
+                        "rollNumber" to "",
+                        "rollNumberVerified" to false,
+                        "pendingRollNumber" to "",
+                        "migrationReviewReason" to "",
+                        "createdAt" to System.currentTimeMillis(),
+                        "lastReadPosts" to 0
+                    )
                     try { db.collection(FirestoreCollections.USERS).document(uid).set(rec).await() } catch (_: Exception) { }
                     return StudentProfile(uid, fallbackUsername, fallbackUsername)
                 }
                 return null
             }
-            StudentProfile(uid, snap.getString("name") ?: fallbackUsername ?: "", snap.getString("username") ?: fallbackUsername ?: "",
-                snap.getString("branchId") ?: "cse", snap.getString("section") ?: "A",
-                snap.getString("hostel") ?: "Day Scholar", snap.getString("gender") ?: "Not specified",
-                snap.getBoolean("isAdmin") == true, snap.getBoolean("adminRequested") == true,
-                snap.getString("migrationStatus") ?: "verified", snap.getString("rollNumber") ?: "",
-                snap.getBoolean("rollNumberVerified") == true, snap.getString("pendingRollNumber") ?: "",
-                snap.getString("migrationReviewReason") ?: "",
-                (snap.getLong("createdAt") ?: 0L), (snap.getDouble("lastReadPosts") ?: 0.0))
+            StudentProfile(
+                uid = uid,
+                name = snap.getString("name") ?: fallbackUsername ?: "",
+                username = snap.getString("username") ?: fallbackUsername ?: "",
+                rollNumber = snap.getString("rollNumber") ?: "",
+                branchId = snap.getString("branchId") ?: "cse",
+                semester = (snap.getLong("semester") ?: 1L).toInt(),
+                section = snap.getString("section") ?: "A",
+                tutorialGroup = snap.getString("tutorialGroup") ?: "T1",
+                practicalGroup = snap.getString("practicalGroup") ?: "P1",
+                hostel = snap.getString("hostel") ?: "Day Scholar",
+                roomNumber = snap.getString("roomNumber") ?: "",
+                gender = snap.getString("gender") ?: "Not specified",
+                isAdmin = snap.getBoolean("isAdmin") == true,
+                adminRequested = snap.getBoolean("adminRequested") == true,
+                migrationStatus = snap.getString("migrationStatus") ?: "verified",
+                rollNumberVerified = snap.getBoolean("rollNumberVerified") == true,
+                pendingRollNumber = snap.getString("pendingRollNumber") ?: "",
+                migrationReviewReason = snap.getString("migrationReviewReason") ?: "",
+                createdAt = snap.getLong("createdAt") ?: 0L,
+                lastReadPosts = snap.getDouble("lastReadPosts") ?: 0.0
+            )
         } catch (_: Exception) {
             if (fallbackUsername != null) StudentProfile(uid, fallbackUsername, fallbackUsername) else null
         }
