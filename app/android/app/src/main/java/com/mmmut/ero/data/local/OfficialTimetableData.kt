@@ -5,323 +5,594 @@ import com.mmmut.ero.data.model.TimetableEntry
 object OfficialTimetableData {
 
     // Official Timetable Entries extracted directly from MMMUT Official Timetable PDF (Session 2025-26)
+    // Covers all branches, semesters, sections, tutorial and practical groups.
     val ALL_ENTRIES: List<TimetableEntry> = listOf(
         // =========================================================================
         // PAGE 1: B.Tech (Civil Engineering), Semester I, SEC-A, Room: TL-206
         // =========================================================================
-        // Monday
         TimetableEntry("civil_1_a_mon_1", "2025-26", "civil", "A", 1, "Monday", "I", "I", "09:10", "10:00", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-206", "MH"),
         TimetableEntry("civil_1_a_mon_2", "2025-26", "civil", "A", 1, "Monday", "II", "II", "10:00", "10:50", "BSM-110", "Engineering Mathematics I", "LECTURE", null, null, "TL-206", "MH"),
         TimetableEntry("civil_1_a_mon_3", "2025-26", "civil", "A", 1, "Monday", "III", "III", "10:50", "11:40", "BIT-103", "Programming in C", "LECTURE", null, null, "TL-206", "NiH"),
-        TimetableEntry("civil_1_a_mon_7", "2025-26", "civil", "A", 1, "Monday", "VII", "VII", "15:30", "16:15", "BHS-101", "Universal Human Values", "LECTURE", null, null, "TL-206"),
+        TimetableEntry("civil_1_a_mon_7", "2025-26", "civil", "A", 1, "Monday", "VII", "VII", "15:30", "16:15", "BHS-101", "Universal Human Values", "LECTURE", null, null, "TL-206", ""),
         TimetableEntry("civil_1_a_mon_8_t1", "2025-26", "civil", "A", 1, "Monday", "VIII", "VIII", "16:15", "17:00", "BSM-110", "Engineering Mathematics I", "TUTORIAL", "T1", null, "TL-206", "UF"),
-
-        // Tuesday
         TimetableEntry("civil_1_a_tue_1", "2025-26", "civil", "A", 1, "Tuesday", "I", "I", "09:10", "10:00", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-206", "MH"),
-        TimetableEntry("civil_1_a_tue_2", "2025-26", "civil", "A", 1, "Tuesday", "II", "II", "10:00", "10:50", "BSM-110", "Engineering Mathematics I", "LECTURE", null, null, "TL-206"),
-        TimetableEntry("civil_1_a_tue_3_t1", "2025-26", "civil", "A", 1, "Tuesday", "III", "III", "10:50", "11:40", "BHS-101", "Universal Human Values", "TUTORIAL", "T1", null, "TL-206"),
+        TimetableEntry("civil_1_a_tue_2", "2025-26", "civil", "A", 1, "Tuesday", "II", "II", "10:00", "10:50", "BSM-110", "Engineering Mathematics I", "LECTURE", null, null, "TL-206", ""),
+        TimetableEntry("civil_1_a_tue_3_t1", "2025-26", "civil", "A", 1, "Tuesday", "III", "III", "10:50", "11:40", "BHS-101", "Universal Human Values", "TUTORIAL", "T1", null, "TL-206", ""),
         TimetableEntry("civil_1_a_tue_7_t2", "2025-26", "civil", "A", 1, "Tuesday", "VII", "VII", "15:30", "16:15", "BSM-110", "Engineering Mathematics I", "TUTORIAL", "T2", null, "TL-206", "UF"),
-
-        // Wednesday
         TimetableEntry("civil_1_a_wed_1", "2025-26", "civil", "A", 1, "Wednesday", "I", "I", "09:10", "10:00", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-206", "MH"),
-        TimetableEntry("civil_1_a_wed_2", "2025-26", "civil", "A", 1, "Wednesday", "II", "II", "10:00", "10:50", "BSM-110", "Engineering Mathematics I", "LECTURE", null, null, "TL-206"),
-        TimetableEntry("civil_1_a_wed_3_t2", "2025-26", "civil", "A", 1, "Wednesday", "III", "III", "10:50", "11:40", "BHS-101", "Universal Human Values", "TUTORIAL", "T2", null, "TL-206"),
-        // Wednesday afternoon simultaneous practicals: P1 in L-104, P2 in Physics Lab
+        TimetableEntry("civil_1_a_wed_2", "2025-26", "civil", "A", 1, "Wednesday", "II", "II", "10:00", "10:50", "BSM-110", "Engineering Mathematics I", "LECTURE", null, null, "TL-206", ""),
+        TimetableEntry("civil_1_a_wed_3_t2", "2025-26", "civil", "A", 1, "Wednesday", "III", "III", "10:50", "11:40", "BHS-101", "Universal Human Values", "TUTORIAL", "T2", null, "TL-206", ""),
         TimetableEntry("civil_1_a_wed_5_6_p1", "2025-26", "civil", "A", 1, "Wednesday", "V", "VI", "14:00", "15:30", "BCE-121", "Engineering Graphics", "PRACTICAL", null, "P1", "L-104", "RPT/SU/AnS/CC"),
-        TimetableEntry("civil_1_a_wed_5_6_p2", "2025-26", "civil", "A", 1, "Wednesday", "V", "VI", "14:00", "15:30", "BSM-131", "Engineering Physics", "PRACTICAL", null, "P2", "Physics Lab"),
-
-        // Thursday
+        TimetableEntry("civil_1_a_wed_5_6_p2", "2025-26", "civil", "A", 1, "Wednesday", "V", "VI", "14:00", "15:30", "BSM-131", "Engineering Physics", "PRACTICAL", null, "P2", "Physics Lab", ""),
         TimetableEntry("civil_1_a_thu_1_2_p2", "2025-26", "civil", "A", 1, "Thursday", "I", "II", "09:10", "10:50", "BIT-103", "Programming in C", "PRACTICAL", null, "P2", "ITRC-02", "AK"),
         TimetableEntry("civil_1_a_thu_3", "2025-26", "civil", "A", 1, "Thursday", "III", "III", "10:50", "11:40", "BIT-103", "Programming in C", "LECTURE", null, null, "TL-206", "NiH"),
-        // Thursday afternoon simultaneous practicals: P1 in Physics Lab, P2 in L-104
-        TimetableEntry("civil_1_a_thu_5_6_p1", "2025-26", "civil", "A", 1, "Thursday", "V", "VI", "14:00", "15:30", "BSM-131", "Engineering Physics", "PRACTICAL", null, "P1", "Physics Lab"),
+        TimetableEntry("civil_1_a_thu_5_6_p1", "2025-26", "civil", "A", 1, "Thursday", "V", "VI", "14:00", "15:30", "BSM-131", "Engineering Physics", "PRACTICAL", null, "P1", "Physics Lab", ""),
         TimetableEntry("civil_1_a_thu_5_6_p2", "2025-26", "civil", "A", 1, "Thursday", "V", "VI", "14:00", "15:30", "BCE-121", "Engineering Graphics", "PRACTICAL", null, "P2", "L-104", "MM/AD/AkS/An"),
-
-        // Friday
         TimetableEntry("civil_1_a_fri_3", "2025-26", "civil", "A", 1, "Friday", "III", "III", "10:50", "11:40", "BIT-103", "Programming in C", "LECTURE", null, null, "TL-206", "NiH"),
-        TimetableEntry("civil_1_a_fri_4", "2025-26", "civil", "A", 1, "Friday", "IV", "IV", "11:40", "12:30", "BHS-101", "Universal Human Values", "LECTURE", null, null, "TL-206"),
+        TimetableEntry("civil_1_a_fri_4", "2025-26", "civil", "A", 1, "Friday", "IV", "IV", "11:40", "12:30", "BHS-101", "Universal Human Values", "LECTURE", null, null, "TL-206", ""),
         TimetableEntry("civil_1_a_fri_5", "2025-26", "civil", "A", 1, "Friday", "V", "V", "14:00", "14:45", "BCE-121", "Engineering Graphics", "LECTURE", null, null, "TL-206", "NC"),
-
-        // Saturday
         TimetableEntry("civil_1_a_sat_1_2_p1", "2025-26", "civil", "A", 1, "Saturday", "I", "II", "09:10", "10:50", "BIT-103", "Programming in C", "PRACTICAL", null, "P1", "ITRC-02", "AK"),
         TimetableEntry("civil_1_a_sat_3", "2025-26", "civil", "A", 1, "Saturday", "III", "III", "10:50", "11:40", "BCE-121", "Engineering Graphics", "LECTURE", null, null, "TL-206", "NC"),
-        TimetableEntry("civil_1_a_sat_4", "2025-26", "civil", "A", 1, "Saturday", "IV", "IV", "11:40", "12:30", "BHS-101", "Universal Human Values", "LECTURE", null, null, "TL-206"),
+        TimetableEntry("civil_1_a_sat_4", "2025-26", "civil", "A", 1, "Saturday", "IV", "IV", "11:40", "12:30", "BHS-101", "Universal Human Values", "LECTURE", null, null, "TL-206", ""),
 
         // =========================================================================
         // PAGE 2: B.Tech (Civil Engineering), Semester I, SEC-B, Room: TL-206
         // =========================================================================
-        // Monday
         TimetableEntry("civil_1_b_mon_1_2_p1", "2025-26", "civil", "B", 1, "Monday", "I", "II", "09:10", "10:50", "BCE-121", "Engineering Graphics", "PRACTICAL", null, "P1", "L-104", "RP/AKS/PP"),
-        TimetableEntry("civil_1_b_mon_3_4_p2", "2025-26", "civil", "B", 1, "Monday", "III", "IV", "10:50", "12:30", "BSM-131", "Engineering Physics", "PRACTICAL", null, "P2", "Physics Lab"),
+        TimetableEntry("civil_1_b_mon_3_4_p2", "2025-26", "civil", "B", 1, "Monday", "III", "IV", "10:50", "12:30", "BSM-131", "Engineering Physics", "PRACTICAL", null, "P2", "Physics Lab", ""),
         TimetableEntry("civil_1_b_mon_5", "2025-26", "civil", "B", 1, "Monday", "V", "V", "14:00", "14:45", "BIT-103", "Programming in C", "LECTURE", null, null, "TL-206", "NiH"),
         TimetableEntry("civil_1_b_mon_6", "2025-26", "civil", "B", 1, "Monday", "VI", "VI", "14:45", "15:30", "BCE-121", "Engineering Graphics", "LECTURE", null, null, "TL-206", "NC"),
-
-        // Tuesday
         TimetableEntry("civil_1_b_tue_1_2_p2", "2025-26", "civil", "B", 1, "Tuesday", "I", "II", "09:10", "10:50", "BCE-121", "Engineering Graphics", "PRACTICAL", null, "P2", "L-104", "DP/NC/An"),
-        TimetableEntry("civil_1_b_tue_3_4_p1", "2025-26", "civil", "B", 1, "Tuesday", "III", "IV", "10:50", "12:30", "BSM-131", "Engineering Physics", "PRACTICAL", null, "P1", "Physics Lab"),
+        TimetableEntry("civil_1_b_tue_3_4_p1", "2025-26", "civil", "B", 1, "Tuesday", "III", "IV", "10:50", "12:30", "BSM-131", "Engineering Physics", "PRACTICAL", null, "P1", "Physics Lab", ""),
         TimetableEntry("civil_1_b_tue_5", "2025-26", "civil", "B", 1, "Tuesday", "V", "V", "14:00", "14:45", "BIT-103", "Programming in C", "LECTURE", null, null, "TL-206", "NiH"),
-        TimetableEntry("civil_1_b_tue_6", "2025-26", "civil", "B", 1, "Tuesday", "VI", "VI", "14:45", "15:30", "BHS-101", "Universal Human Values", "LECTURE", null, null, "TL-206"),
-
-        // Wednesday
+        TimetableEntry("civil_1_b_tue_6", "2025-26", "civil", "B", 1, "Tuesday", "VI", "VI", "14:45", "15:30", "BHS-101", "Universal Human Values", "LECTURE", null, null, "TL-206", ""),
         TimetableEntry("civil_1_b_wed_2_3_p2", "2025-26", "civil", "B", 1, "Wednesday", "II", "III", "10:00", "11:40", "BIT-103", "Programming in C", "PRACTICAL", null, "P2", "ITRC-01", "NiH"),
         TimetableEntry("civil_1_b_wed_4", "2025-26", "civil", "B", 1, "Wednesday", "IV", "IV", "11:40", "12:30", "BIT-103", "Programming in C", "LECTURE", null, null, "TL-206", "NiH"),
         TimetableEntry("civil_1_b_wed_6", "2025-26", "civil", "B", 1, "Wednesday", "VI", "VI", "14:45", "15:30", "BSM-110", "Engineering Mathematics I", "LECTURE", null, null, "TL-206", "MH"),
-        TimetableEntry("civil_1_b_wed_7", "2025-26", "civil", "B", 1, "Wednesday", "VII", "VII", "15:30", "16:15", "BHS-101", "Universal Human Values", "LECTURE", null, null, "TL-206"),
-
-        // Thursday
-        TimetableEntry("civil_1_b_thu_1", "2025-26", "civil", "B", 1, "Thursday", "I", "I", "09:10", "10:00", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-206"),
+        TimetableEntry("civil_1_b_wed_7", "2025-26", "civil", "B", 1, "Wednesday", "VII", "VII", "15:30", "16:15", "BHS-101", "Universal Human Values", "LECTURE", null, null, "TL-206", ""),
+        TimetableEntry("civil_1_b_thu_1", "2025-26", "civil", "B", 1, "Thursday", "I", "I", "09:10", "10:00", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-206", ""),
         TimetableEntry("civil_1_b_thu_2", "2025-26", "civil", "B", 1, "Thursday", "II", "II", "10:00", "10:50", "BSM-110", "Engineering Mathematics I", "LECTURE", null, null, "TL-206", "MH"),
-        TimetableEntry("civil_1_b_thu_5", "2025-26", "civil", "B", 1, "Thursday", "V", "V", "14:00", "14:45", "BHS-101", "Universal Human Values", "LECTURE", null, null, "TL-206"),
-        TimetableEntry("civil_1_b_thu_6_t1", "2025-26", "civil", "B", 1, "Thursday", "VI", "VI", "14:45", "15:30", "BHS-101", "Universal Human Values", "TUTORIAL", "T1", null, "TL-206"),
+        TimetableEntry("civil_1_b_thu_5", "2025-26", "civil", "B", 1, "Thursday", "V", "V", "14:00", "14:45", "BHS-101", "Universal Human Values", "LECTURE", null, null, "TL-206", ""),
+        TimetableEntry("civil_1_b_thu_6_t1", "2025-26", "civil", "B", 1, "Thursday", "VI", "VI", "14:45", "15:30", "BHS-101", "Universal Human Values", "TUTORIAL", "T1", null, "TL-206", ""),
         TimetableEntry("civil_1_b_thu_7_t1", "2025-26", "civil", "B", 1, "Thursday", "VII", "VII", "15:30", "16:15", "BSM-110", "Engineering Mathematics I", "TUTORIAL", "T1", null, "TL-206", "AKS"),
-
-        // Friday
         TimetableEntry("civil_1_b_fri_1", "2025-26", "civil", "B", 1, "Friday", "I", "I", "09:10", "10:00", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-206", "MH"),
-        TimetableEntry("civil_1_b_fri_2", "2025-26", "civil", "B", 1, "Friday", "II", "II", "10:00", "10:50", "BSM-110", "Engineering Mathematics I", "LECTURE", null, null, "TL-206"),
+        TimetableEntry("civil_1_b_fri_2", "2025-26", "civil", "B", 1, "Friday", "II", "II", "10:00", "10:50", "BSM-110", "Engineering Mathematics I", "LECTURE", null, null, "TL-206", ""),
         TimetableEntry("civil_1_b_fri_6", "2025-26", "civil", "B", 1, "Friday", "VI", "VI", "14:45", "15:30", "BCE-121", "Engineering Graphics", "LECTURE", null, null, "TL-206", "NC"),
-        TimetableEntry("civil_1_b_fri_7_t2", "2025-26", "civil", "B", 1, "Friday", "VII", "VII", "15:30", "16:15", "BHS-101", "Universal Human Values", "TUTORIAL", "T2", null, "TL-206"),
-
-        // Saturday
-        TimetableEntry("civil_1_b_sat_1", "2025-26", "civil", "B", 1, "Saturday", "I", "I", "09:10", "10:00", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-206"),
+        TimetableEntry("civil_1_b_fri_7_t2", "2025-26", "civil", "B", 1, "Friday", "VII", "VII", "15:30", "16:15", "BHS-101", "Universal Human Values", "TUTORIAL", "T2", null, "TL-206", ""),
+        TimetableEntry("civil_1_b_sat_1", "2025-26", "civil", "B", 1, "Saturday", "I", "I", "09:10", "10:00", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-206", ""),
         TimetableEntry("civil_1_b_sat_2_t2", "2025-26", "civil", "B", 1, "Saturday", "II", "II", "10:00", "10:50", "BSM-110", "Engineering Mathematics I", "TUTORIAL", "T2", null, "TL-206", "AKS"),
         TimetableEntry("civil_1_b_sat_3_4_p1", "2025-26", "civil", "B", 1, "Saturday", "III", "IV", "10:50", "12:30", "BIT-103", "Programming in C", "PRACTICAL", null, "P1", "ITRC-01", "NiH"),
 
         // =========================================================================
         // PAGE 3: B.Tech (Computer Sc. & Engineering), Semester I, SEC-A, Room: TL-109
         // =========================================================================
-        // Monday
-        TimetableEntry("cse_1_a_mon_1_2_p2", "2025-26", "cse", "A", 1, "Monday", "I", "II", "09:10", "10:50", "BSM-131", "Engineering Physics", "PRACTICAL", null, "P2", "Physics Lab"),
-        TimetableEntry("cse_1_a_mon_3", "2025-26", "cse", "A", 1, "Monday", "III", "III", "10:50", "11:40", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-109"),
-        TimetableEntry("cse_1_a_mon_4", "2025-26", "cse", "A", 1, "Monday", "IV", "IV", "11:40", "12:30", "BHS-101", "Universal Human Values", "LECTURE", null, null, "TL-109"),
+        TimetableEntry("cse_1_a_mon_1_2_p2", "2025-26", "cse", "A", 1, "Monday", "I", "II", "09:10", "10:50", "BSM-131", "Engineering Physics", "PRACTICAL", null, "P2", "Physics Lab", ""),
+        TimetableEntry("cse_1_a_mon_3", "2025-26", "cse", "A", 1, "Monday", "III", "III", "10:50", "11:40", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-109", ""),
+        TimetableEntry("cse_1_a_mon_4", "2025-26", "cse", "A", 1, "Monday", "IV", "IV", "11:40", "12:30", "BHS-101", "Universal Human Values: Understanding Harmony", "LECTURE", null, null, "TL-109", ""),
         TimetableEntry("cse_1_a_mon_5_6_p1", "2025-26", "cse", "A", 1, "Monday", "V", "VI", "14:00", "15:30", "BCS-111", "Web Designing-1", "PRACTICAL", null, "P1", "ITRC-03", "Dr. Meenu, Anushka (RS)"),
         TimetableEntry("cse_1_a_mon_5_6_p2", "2025-26", "cse", "A", 1, "Monday", "V", "VI", "14:00", "15:30", "BCS-110", "Introduction to C Programming", "PRACTICAL", null, "P2", "ITRC-04", "SKS, Vaibhavi(RS)"),
-
-        // Tuesday
-        TimetableEntry("cse_1_a_tue_1_2_p1", "2025-26", "cse", "A", 1, "Tuesday", "I", "II", "09:10", "10:50", "BSM-131", "Engineering Physics", "PRACTICAL", null, "P1", "Physics Lab"),
-        TimetableEntry("cse_1_a_tue_3", "2025-26", "cse", "A", 1, "Tuesday", "III", "III", "10:50", "11:40", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-109"),
+        TimetableEntry("cse_1_a_tue_1_2_p1", "2025-26", "cse", "A", 1, "Tuesday", "I", "II", "09:10", "10:50", "BSM-131", "Engineering Physics", "PRACTICAL", null, "P1", "Physics Lab", ""),
+        TimetableEntry("cse_1_a_tue_3", "2025-26", "cse", "A", 1, "Tuesday", "III", "III", "10:50", "11:40", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-109", ""),
         TimetableEntry("cse_1_a_tue_4", "2025-26", "cse", "A", 1, "Tuesday", "IV", "IV", "11:40", "12:30", "BCS-111", "Web Designing-1", "LECTURE", null, null, "TL-109", "Dr. Meenu"),
         TimetableEntry("cse_1_a_tue_5_6_p2", "2025-26", "cse", "A", 1, "Tuesday", "V", "VI", "14:00", "15:30", "BCS-111", "Web Designing-1", "PRACTICAL", null, "P2", "ITRC-03", "Dr. Meenu, Shreyansh (RS)"),
-
-        // Wednesday
-        TimetableEntry("cse_1_a_wed_3", "2025-26", "cse", "A", 1, "Wednesday", "III", "III", "10:50", "11:40", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-109"),
+        TimetableEntry("cse_1_a_wed_3", "2025-26", "cse", "A", 1, "Wednesday", "III", "III", "10:50", "11:40", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-109", ""),
         TimetableEntry("cse_1_a_wed_4", "2025-26", "cse", "A", 1, "Wednesday", "IV", "IV", "11:40", "12:30", "BCS-111", "Web Designing-1", "LECTURE", null, null, "TL-109", "Dr. Meenu"),
-
-        // Thursday
-        TimetableEntry("cse_1_a_thu_1", "2025-26", "cse", "A", 1, "Thursday", "I", "I", "09:10", "10:00", "BSM-110", "Engineering Mathematics I", "LECTURE", null, null, "TL-109", "KK"),
+        TimetableEntry("cse_1_a_thu_1", "2025-26", "cse", "A", 1, "Thursday", "I", "I", "09:10", "10:00", "BSM-110", "Engineering Mathematics-I", "LECTURE", null, null, "TL-109", "KK"),
         TimetableEntry("cse_1_a_thu_2", "2025-26", "cse", "A", 1, "Thursday", "II", "II", "10:00", "10:50", "BCS-110", "Introduction to C Programming", "LECTURE", null, null, "TL-109", "SKS"),
-        TimetableEntry("cse_1_a_thu_5_t1", "2025-26", "cse", "A", 1, "Thursday", "V", "V", "14:00", "14:45", "BSM-110", "Engineering Mathematics I", "TUTORIAL", "T1", null, "TL-109", "DM"),
-        TimetableEntry("cse_1_a_thu_6", "2025-26", "cse", "A", 1, "Thursday", "VI", "VI", "14:45", "15:30", "BHS-101", "Universal Human Values", "LECTURE", null, null, "TL-109"),
-        TimetableEntry("cse_1_a_thu_7_t1", "2025-26", "cse", "A", 1, "Thursday", "VII", "VII", "15:30", "16:15", "BHS-101", "Universal Human Values", "TUTORIAL", "T1", null, "TL-109"),
-
-        // Friday
-        TimetableEntry("cse_1_a_fri_1", "2025-26", "cse", "A", 1, "Friday", "I", "I", "09:10", "10:00", "BSM-110", "Engineering Mathematics I", "LECTURE", null, null, "TL-109", "KK"),
+        TimetableEntry("cse_1_a_thu_5_t1", "2025-26", "cse", "A", 1, "Thursday", "V", "V", "14:00", "14:45", "BSM-110", "Engineering Mathematics-I", "TUTORIAL", "T1", null, "TL-109", "DM"),
+        TimetableEntry("cse_1_a_thu_6", "2025-26", "cse", "A", 1, "Thursday", "VI", "VI", "14:45", "15:30", "BHS-101", "Universal Human Values: Understanding Harmony", "LECTURE", null, null, "TL-109", ""),
+        TimetableEntry("cse_1_a_thu_7_t1", "2025-26", "cse", "A", 1, "Thursday", "VII", "VII", "15:30", "16:15", "BHS-101", "Universal Human Values: Understanding Harmony", "TUTORIAL", "T1", null, "TL-109", ""),
+        TimetableEntry("cse_1_a_fri_1", "2025-26", "cse", "A", 1, "Friday", "I", "I", "09:10", "10:00", "BSM-110", "Engineering Mathematics-I", "LECTURE", null, null, "TL-109", "KK"),
         TimetableEntry("cse_1_a_fri_2", "2025-26", "cse", "A", 1, "Friday", "II", "II", "10:00", "10:50", "BCS-110", "Introduction to C Programming", "LECTURE", null, null, "TL-109", "SKS"),
-        TimetableEntry("cse_1_a_fri_5", "2025-26", "cse", "A", 1, "Friday", "V", "V", "14:00", "14:45", "BHS-101", "Universal Human Values", "LECTURE", null, null, "TL-109"),
-        TimetableEntry("cse_1_a_fri_6_t2", "2025-26", "cse", "A", 1, "Friday", "VI", "VI", "14:45", "15:30", "BSM-110", "Engineering Mathematics I", "TUTORIAL", "T2", null, "TL-109", "DM"),
-        TimetableEntry("cse_1_a_fri_7_t2", "2025-26", "cse", "A", 1, "Friday", "VII", "VII", "15:30", "16:15", "BHS-101", "Universal Human Values", "TUTORIAL", "T2", null, "TL-109"),
-
-        // Saturday
-        TimetableEntry("cse_1_a_sat_1", "2025-26", "cse", "A", 1, "Saturday", "I", "I", "09:10", "10:00", "BSM-110", "Engineering Mathematics I", "LECTURE", null, null, "TL-109", "KK"),
+        TimetableEntry("cse_1_a_fri_5", "2025-26", "cse", "A", 1, "Friday", "V", "V", "14:00", "14:45", "BHS-101", "Universal Human Values: Understanding Harmony", "LECTURE", null, null, "TL-109", ""),
+        TimetableEntry("cse_1_a_fri_6_t2", "2025-26", "cse", "A", 1, "Friday", "VI", "VI", "14:45", "15:30", "BSM-110", "Engineering Mathematics-I", "TUTORIAL", "T2", null, "TL-109", "DM"),
+        TimetableEntry("cse_1_a_fri_7_t2", "2025-26", "cse", "A", 1, "Friday", "VII", "VII", "15:30", "16:15", "BHS-101", "Universal Human Values: Understanding Harmony", "TUTORIAL", "T2", null, "TL-109", ""),
+        TimetableEntry("cse_1_a_sat_1", "2025-26", "cse", "A", 1, "Saturday", "I", "I", "09:10", "10:00", "BSM-110", "Engineering Mathematics-I", "LECTURE", null, null, "TL-109", "KK"),
         TimetableEntry("cse_1_a_sat_2", "2025-26", "cse", "A", 1, "Saturday", "II", "II", "10:00", "10:50", "BCS-110", "Introduction to C Programming", "LECTURE", null, null, "TL-109", "SKS"),
         TimetableEntry("cse_1_a_sat_3_4_p1", "2025-26", "cse", "A", 1, "Saturday", "III", "IV", "10:50", "12:30", "BCS-110", "Introduction to C Programming", "PRACTICAL", null, "P1", "ITRC-04", "SKS, HARSH(RS)"),
 
         // =========================================================================
         // PAGE 4: B.Tech (Computer Sc. & Engineering), Semester I, SEC-B, Room: TL-109
         // =========================================================================
-        // Monday
-        TimetableEntry("cse_1_b_mon_1", "2025-26", "cse", "B", 1, "Monday", "I", "I", "09:10", "10:00", "BSM-110", "Engineering Mathematics I", "LECTURE", null, null, "TL-109", "KK"),
+        TimetableEntry("cse_1_b_mon_1", "2025-26", "cse", "B", 1, "Monday", "I", "I", "09:10", "10:00", "BSM-110", "Engineering Mathematics-I", "LECTURE", null, null, "TL-109", "KK"),
         TimetableEntry("cse_1_b_mon_2", "2025-26", "cse", "B", 1, "Monday", "II", "II", "10:00", "10:50", "BCS-110", "Introduction to C Programming", "LECTURE", null, null, "TL-109", "SKS"),
         TimetableEntry("cse_1_b_mon_3_4_p1", "2025-26", "cse", "B", 1, "Monday", "III", "IV", "10:50", "12:30", "BCS-110", "Introduction to C Programming", "PRACTICAL", null, "P1", "ITRC-04", "SKS, MKS"),
-        TimetableEntry("cse_1_b_mon_5_t1", "2025-26", "cse", "B", 1, "Monday", "V", "V", "14:00", "14:45", "BSM-110", "Engineering Mathematics I", "TUTORIAL", "T1", null, "TL-109", "SS"),
-        TimetableEntry("cse_1_b_mon_6", "2025-26", "cse", "B", 1, "Monday", "VI", "VI", "14:45", "15:30", "BHS-101", "Universal Human Values", "LECTURE", null, null, "TL-109"),
-
-        // Tuesday
-        TimetableEntry("cse_1_b_tue_1", "2025-26", "cse", "B", 1, "Tuesday", "I", "I", "09:10", "10:00", "BSM-110", "Engineering Mathematics I", "LECTURE", null, null, "TL-109", "KK"),
+        TimetableEntry("cse_1_b_mon_5_t1", "2025-26", "cse", "B", 1, "Monday", "V", "V", "14:00", "14:45", "BSM-110", "Engineering Mathematics-I", "TUTORIAL", "T1", null, "TL-109", "SS"),
+        TimetableEntry("cse_1_b_mon_6", "2025-26", "cse", "B", 1, "Monday", "VI", "VI", "14:45", "15:30", "BHS-101", "Universal Human Values: Understanding Harmony", "LECTURE", null, null, "TL-109", ""),
+        TimetableEntry("cse_1_b_tue_1", "2025-26", "cse", "B", 1, "Tuesday", "I", "I", "09:10", "10:00", "BSM-110", "Engineering Mathematics-I", "LECTURE", null, null, "TL-109", "KK"),
         TimetableEntry("cse_1_b_tue_2", "2025-26", "cse", "B", 1, "Tuesday", "II", "II", "10:00", "10:50", "BCS-110", "Introduction to C Programming", "LECTURE", null, null, "TL-109", "SKS"),
         TimetableEntry("cse_1_b_tue_3_4_p2", "2025-26", "cse", "B", 1, "Tuesday", "III", "IV", "10:50", "12:30", "BCS-110", "Introduction to C Programming", "PRACTICAL", null, "P2", "ITRC-04", "SKS, MKS"),
-        TimetableEntry("cse_1_b_tue_5", "2025-26", "cse", "B", 1, "Tuesday", "V", "V", "14:00", "14:45", "BHS-101", "Universal Human Values", "LECTURE", null, null, "TL-109"),
-        TimetableEntry("cse_1_b_tue_6_t2", "2025-26", "cse", "B", 1, "Tuesday", "VI", "VI", "14:45", "15:30", "BSM-110", "Engineering Mathematics I", "TUTORIAL", "T2", null, "TL-109", "SS"),
-        TimetableEntry("cse_1_b_tue_7_t2", "2025-26", "cse", "B", 1, "Tuesday", "VII", "VII", "15:30", "16:15", "BHS-101", "Universal Human Values", "TUTORIAL", "T2", null, "TL-109"),
-
-        // Wednesday
-        TimetableEntry("cse_1_b_wed_1", "2025-26", "cse", "B", 1, "Wednesday", "I", "I", "09:10", "10:00", "BSM-110", "Engineering Mathematics I", "LECTURE", null, null, "TL-109", "KK"),
+        TimetableEntry("cse_1_b_tue_5", "2025-26", "cse", "B", 1, "Tuesday", "V", "V", "14:00", "14:45", "BHS-101", "Universal Human Values: Understanding Harmony", "LECTURE", null, null, "TL-109", ""),
+        TimetableEntry("cse_1_b_tue_6_t2", "2025-26", "cse", "B", 1, "Tuesday", "VI", "VI", "14:45", "15:30", "BSM-110", "Engineering Mathematics-I", "TUTORIAL", "T2", null, "TL-109", "SS"),
+        TimetableEntry("cse_1_b_tue_7_t2", "2025-26", "cse", "B", 1, "Tuesday", "VII", "VII", "15:30", "16:15", "BHS-101", "Universal Human Values: Understanding Harmony", "TUTORIAL", "T2", null, "TL-109", ""),
+        TimetableEntry("cse_1_b_wed_1", "2025-26", "cse", "B", 1, "Wednesday", "I", "I", "09:10", "10:00", "BSM-110", "Engineering Mathematics-I", "LECTURE", null, null, "TL-109", "KK"),
         TimetableEntry("cse_1_b_wed_2", "2025-26", "cse", "B", 1, "Wednesday", "II", "II", "10:00", "10:50", "BCS-110", "Introduction to C Programming", "LECTURE", null, null, "TL-109", "SKS"),
-        TimetableEntry("cse_1_b_wed_6", "2025-26", "cse", "B", 1, "Wednesday", "VI", "VI", "14:45", "15:30", "BCS-111", "Web Designing-1", "LECTURE", null, null, "TL-109"),
-
-        // Thursday
-        TimetableEntry("cse_1_b_thu_3", "2025-26", "cse", "B", 1, "Thursday", "III", "III", "10:50", "11:40", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-109"),
+        TimetableEntry("cse_1_b_wed_6", "2025-26", "cse", "B", 1, "Wednesday", "VI", "VI", "14:45", "15:30", "BCS-111", "Web Designing-1", "LECTURE", null, null, "TL-109", ""),
+        TimetableEntry("cse_1_b_thu_3", "2025-26", "cse", "B", 1, "Thursday", "III", "III", "10:50", "11:40", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-109", ""),
         TimetableEntry("cse_1_b_thu_4", "2025-26", "cse", "B", 1, "Thursday", "IV", "IV", "11:40", "12:30", "BCS-111", "Web Designing-1", "LECTURE", null, null, "TL-109", "Dr. Meenu"),
         TimetableEntry("cse_1_b_thu_5_6_p1", "2025-26", "cse", "B", 1, "Thursday", "V", "VI", "14:00", "15:30", "BCS-111", "Web Designing-1", "PRACTICAL", null, "P1", "ITRC-03", "G6, VDB (RS)"),
-
-        // Friday
-        TimetableEntry("cse_1_b_fri_3", "2025-26", "cse", "B", 1, "Friday", "III", "III", "10:50", "11:40", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-109"),
+        TimetableEntry("cse_1_b_fri_3", "2025-26", "cse", "B", 1, "Friday", "III", "III", "10:50", "11:40", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-109", ""),
         TimetableEntry("cse_1_b_fri_4", "2025-26", "cse", "B", 1, "Friday", "IV", "IV", "11:40", "12:30", "BCS-111", "Web Designing-1", "LECTURE", null, null, "TL-109", "Dr. Meenu"),
         TimetableEntry("cse_1_b_fri_5_6_p2", "2025-26", "cse", "B", 1, "Friday", "V", "VI", "14:00", "15:30", "BCS-111", "Web Designing-1", "PRACTICAL", null, "P2", "ITRC-03", "G1, VDB (RS)"),
-        TimetableEntry("cse_1_b_fri_5_6_p1", "2025-26", "cse", "B", 1, "Friday", "V", "VI", "14:00", "15:30", "BSM-131", "Engineering Physics", "PRACTICAL", null, "P1", "Physics Lab"),
+        TimetableEntry("cse_1_b_fri_5_6_p1", "2025-26", "cse", "B", 1, "Friday", "V", "VI", "14:00", "15:30", "BSM-131", "Engineering Physics", "PRACTICAL", null, "P1", "Physics Lab", ""),
+        TimetableEntry("cse_1_b_sat_1_2_p2", "2025-26", "cse", "B", 1, "Saturday", "I", "II", "09:10", "10:50", "BSM-131", "Engineering Physics", "PRACTICAL", null, "P2", "Physics Lab", ""),
+        TimetableEntry("cse_1_b_sat_3", "2025-26", "cse", "B", 1, "Saturday", "III", "III", "10:50", "11:40", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-109", ""),
+        TimetableEntry("cse_1_b_sat_4_t1", "2025-26", "cse", "B", 1, "Saturday", "IV", "IV", "11:40", "12:30", "BHS-101", "Universal Human Values: Understanding Harmony", "TUTORIAL", "T1", null, "TL-109", ""),
 
-        // Saturday
-        TimetableEntry("cse_1_b_sat_1_2_p2", "2025-26", "cse", "B", 1, "Saturday", "I", "II", "09:10", "10:50", "BSM-131", "Engineering Physics", "PRACTICAL", null, "P2", "Physics Lab"),
-        TimetableEntry("cse_1_b_sat_3", "2025-26", "cse", "B", 1, "Saturday", "III", "III", "10:50", "11:40", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-109"),
-        TimetableEntry("cse_1_b_sat_4_t1", "2025-26", "cse", "B", 1, "Saturday", "IV", "IV", "11:40", "12:30", "BHS-101", "Universal Human Values", "TUTORIAL", "T1", null, "TL-109"),
+        // =========================================================================
+        // PAGE 5: B.Tech (Computer Sc. & Engineering), Semester I, SEC-C, Room: TL-201
+        // =========================================================================
+        TimetableEntry("cse_1_c_mon_3", "2025-26", "cse", "C", 1, "Monday", "III", "III", "10:50", "11:40", "BSM-110", "Engineering Mathematics-I", "LECTURE", null, null, "TL-201", "KK"),
+        TimetableEntry("cse_1_c_mon_4", "2025-26", "cse", "C", 1, "Monday", "IV", "IV", "11:40", "12:30", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-201", ""),
+        TimetableEntry("cse_1_c_mon_6_t1", "2025-26", "cse", "C", 1, "Monday", "VI", "VI", "14:45", "15:30", "BSM-110", "Engineering Mathematics-I", "TUTORIAL", "T1", null, "TL-201", "NK"),
+        TimetableEntry("cse_1_c_mon_7_t2", "2025-26", "cse", "C", 1, "Monday", "VII", "VII", "15:30", "16:15", "BHS-101", "Universal Human Values: Understanding Harmony", "TUTORIAL", "T2", null, "TL-201", ""),
+        TimetableEntry("cse_1_c_tue_1_2_p2", "2025-26", "cse", "C", 1, "Tuesday", "I", "II", "09:10", "10:50", "BCS-111", "Web Designing-1", "PRACTICAL", null, "P2", "ITRC-03", "G7, PS(RS)"),
+        TimetableEntry("cse_1_c_tue_3_p1", "2025-26", "cse", "C", 1, "Tuesday", "III", "III", "10:50", "11:40", "BCS-110", "Introduction to C Programming", "PRACTICAL", null, "P1", "ITRC-03", "Ram, VAIBHAVI(RS)"),
+        TimetableEntry("cse_1_c_tue_5", "2025-26", "cse", "C", 1, "Tuesday", "V", "V", "14:00", "14:45", "BHS-101", "Universal Human Values: Understanding Harmony", "LECTURE", null, null, "TL-201", ""),
+        TimetableEntry("cse_1_c_tue_6_t2", "2025-26", "cse", "C", 1, "Tuesday", "VI", "VI", "14:45", "15:30", "BSM-110", "Engineering Mathematics-I", "TUTORIAL", "T2", null, "TL-201", "NK"),
+        TimetableEntry("cse_1_c_tue_7_t1", "2025-26", "cse", "C", 1, "Tuesday", "VII", "VII", "15:30", "16:15", "BHS-101", "Universal Human Values: Understanding Harmony", "TUTORIAL", "T1", null, "TL-201", ""),
+        TimetableEntry("cse_1_c_wed_3", "2025-26", "cse", "C", 1, "Wednesday", "III", "III", "10:50", "11:40", "BSM-110", "Engineering Mathematics-I", "LECTURE", null, null, "TL-201", "KK"),
+        TimetableEntry("cse_1_c_wed_4", "2025-26", "cse", "C", 1, "Wednesday", "IV", "IV", "11:40", "12:30", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-201", ""),
+        TimetableEntry("cse_1_c_wed_6_7_p1", "2025-26", "cse", "C", 1, "Wednesday", "VI", "VII", "14:45", "16:15", "BCS-111", "Web Designing-1", "PRACTICAL", null, "P1", "ITRC-02", "G6, Divyanshi (RS)"),
+        TimetableEntry("cse_1_c_thu_1", "2025-26", "cse", "C", 1, "Thursday", "I", "I", "09:10", "10:00", "BCS-111", "Web Designing-1", "LECTURE", null, null, "TL-201", "GF-6"),
+        TimetableEntry("cse_1_c_thu_2", "2025-26", "cse", "C", 1, "Thursday", "II", "II", "10:00", "10:50", "BCS-110", "Introduction to C Programming", "LECTURE", null, null, "TL-201", "RAM"),
+        TimetableEntry("cse_1_c_thu_3_4_p1", "2025-26", "cse", "C", 1, "Thursday", "III", "IV", "10:50", "12:30", "BSM-131", "Engineering Physics", "PRACTICAL", null, "P1", "Physics Lab", ""),
+        TimetableEntry("cse_1_c_thu_6", "2025-26", "cse", "C", 1, "Thursday", "VI", "VI", "14:45", "15:30", "BHS-101", "Universal Human Values: Understanding Harmony", "LECTURE", null, null, "TL-201", ""),
+        TimetableEntry("cse_1_c_thu_7", "2025-26", "cse", "C", 1, "Thursday", "VII", "VII", "15:30", "16:15", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-201", ""),
+        TimetableEntry("cse_1_c_fri_1", "2025-26", "cse", "C", 1, "Friday", "I", "I", "09:10", "10:00", "BCS-111", "Web Designing-1", "LECTURE", null, null, "TL-201", "GF-6"),
+        TimetableEntry("cse_1_c_fri_2", "2025-26", "cse", "C", 1, "Friday", "II", "II", "10:00", "10:50", "BCS-110", "Introduction to C Programming", "LECTURE", null, null, "TL-201", "RAM"),
+        TimetableEntry("cse_1_c_fri_6", "2025-26", "cse", "C", 1, "Friday", "VI", "VI", "14:45", "15:30", "BSM-110", "Engineering Mathematics-I", "LECTURE", null, null, "TL-201", "KK"),
+        TimetableEntry("cse_1_c_fri_7_p2", "2025-26", "cse", "C", 1, "Friday", "VII", "VII", "15:30", "16:15", "BCS-110", "Introduction to C Programming", "PRACTICAL", null, "P2", "ITRC-01", "RAM, HARSH(RS)"),
+        TimetableEntry("cse_1_c_sat_1", "2025-26", "cse", "C", 1, "Saturday", "I", "I", "09:10", "10:00", "BHS-101", "Universal Human Values: Understanding Harmony", "LECTURE", null, null, "TL-201", ""),
+        TimetableEntry("cse_1_c_sat_2", "2025-26", "cse", "C", 1, "Saturday", "II", "II", "10:00", "10:50", "BCS-110", "Introduction to C Programming", "LECTURE", null, null, "TL-201", "RAM"),
+        TimetableEntry("cse_1_c_sat_3_4_p2", "2025-26", "cse", "C", 1, "Saturday", "III", "IV", "10:50", "12:30", "BSM-131", "Engineering Physics", "PRACTICAL", null, "P2", "Physics Lab", ""),
+
+        // =========================================================================
+        // PAGE 6: B.Tech (Computer Sc. & Engineering), Semester I, SEC-D, Room: TL-201
+        // =========================================================================
+        TimetableEntry("cse_1_d_mon_1", "2025-26", "cse", "D", 1, "Monday", "I", "I", "09:10", "10:00", "BHS-101", "Universal Human Values: Understanding Harmony", "LECTURE", null, null, "TL-201", ""),
+        TimetableEntry("cse_1_d_mon_2", "2025-26", "cse", "D", 1, "Monday", "II", "II", "10:00", "10:50", "BCS-110", "Introduction to C Programming", "LECTURE", null, null, "TL-201", "RAM"),
+        TimetableEntry("cse_1_d_mon_6_7_p1", "2025-26", "cse", "D", 1, "Monday", "VI", "VII", "14:45", "16:15", "BCS-111", "Web Designing-1", "PRACTICAL", null, "P1", "ITRC-01", "G6, AM(RS)"),
+        TimetableEntry("cse_1_d_tue_1", "2025-26", "cse", "D", 1, "Tuesday", "I", "I", "09:10", "10:00", "BCS-110", "Introduction to C Programming", "LECTURE", null, null, "TL-201", "RAM"),
+        TimetableEntry("cse_1_d_tue_2", "2025-26", "cse", "D", 1, "Tuesday", "II", "II", "10:00", "10:50", "BCS-111", "Web Designing-1", "LECTURE", null, null, "TL-201", "Dr. Meenu"),
+        TimetableEntry("cse_1_d_tue_3", "2025-26", "cse", "D", 1, "Tuesday", "III", "III", "10:50", "11:40", "BSM-110", "Engineering Mathematics-I", "LECTURE", null, null, "TL-201", "HP"),
+        TimetableEntry("cse_1_d_tue_4", "2025-26", "cse", "D", 1, "Tuesday", "IV", "IV", "11:40", "12:30", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-201", ""),
+        TimetableEntry("cse_1_d_tue_5_6_p2", "2025-26", "cse", "D", 1, "Tuesday", "V", "VI", "14:00", "15:30", "BSM-131", "Engineering Physics", "PRACTICAL", null, "P2", "Physics Lab", ""),
+        TimetableEntry("cse_1_d_tue_6_7_p2", "2025-26", "cse", "D", 1, "Tuesday", "VI", "VII", "14:45", "16:15", "BCS-111", "Web Designing-1", "PRACTICAL", null, "P2", "ITRC-03", "G7, SG(RS)"),
+        TimetableEntry("cse_1_d_wed_1", "2025-26", "cse", "D", 1, "Wednesday", "I", "I", "09:10", "10:00", "BCS-110", "Introduction to C Programming", "LECTURE", null, null, "TL-201", "RAM"),
+        TimetableEntry("cse_1_d_wed_2", "2025-26", "cse", "D", 1, "Wednesday", "II", "II", "10:00", "10:50", "BCS-111", "Web Designing-1", "LECTURE", null, null, "TL-201", "Dr. Meenu"),
+        TimetableEntry("cse_1_d_wed_3_4_p1", "2025-26", "cse", "D", 1, "Wednesday", "III", "IV", "10:50", "12:30", "BSM-131", "Engineering Physics", "PRACTICAL", null, "P1", "Physics Lab", ""),
+        TimetableEntry("cse_1_d_wed_5_6_p1", "2025-26", "cse", "D", 1, "Wednesday", "V", "VI", "14:00", "15:30", "BCS-110", "Introduction to C Programming", "PRACTICAL", null, "P1", "ITRC-04", "RAM, MKS"),
+        TimetableEntry("cse_1_d_thu_3", "2025-26", "cse", "D", 1, "Thursday", "III", "III", "10:50", "11:40", "BSM-110", "Engineering Mathematics-I", "LECTURE", null, null, "TL-201", "HP"),
+        TimetableEntry("cse_1_d_thu_4", "2025-26", "cse", "D", 1, "Thursday", "IV", "IV", "11:40", "12:30", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-201", ""),
+        TimetableEntry("cse_1_d_thu_7", "2025-26", "cse", "D", 1, "Thursday", "VII", "VII", "15:30", "16:15", "BHS-101", "Universal Human Values: Understanding Harmony", "LECTURE", null, null, "TL-201", ""),
+        TimetableEntry("cse_1_d_thu_8_t1", "2025-26", "cse", "D", 1, "Thursday", "VIII", "VIII", "16:15", "17:00", "BHS-101", "Universal Human Values: Understanding Harmony", "TUTORIAL", "T1", null, "TL-201", ""),
+        TimetableEntry("cse_1_d_fri_3", "2025-26", "cse", "D", 1, "Friday", "III", "III", "10:50", "11:40", "BSM-110", "Engineering Mathematics-I", "LECTURE", null, null, "TL-201", "HP"),
+        TimetableEntry("cse_1_d_fri_4", "2025-26", "cse", "D", 1, "Friday", "IV", "IV", "11:40", "12:30", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-201", ""),
+        TimetableEntry("cse_1_d_fri_7_t1", "2025-26", "cse", "D", 1, "Friday", "VII", "VII", "15:30", "16:15", "BSM-110", "Engineering Mathematics-I", "TUTORIAL", "T1", null, "TL-201", "SS"),
+        TimetableEntry("cse_1_d_fri_8_t2", "2025-26", "cse", "D", 1, "Friday", "VIII", "VIII", "16:15", "17:00", "BHS-101", "Universal Human Values: Understanding Harmony", "TUTORIAL", "T2", null, "TL-201", ""),
+        TimetableEntry("cse_1_d_sat_1_2_p2", "2025-26", "cse", "D", 1, "Saturday", "I", "II", "09:10", "10:50", "BCS-110", "Introduction to C Programming", "PRACTICAL", null, "P2", "ITRC-03", "RAM, SKS"),
+        TimetableEntry("cse_1_d_sat_3", "2025-26", "cse", "D", 1, "Saturday", "III", "III", "10:50", "11:40", "BHS-101", "Universal Human Values: Understanding Harmony", "LECTURE", null, null, "TL-201", ""),
+        TimetableEntry("cse_1_d_sat_4_t2", "2025-26", "cse", "D", 1, "Saturday", "IV", "IV", "11:40", "12:30", "BSM-110", "Engineering Mathematics-I", "TUTORIAL", "T2", null, "TL-201", "SS"),
 
         // =========================================================================
         // PAGE 7: B.Tech (Information Technology), Semester I, SEC-A, Room: TL-203
         // =========================================================================
-        // Monday
         TimetableEntry("it_1_a_mon_1_2_p1", "2025-26", "it", "A", 1, "Monday", "I", "II", "09:10", "10:50", "BIT-104", "Internet and Web Designing", "PRACTICAL", null, "P1", "ITRC-03", "NS"),
         TimetableEntry("it_1_a_mon_1_2_p2", "2025-26", "it", "A", 1, "Monday", "I", "II", "09:10", "10:50", "BIT-103", "Programming in C", "PRACTICAL", null, "P2", "CL-02", "DS"),
-        TimetableEntry("it_1_a_mon_5", "2025-26", "it", "A", 1, "Monday", "V", "V", "14:00", "14:45", "BHS-101", "Universal Human Values", "LECTURE", null, null, "TL-203"),
-        TimetableEntry("it_1_a_mon_6", "2025-26", "it", "A", 1, "Monday", "VI", "VI", "14:45", "15:30", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-203"),
-
-        // Tuesday
+        TimetableEntry("it_1_a_mon_5", "2025-26", "it", "A", 1, "Monday", "V", "V", "14:00", "14:45", "BHS-101", "Universal Human Values", "LECTURE", null, null, "TL-203", ""),
+        TimetableEntry("it_1_a_mon_6", "2025-26", "it", "A", 1, "Monday", "VI", "VI", "14:45", "15:30", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-203", ""),
         TimetableEntry("it_1_a_tue_1_2_p2", "2025-26", "it", "A", 1, "Tuesday", "I", "II", "09:10", "10:50", "BIT-104", "Internet and Web Designing", "PRACTICAL", null, "P2", "ITRC-03", "NS"),
         TimetableEntry("it_1_a_tue_1_2_p1", "2025-26", "it", "A", 1, "Tuesday", "I", "II", "09:10", "10:50", "BIT-103", "Programming in C", "PRACTICAL", null, "P1", "CL-02", "DS"),
-        TimetableEntry("it_1_a_tue_5", "2025-26", "it", "A", 1, "Tuesday", "V", "V", "14:00", "14:45", "BHS-101", "Universal Human Values", "LECTURE", null, null, "TL-203"),
-
-        // Wednesday
+        TimetableEntry("it_1_a_tue_5", "2025-26", "it", "A", 1, "Tuesday", "V", "V", "14:00", "14:45", "BHS-101", "Universal Human Values", "LECTURE", null, null, "TL-203", ""),
         TimetableEntry("it_1_a_wed_1", "2025-26", "it", "A", 1, "Wednesday", "I", "I", "09:10", "10:00", "BSM-110", "Engineering Mathematics I", "LECTURE", null, null, "TL-203", "VB"),
         TimetableEntry("it_1_a_wed_2", "2025-26", "it", "A", 1, "Wednesday", "II", "II", "10:00", "10:50", "BIT-103", "Programming in C", "LECTURE", null, null, "TL-203", "SPS"),
         TimetableEntry("it_1_a_wed_5", "2025-26", "it", "A", 1, "Wednesday", "V", "V", "14:00", "14:45", "BIT-104", "Internet and Web Designing", "LECTURE", null, null, "TL-203", "NS"),
         TimetableEntry("it_1_a_wed_6_t2", "2025-26", "it", "A", 1, "Wednesday", "VI", "VI", "14:45", "15:30", "BSM-110", "Engineering Mathematics I", "TUTORIAL", "T2", null, "TL-203", "KM"),
-        TimetableEntry("it_1_a_wed_7_8_p2", "2025-26", "it", "A", 1, "Wednesday", "VII", "VIII", "15:30", "17:00", "BSM-131", "Engineering Physics", "PRACTICAL", null, "P2", "Physics Lab"),
-
-        // Thursday
+        TimetableEntry("it_1_a_wed_7_8_p2", "2025-26", "it", "A", 1, "Wednesday", "VII", "VIII", "15:30", "17:00", "BSM-131", "Engineering Physics", "PRACTICAL", null, "P2", "Physics Lab", ""),
         TimetableEntry("it_1_a_thu_1", "2025-26", "it", "A", 1, "Thursday", "I", "I", "09:10", "10:00", "BSM-110", "Engineering Mathematics I", "LECTURE", null, null, "TL-203", "VB"),
         TimetableEntry("it_1_a_thu_2", "2025-26", "it", "A", 1, "Thursday", "II", "II", "10:00", "10:50", "BIT-103", "Programming in C", "LECTURE", null, null, "TL-203", "SPS"),
         TimetableEntry("it_1_a_thu_5_t1", "2025-26", "it", "A", 1, "Thursday", "V", "V", "14:00", "14:45", "BSM-110", "Engineering Mathematics I", "TUTORIAL", "T1", null, "TL-203", "KM"),
-        TimetableEntry("it_1_a_thu_6", "2025-26", "it", "A", 1, "Thursday", "VI", "VI", "14:45", "15:30", "BHS-101", "Universal Human Values", "LECTURE", null, null, "TL-203"),
-        TimetableEntry("it_1_a_thu_7_t1", "2025-26", "it", "A", 1, "Thursday", "VII", "VII", "15:30", "16:15", "BHS-101", "Universal Human Values", "TUTORIAL", "T1", null, "TL-203"),
-
-        // Friday
-        TimetableEntry("it_1_a_fri_3", "2025-26", "it", "A", 1, "Friday", "III", "III", "10:50", "11:40", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-203"),
+        TimetableEntry("it_1_a_thu_6", "2025-26", "it", "A", 1, "Thursday", "VI", "VI", "14:45", "15:30", "BHS-101", "Universal Human Values", "LECTURE", null, null, "TL-203", ""),
+        TimetableEntry("it_1_a_thu_7_t1", "2025-26", "it", "A", 1, "Thursday", "VII", "VII", "15:30", "16:15", "BHS-101", "Universal Human Values", "TUTORIAL", "T1", null, "TL-203", ""),
+        TimetableEntry("it_1_a_fri_3", "2025-26", "it", "A", 1, "Friday", "III", "III", "10:50", "11:40", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-203", ""),
         TimetableEntry("it_1_a_fri_4", "2025-26", "it", "A", 1, "Friday", "IV", "IV", "11:40", "12:30", "BIT-103", "Programming in C", "LECTURE", null, null, "TL-203", "SPS"),
-        TimetableEntry("it_1_a_fri_5_t2", "2025-26", "it", "A", 1, "Friday", "V", "V", "14:00", "14:45", "BHS-101", "Universal Human Values", "TUTORIAL", "T2", null, "TL-203"),
+        TimetableEntry("it_1_a_fri_5_t2", "2025-26", "it", "A", 1, "Friday", "V", "V", "14:00", "14:45", "BHS-101", "Universal Human Values", "TUTORIAL", "T2", null, "TL-203", ""),
         TimetableEntry("it_1_a_fri_6", "2025-26", "it", "A", 1, "Friday", "VI", "VI", "14:45", "15:30", "BSM-110", "Engineering Mathematics I", "LECTURE", null, null, "TL-203", "VB"),
-        TimetableEntry("it_1_a_fri_7_8_p1", "2025-26", "it", "A", 1, "Friday", "VII", "VIII", "15:30", "17:00", "BSM-131", "Engineering Physics", "PRACTICAL", null, "P1", "Physics Lab"),
-
-        // Saturday
-        TimetableEntry("it_1_a_sat_3", "2025-26", "it", "A", 1, "Saturday", "III", "III", "10:50", "11:40", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-203"),
+        TimetableEntry("it_1_a_fri_7_8_p1", "2025-26", "it", "A", 1, "Friday", "VII", "VIII", "15:30", "17:00", "BSM-131", "Engineering Physics", "PRACTICAL", null, "P1", "Physics Lab", ""),
+        TimetableEntry("it_1_a_sat_3", "2025-26", "it", "A", 1, "Saturday", "III", "III", "10:50", "11:40", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-203", ""),
         TimetableEntry("it_1_a_sat_4", "2025-26", "it", "A", 1, "Saturday", "IV", "IV", "11:40", "12:30", "BIT-104", "Internet and Web Designing", "LECTURE", null, null, "TL-203", "NS"),
+
+        // =========================================================================
+        // PAGE 8: B.Tech (Information Technology), Semester I, SEC-B, Room: TL-203
+        // =========================================================================
+        TimetableEntry("it_1_b_mon_1", "2025-26", "it", "B", 1, "Monday", "I", "I", "09:10", "10:00", "BSM-110", "Engineering Mathematics I", "LECTURE", null, null, "TL-203", "VB"),
+        TimetableEntry("it_1_b_mon_2", "2025-26", "it", "B", 1, "Monday", "II", "II", "10:00", "10:50", "BIT-103", "Programming in C", "LECTURE", null, null, "TL-203", "SPS"),
+        TimetableEntry("it_1_b_mon_3", "2025-26", "it", "B", 1, "Monday", "III", "III", "10:50", "11:40", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-203", ""),
+        TimetableEntry("it_1_b_mon_4", "2025-26", "it", "B", 1, "Monday", "IV", "IV", "11:40", "12:30", "BHS-101", "Universal Human Values", "LECTURE", null, null, "TL-203", ""),
+        TimetableEntry("it_1_b_tue_1", "2025-26", "it", "B", 1, "Tuesday", "I", "I", "09:10", "10:00", "BSM-110", "Engineering Mathematics I", "LECTURE", null, null, "TL-203", "VB"),
+        TimetableEntry("it_1_b_tue_2", "2025-26", "it", "B", 1, "Tuesday", "II", "II", "10:00", "10:50", "BIT-103", "Programming in C", "LECTURE", null, null, "TL-203", "SPS"),
+        TimetableEntry("it_1_b_tue_3", "2025-26", "it", "B", 1, "Tuesday", "III", "III", "10:50", "11:40", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-110", ""),
+        TimetableEntry("it_1_b_tue_7_t2", "2025-26", "it", "B", 1, "Tuesday", "VII", "VII", "15:30", "16:15", "BHS-101", "Universal Human Values", "TUTORIAL", "T2", null, "TL-203", ""),
+        TimetableEntry("it_1_b_tue_8_t1", "2025-26", "it", "B", 1, "Tuesday", "VIII", "VIII", "16:15", "17:00", "BSM-110", "Engineering Mathematics I", "TUTORIAL", "T1", null, "TL-203", "DG"),
+        TimetableEntry("it_1_b_wed_1_2_p1", "2025-26", "it", "B", 1, "Wednesday", "I", "II", "09:10", "10:50", "BSM-131", "Engineering Physics", "PRACTICAL", null, "P1", "Physics Lab", ""),
+        TimetableEntry("it_1_b_wed_3", "2025-26", "it", "B", 1, "Wednesday", "III", "III", "10:50", "11:40", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-203", ""),
+        TimetableEntry("it_1_b_wed_4", "2025-26", "it", "B", 1, "Wednesday", "IV", "IV", "11:40", "12:30", "BHS-101", "Universal Human Values", "LECTURE", null, null, "TL-203", ""),
+        TimetableEntry("it_1_b_wed_5_6_p1", "2025-26", "it", "B", 1, "Wednesday", "V", "VI", "14:00", "15:30", "BIT-104", "Internet and Web Designing", "PRACTICAL", null, "P1", "ITRC-03", "TH"),
+        TimetableEntry("it_1_b_wed_5_6_p2", "2025-26", "it", "B", 1, "Wednesday", "V", "VI", "14:00", "15:30", "BIT-103", "Programming in C", "PRACTICAL", null, "P2", "CL-02", "SPS/DS"),
+        TimetableEntry("it_1_b_thu_1_2_p2", "2025-26", "it", "B", 1, "Thursday", "I", "II", "09:10", "10:50", "BSM-131", "Engineering Physics", "PRACTICAL", null, "P2", "Physics Lab", ""),
+        TimetableEntry("it_1_b_thu_3", "2025-26", "it", "B", 1, "Thursday", "III", "III", "10:50", "11:40", "BSM-110", "Engineering Mathematics I", "LECTURE", null, null, "TL-203", "VB"),
+        TimetableEntry("it_1_b_thu_4_t2", "2025-26", "it", "B", 1, "Thursday", "IV", "IV", "11:40", "12:30", "BHS-101", "Universal Human Values", "TUTORIAL", "T2", null, "TL-203", ""),
+        TimetableEntry("it_1_b_thu_5_6_p2", "2025-26", "it", "B", 1, "Thursday", "V", "VI", "14:00", "15:30", "BIT-104", "Internet and Web Designing", "PRACTICAL", null, "P2", "ITRC-02", "TH"),
+        TimetableEntry("it_1_b_fri_1", "2025-26", "it", "B", 1, "Friday", "I", "I", "09:10", "10:00", "BIT-103", "Programming in C", "LECTURE", null, null, "TL-203", "SPS"),
+        TimetableEntry("it_1_b_fri_2_t2", "2025-26", "it", "B", 1, "Friday", "II", "II", "10:00", "10:50", "BSM-110", "Engineering Mathematics I", "TUTORIAL", "T2", null, "TL-203", "DG"),
+        TimetableEntry("it_1_b_fri_6", "2025-26", "it", "B", 1, "Friday", "VI", "VI", "14:45", "15:30", "BIT-104", "Internet and Web Designing", "LECTURE", null, null, "TL-203", "TH"),
+        TimetableEntry("it_1_b_sat_1", "2025-26", "it", "B", 1, "Saturday", "I", "I", "09:10", "10:00", "BIT-104", "Internet and Web Designing", "LECTURE", null, null, "TL-203", "TH"),
+        TimetableEntry("it_1_b_sat_2", "2025-26", "it", "B", 1, "Saturday", "II", "II", "10:00", "10:50", "BHS-101", "Universal Human Values", "LECTURE", null, null, "TL-203", ""),
+        TimetableEntry("it_1_b_sat_3_4_p1", "2025-26", "it", "B", 1, "Saturday", "III", "IV", "10:50", "12:30", "BIT-103", "Programming in C", "PRACTICAL", null, "P1", "CL-02", "SPS/DS"),
+
+        // =========================================================================
+        // PAGE 9: B.Tech (Chemical Engineering), Semester I, SEC-A, Room: TL-110
+        // =========================================================================
+        TimetableEntry("chem_1_a_mon_2", "2025-26", "chemical", "A", 1, "Monday", "II", "II", "10:00", "10:50", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-110", ""),
+        TimetableEntry("chem_1_a_mon_3", "2025-26", "chemical", "A", 1, "Monday", "III", "III", "10:50", "11:40", "BSM-110", "Engineering Mathematics -I", "LECTURE", null, null, "TL-110", "VB"),
+        TimetableEntry("chem_1_a_mon_7_8_p2", "2025-26", "chemical", "A", 1, "Monday", "VII", "VIII", "15:30", "17:00", "BSM-131", "Engineering Physics", "PRACTICAL", null, "P2", "Physics Lab", ""),
+        TimetableEntry("chem_1_a_tue_2", "2025-26", "chemical", "A", 1, "Tuesday", "II", "II", "10:00", "10:50", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-110", ""),
+        TimetableEntry("chem_1_a_tue_3", "2025-26", "chemical", "A", 1, "Tuesday", "III", "III", "10:50", "11:40", "BSM-110", "Engineering Mathematics -I", "LECTURE", null, null, "TL-110", "VB"),
+        TimetableEntry("chem_1_a_tue_5_6_p1", "2025-26", "chemical", "A", 1, "Tuesday", "V", "VI", "14:00", "15:30", "BSM-131", "Engineering Physics", "PRACTICAL", null, "P1", "Physics Lab", ""),
+        TimetableEntry("chem_1_a_tue_7_t1", "2025-26", "chemical", "A", 1, "Tuesday", "VII", "VII", "15:30", "16:15", "BSM-110", "Engineering Mathematics -I", "TUTORIAL", "T1", null, "TL-110", "AG"),
+        TimetableEntry("chem_1_a_wed_1_2_p2", "2025-26", "chemical", "A", 1, "Wednesday", "I", "II", "09:10", "10:50", "BIT-103", "Programming in C", "PRACTICAL", null, "P2", "ITRC-02", "AKG"),
+        TimetableEntry("chem_1_a_wed_1_4_p1", "2025-26", "chemical", "A", 1, "Wednesday", "I", "IV", "09:10", "12:30", "BME-104", "Manufacturing Techniques Workshop", "PRACTICAL", null, "P1", "Workshop", ""),
+        TimetableEntry("chem_1_a_wed_6", "2025-26", "chemical", "A", 1, "Wednesday", "VI", "VI", "14:45", "15:30", "BIT-103", "Programming in C", "LECTURE", null, null, "TL-110", "AKG"),
+        TimetableEntry("chem_1_a_wed_7_t1", "2025-26", "chemical", "A", 1, "Wednesday", "VII", "VII", "15:30", "16:15", "BHS-101", "Universal Human Values", "TUTORIAL", "T1", null, "TL-110", ""),
+        TimetableEntry("chem_1_a_thu_2", "2025-26", "chemical", "A", 1, "Thursday", "II", "II", "10:00", "10:50", "BSM-131", "Engineering Physics", "LECTURE", null, null, "TL-110", ""),
+        TimetableEntry("chem_1_a_thu_3", "2025-26", "chemical", "A", 1, "Thursday", "III", "III", "10:50", "11:40", "BHS-101", "Universal Human Values", "LECTURE", null, null, "TL-110", ""),
+        TimetableEntry("chem_1_a_thu_4", "2025-26", "chemical", "A", 1, "Thursday", "IV", "IV", "11:40", "12:30", "BIT-103", "Programming in C", "LECTURE", null, null, "TL-110", "AKG"),
+        TimetableEntry("chem_1_a_thu_5_8_p2", "2025-26", "chemical", "A", 1, "Thursday", "V", "VIII", "14:00", "17:00", "BME-104", "Manufacturing Techniques Workshop", "PRACTICAL", null, "P2", "Workshop", ""),
+        TimetableEntry("chem_1_a_fri_2", "2025-26", "chemical", "A", 1, "Friday", "II", "II", "10:00", "10:50", "BSM-110", "Engineering Mathematics -I", "LECTURE", null, null, "TL-110", "VB"),
+        TimetableEntry("chem_1_a_fri_3", "2025-26", "chemical", "A", 1, "Friday", "III", "III", "10:50", "11:40", "BHS-101", "Universal Human Values", "LECTURE", null, null, "TL-110", ""),
+        TimetableEntry("chem_1_a_fri_4", "2025-26", "chemical", "A", 1, "Friday", "IV", "IV", "11:40", "12:30", "BIT-103", "Programming in C", "LECTURE", null, null, "TL-110", "AKG"),
+        TimetableEntry("chem_1_a_fri_5", "2025-26", "chemical", "A", 1, "Friday", "V", "V", "14:00", "14:45", "BME-101", "Manufacturing Techniques Workshop", "LECTURE", null, null, "TL-110", ""),
+        TimetableEntry("chem_1_a_fri_6_t2", "2025-26", "chemical", "A", 1, "Friday", "VI", "VI", "14:45", "15:30", "BSM-110", "Engineering Mathematics -I", "TUTORIAL", "T2", null, "TL-110", "AG"),
+        TimetableEntry("chem_1_a_fri_7_t2", "2025-26", "chemical", "A", 1, "Friday", "VII", "VII", "15:30", "16:15", "BHS-101", "Universal Human Values", "TUTORIAL", "T2", null, "TL-110", ""),
+        TimetableEntry("chem_1_a_sat_1_2_p1", "2025-26", "chemical", "A", 1, "Saturday", "I", "II", "09:10", "10:50", "BIT-103", "Programming in C", "PRACTICAL", null, "P1", "ITRC-01", "AKG"),
+        TimetableEntry("chem_1_a_sat_3", "2025-26", "chemical", "A", 1, "Saturday", "III", "III", "10:50", "11:40", "BME-101", "Manufacturing Techniques Workshop", "LECTURE", null, null, "TL-110", ""),
+        TimetableEntry("chem_1_a_sat_4", "2025-26", "chemical", "A", 1, "Saturday", "IV", "IV", "11:40", "12:30", "BHS-101", "Universal Human Values", "LECTURE", null, null, "TL-110", ""),
 
         // =========================================================================
         // PAGE 10: B.Tech (Mechanical Engineering), Semester I, SEC-A, Room: TL-205
         // =========================================================================
-        // Monday
         TimetableEntry("me_1_a_mon_1", "2025-26", "me", "A", 1, "Monday", "I", "I", "09:10", "10:00", "BSM-110", "Engineering Mathematics-1", "LECTURE", null, null, "TL-205", "SL"),
         TimetableEntry("me_1_a_mon_2", "2025-26", "me", "A", 1, "Monday", "II", "II", "10:00", "10:50", "BEE-110", "Basic Electrical Engineering", "LECTURE", null, null, "TL-205", "SY"),
         TimetableEntry("me_1_a_mon_3", "2025-26", "me", "A", 1, "Monday", "III", "III", "10:50", "11:40", "BSM-140", "Environmental Science and Green Chemistry", "LECTURE", null, null, "TL-205", "RKY"),
         TimetableEntry("me_1_a_mon_5_6_p2", "2025-26", "me", "A", 1, "Monday", "V", "VI", "14:00", "15:30", "BSM-140", "Environmental Science and Green Chemistry", "PRACTICAL", null, "P2", "Chemistry Lab", "RKY, NK & RS"),
-        TimetableEntry("me_1_a_mon_5_6_p1", "2025-26", "me", "A", 1, "Monday", "V", "VI", "14:00", "15:30", "BHS-102", "Technical Writing and Professional Communication", "PRACTICAL", null, "P1", "TL-205"),
-
-        // Tuesday
-        TimetableEntry("me_1_a_tue_1_2_p2", "2025-26", "me", "A", 1, "Tuesday", "I", "II", "09:10", "10:50", "BME-104", "Manufacturing Practice Workshop", "PRACTICAL", null, "P2", "Workshop", "PSY/Nistha"),
+        TimetableEntry("me_1_a_mon_5_6_p1", "2025-26", "me", "A", 1, "Monday", "V", "VI", "14:00", "15:30", "BHS-102", "Technical Writing and Professional Communication", "PRACTICAL", null, "P1", "TL-205", ""),
+        TimetableEntry("me_1_a_tue_1_4_p2", "2025-26", "me", "A", 1, "Tuesday", "I", "IV", "09:10", "12:30", "BME-104", "Manufacturing Practice Workshop", "PRACTICAL", null, "P2", "Workshop", "PSY/Nistha"),
         TimetableEntry("me_1_a_tue_5_6_p1", "2025-26", "me", "A", 1, "Tuesday", "V", "VI", "14:00", "15:30", "BSM-140", "Environmental Science and Green Chemistry", "PRACTICAL", null, "P1", "Chemistry Lab", "CL, Preeti & RS"),
         TimetableEntry("me_1_a_tue_7", "2025-26", "me", "A", 1, "Tuesday", "VII", "VII", "15:30", "16:15", "BSM-140", "Environmental Science and Green Chemistry", "LECTURE", null, null, "TL-205", "RKY"),
-        TimetableEntry("me_1_a_tue_8_t2", "2025-26", "me", "A", 1, "Tuesday", "VIII", "VIII", "16:15", "17:00", "BHS-102", "Technical Writing and Professional Communication", "TUTORIAL", "T2", null, "TL-205"),
-
-        // Wednesday
+        TimetableEntry("me_1_a_tue_8_t2", "2025-26", "me", "A", 1, "Tuesday", "VIII", "VIII", "16:15", "17:00", "BHS-102", "Technical Writing and Professional Communication", "TUTORIAL", "T2", null, "TL-205", ""),
         TimetableEntry("me_1_a_wed_1", "2025-26", "me", "A", 1, "Wednesday", "I", "I", "09:10", "10:00", "BSM-140", "Environmental Science and Green Chemistry", "LECTURE", null, null, "TL-205", "RKY"),
         TimetableEntry("me_1_a_wed_2", "2025-26", "me", "A", 1, "Wednesday", "II", "II", "10:00", "10:50", "BME-104", "Manufacturing Practice Workshop", "LECTURE", null, null, "TL-205", "MG"),
         TimetableEntry("me_1_a_wed_5_6_p1", "2025-26", "me", "A", 1, "Wednesday", "V", "VI", "14:00", "15:30", "BEE-110", "Basic Electrical Engineering", "PRACTICAL", null, "P1", "Electrical Lab", "SY/M"),
-        TimetableEntry("me_1_a_wed_7", "2025-26", "me", "A", 1, "Wednesday", "VII", "VII", "15:30", "16:15", "BHS-102", "Technical Writing and Professional Communication", "LECTURE", null, null, "TL-205"),
+        TimetableEntry("me_1_a_wed_7", "2025-26", "me", "A", 1, "Wednesday", "VII", "VII", "15:30", "16:15", "BHS-102", "Technical Writing and Professional Communication", "LECTURE", null, null, "TL-205", ""),
         TimetableEntry("me_1_a_wed_8_t2", "2025-26", "me", "A", 1, "Wednesday", "VIII", "VIII", "16:15", "17:00", "BSM-110", "Engineering Mathematics-1", "TUTORIAL", "T2", null, "TL-205", "VP"),
-
-        // Thursday
         TimetableEntry("me_1_a_thu_1", "2025-26", "me", "A", 1, "Thursday", "I", "I", "09:10", "10:00", "BSM-110", "Engineering Mathematics-1", "LECTURE", null, null, "TL-205", "SL"),
         TimetableEntry("me_1_a_thu_2", "2025-26", "me", "A", 1, "Thursday", "II", "II", "10:00", "10:50", "BEE-110", "Basic Electrical Engineering", "LECTURE", null, null, "TL-205", "SY"),
         TimetableEntry("me_1_a_thu_5", "2025-26", "me", "A", 1, "Thursday", "V", "V", "14:00", "14:45", "BME-104", "Manufacturing Practice Workshop", "LECTURE", null, null, "TL-205", "MG"),
         TimetableEntry("me_1_a_thu_6_t1", "2025-26", "me", "A", 1, "Thursday", "VI", "VI", "14:45", "15:30", "BSM-110", "Engineering Mathematics-1", "TUTORIAL", "T1", null, "TL-205", "VP"),
-
-        // Friday
         TimetableEntry("me_1_a_fri_1", "2025-26", "me", "A", 1, "Friday", "I", "I", "09:10", "10:00", "BSM-110", "Engineering Mathematics-1", "LECTURE", null, null, "TL-205", "SL"),
         TimetableEntry("me_1_a_fri_2", "2025-26", "me", "A", 1, "Friday", "II", "II", "10:00", "10:50", "BEE-110", "Basic Electrical Engineering", "LECTURE", null, null, "TL-205", "SY"),
-        TimetableEntry("me_1_a_fri_5_6_p2", "2025-26", "me", "A", 1, "Friday", "V", "VI", "14:00", "15:30", "BHS-102", "Technical Writing and Professional Communication", "PRACTICAL", null, "P2", "TL-205"),
-        TimetableEntry("me_1_a_fri_5_6_p1", "2025-26", "me", "A", 1, "Friday", "V", "VI", "14:00", "15:30", "BME-104", "Manufacturing Practice Workshop", "PRACTICAL", null, "P1", "Workshop", "Anjani Kumar Singh/Dr. Kuldeep Kumar"),
-
-        // Saturday
-        TimetableEntry("me_1_a_sat_1", "2025-26", "me", "A", 1, "Saturday", "I", "I", "09:10", "10:00", "BHS-102", "Technical Writing and Professional Communication", "LECTURE", null, null, "TL-205"),
-        TimetableEntry("me_1_a_sat_2_t1", "2025-26", "me", "A", 1, "Saturday", "II", "II", "10:00", "10:50", "BHS-102", "Technical Writing and Professional Communication", "TUTORIAL", "T1", null, "TL-205"),
+        TimetableEntry("me_1_a_fri_5_6_p2", "2025-26", "me", "A", 1, "Friday", "V", "VI", "14:00", "15:30", "BHS-102", "Technical Writing and Professional Communication", "PRACTICAL", null, "P2", "TL-205", ""),
+        TimetableEntry("me_1_a_fri_5_8_p1", "2025-26", "me", "A", 1, "Friday", "V", "VIII", "14:00", "17:00", "BME-104", "Manufacturing Practice Workshop", "PRACTICAL", null, "P1", "Workshop", "Anjani Kumar Singh/Dr. Kuldeep Kumar"),
+        TimetableEntry("me_1_a_sat_1", "2025-26", "me", "A", 1, "Saturday", "I", "I", "09:10", "10:00", "BHS-102", "Technical Writing and Professional Communication", "LECTURE", null, null, "TL-205", ""),
+        TimetableEntry("me_1_a_sat_2_t1", "2025-26", "me", "A", 1, "Saturday", "II", "II", "10:00", "10:50", "BHS-102", "Technical Writing and Professional Communication", "TUTORIAL", "T1", null, "TL-205", ""),
         TimetableEntry("me_1_a_sat_3_4_p2", "2025-26", "me", "A", 1, "Saturday", "III", "IV", "10:50", "12:30", "BEE-110", "Basic Electrical Engineering", "PRACTICAL", null, "P2", "Electrical Lab", "SY/M"),
+
+        // =========================================================================
+        // PAGE 11: B.Tech (Mechanical Engineering), Semester I, SEC-B, Room: TL-205
+        // =========================================================================
+        TimetableEntry("me_1_b_mon_1_2_p2", "2025-26", "me", "B", 1, "Monday", "I", "II", "09:10", "10:50", "BSM-140", "Environmental Science and Green Chemistry", "PRACTICAL", null, "P2", "Chemistry Lab", "Preeti & RS"),
+        TimetableEntry("me_1_b_mon_1_4_p1", "2025-26", "me", "B", 1, "Monday", "I", "IV", "09:10", "12:30", "BME-104", "Manufacturing Practice Workshop", "PRACTICAL", null, "P1", "Workshop", "Anjani Kumar Singh/Anuj"),
+        TimetableEntry("me_1_b_mon_6", "2025-26", "me", "B", 1, "Monday", "VI", "VI", "14:45", "15:30", "BEE-110", "Basic Electrical Engineering", "LECTURE", null, null, "TL-205", "SY"),
+        TimetableEntry("me_1_b_mon_7_t1", "2025-26", "me", "B", 1, "Monday", "VII", "VII", "15:30", "16:15", "BSM-110", "Engineering Mathematics-1", "TUTORIAL", "T1", null, "TL-205", "NV"),
+        TimetableEntry("me_1_b_tue_1", "2025-26", "me", "B", 1, "Tuesday", "I", "I", "09:10", "10:00", "BSM-110", "Engineering Mathematics-1", "LECTURE", null, null, "TL-205", "SL"),
+        TimetableEntry("me_1_b_tue_2", "2025-26", "me", "B", 1, "Tuesday", "II", "II", "10:00", "10:50", "BEE-110", "Basic Electrical Engineering", "LECTURE", null, null, "TL-205", "SY"),
+        TimetableEntry("me_1_b_tue_3", "2025-26", "me", "B", 1, "Tuesday", "III", "III", "10:50", "11:40", "BSM-140", "Environmental Science and Green Chemistry", "LECTURE", null, null, "TL-205", "RKY"),
+        TimetableEntry("me_1_b_tue_4", "2025-26", "me", "B", 1, "Tuesday", "IV", "IV", "11:40", "12:30", "BME-104", "Manufacturing Practice Workshop", "LECTURE", null, null, "TL-205", "MG"),
+        TimetableEntry("me_1_b_tue_5", "2025-26", "me", "B", 1, "Tuesday", "V", "V", "14:00", "14:45", "BHS-102", "Technical Writing and Professional Communication", "LECTURE", null, null, "TL-205", ""),
+        TimetableEntry("me_1_b_tue_6_8_p2", "2025-26", "me", "B", 1, "Tuesday", "VI", "VIII", "14:45", "17:00", "BME-104", "Manufacturing Practice Workshop", "PRACTICAL", null, "P2", "Workshop", "PSY/Nistha"),
+        TimetableEntry("me_1_b_wed_3", "2025-26", "me", "B", 1, "Wednesday", "III", "III", "10:50", "11:40", "BSM-140", "Environmental Science and Green Chemistry", "LECTURE", null, null, "TL-205", "RKY"),
+        TimetableEntry("me_1_b_wed_4", "2025-26", "me", "B", 1, "Wednesday", "IV", "IV", "11:40", "12:30", "BHS-102", "Technical Writing and Professional Communication", "LECTURE", null, null, "TL-205", ""),
+        TimetableEntry("me_1_b_thu_1_2_p1", "2025-26", "me", "B", 1, "Thursday", "I", "II", "09:10", "10:50", "BEE-110", "Basic Electrical Engineering", "PRACTICAL", null, "P1", "Electrical Lab", "M/PT"),
+        TimetableEntry("me_1_b_thu_3", "2025-26", "me", "B", 1, "Thursday", "III", "III", "10:50", "11:40", "BSM-140", "Environmental Science and Green Chemistry", "LECTURE", null, null, "TL-205", "RKY"),
+        TimetableEntry("me_1_b_thu_4", "2025-26", "me", "B", 1, "Thursday", "IV", "IV", "11:40", "12:30", "BME-104", "Manufacturing Practice Workshop", "LECTURE", null, null, "TL-205", "MG"),
+        TimetableEntry("me_1_b_thu_5_6_p2", "2025-26", "me", "B", 1, "Thursday", "V", "VI", "14:00", "15:30", "BHS-102", "Technical Writing and Professional Communication", "PRACTICAL", null, "P2", "TL-205", ""),
+        TimetableEntry("me_1_b_thu_7_t2", "2025-26", "me", "B", 1, "Thursday", "VII", "VII", "15:30", "16:15", "BSM-110", "Engineering Mathematics-1", "TUTORIAL", "T2", null, "TL-205", "NV"),
+        TimetableEntry("me_1_b_fri_1_2_p1", "2025-26", "me", "B", 1, "Friday", "I", "II", "09:10", "10:50", "BHS-102", "Technical Writing and Professional Communication", "PRACTICAL", null, "P1", "TL-205", ""),
+        TimetableEntry("me_1_b_fri_3", "2025-26", "me", "B", 1, "Friday", "III", "III", "10:50", "11:40", "BSM-110", "Engineering Mathematics-1", "LECTURE", null, null, "TL-205", "SL"),
+        TimetableEntry("me_1_b_fri_4", "2025-26", "me", "B", 1, "Friday", "IV", "IV", "11:40", "12:30", "BEE-110", "Basic Electrical Engineering", "LECTURE", null, null, "TL-205", "SY"),
+        TimetableEntry("me_1_b_fri_5_6_p1", "2025-26", "me", "B", 1, "Friday", "V", "VI", "14:00", "15:30", "BSM-140", "Environmental Science and Green Chemistry", "PRACTICAL", null, "P1", "Chemistry Lab", "Preeti & RS"),
+        TimetableEntry("me_1_b_fri_7_t1", "2025-26", "me", "B", 1, "Friday", "VII", "VII", "15:30", "16:15", "BHS-102", "Technical Writing and Professional Communication", "TUTORIAL", "T1", null, "TL-205", ""),
+        TimetableEntry("me_1_b_sat_1_2_p2", "2025-26", "me", "B", 1, "Saturday", "I", "II", "09:10", "10:50", "BEE-110", "Basic Electrical Engineering", "PRACTICAL", null, "P2", "Electrical Lab", "SY/M"),
+        TimetableEntry("me_1_b_sat_3", "2025-26", "me", "B", 1, "Saturday", "III", "III", "10:50", "11:40", "BSM-110", "Engineering Mathematics-1", "LECTURE", null, null, "TL-205", "SL"),
+        TimetableEntry("me_1_b_sat_4_t2", "2025-26", "me", "B", 1, "Saturday", "IV", "IV", "11:40", "12:30", "BHS-102", "Technical Writing and Professional Communication", "TUTORIAL", "T2", null, "TL-205", ""),
 
         // =========================================================================
         // PAGE 12: B.Tech (Electrical Engineering), Semester I, SEC-A, Room: TL-202
         // =========================================================================
-        // Monday
         TimetableEntry("ee_1_a_mon_1", "2025-26", "ee", "A", 1, "Monday", "I", "I", "09:10", "10:00", "BSM-140", "Environmental Science and Green Chemistry", "LECTURE", null, null, "TL-202", "PS"),
         TimetableEntry("ee_1_a_mon_2", "2025-26", "ee", "A", 1, "Monday", "II", "II", "10:00", "10:50", "BSM-110", "Engineering Mathematics I", "LECTURE", null, null, "TL-202", "AKB"),
         TimetableEntry("ee_1_a_mon_5_6_p1", "2025-26", "ee", "A", 1, "Monday", "V", "VI", "14:00", "15:30", "BEE-108A", "Electrical Wiring & Estimation", "PRACTICAL", null, "P1", "Wiring Lab", "KBS/RSG"),
-        TimetableEntry("ee_1_a_mon_7_t2", "2025-26", "ee", "A", 1, "Monday", "VII", "VII", "15:30", "16:15", "BHS-102", "Technical Writing and Professional Communication", "TUTORIAL", "T2", null, "TL-202"),
-
-        // Tuesday
+        TimetableEntry("ee_1_a_mon_7_t2", "2025-26", "ee", "A", 1, "Monday", "VII", "VII", "15:30", "16:15", "BHS-102", "Technical Writing and Professional Communication", "TUTORIAL", "T2", null, "TL-202", ""),
         TimetableEntry("ee_1_a_tue_3", "2025-26", "ee", "A", 1, "Tuesday", "III", "III", "10:50", "11:40", "BEE-110", "Basic Electrical Engineering", "LECTURE", null, null, "TL-202", "AK"),
-        TimetableEntry("ee_1_a_tue_4", "2025-26", "ee", "A", 1, "Tuesday", "IV", "IV", "11:40", "12:30", "BHS-102", "Technical Writing and Professional Communication", "LECTURE", null, null, "TL-202"),
-        TimetableEntry("ee_1_a_tue_7", "2025-26", "ee", "A", 1, "Tuesday", "VII", "VII", "15:30", "16:15", "BHS-102", "Technical Writing and Professional Communication", "LECTURE", null, null, "TL-202"),
-
-        // Wednesday
-        TimetableEntry("ee_1_a_wed_1_2_p1", "2025-26", "ee", "A", 1, "Wednesday", "I", "II", "09:10", "10:50", "BHS-102", "Technical Writing and Professional Communication", "PRACTICAL", null, "P1", "TL-202"),
+        TimetableEntry("ee_1_a_tue_4", "2025-26", "ee", "A", 1, "Tuesday", "IV", "IV", "11:40", "12:30", "BHS-102", "Technical Writing and Professional Communication", "LECTURE", null, null, "TL-202", ""),
+        TimetableEntry("ee_1_a_tue_7", "2025-26", "ee", "A", 1, "Tuesday", "VII", "VII", "15:30", "16:15", "BHS-102", "Technical Writing and Professional Communication", "LECTURE", null, null, "TL-202", ""),
+        TimetableEntry("ee_1_a_wed_1_2_p1", "2025-26", "ee", "A", 1, "Wednesday", "I", "II", "09:10", "10:50", "BHS-102", "Technical Writing and Professional Communication", "PRACTICAL", null, "P1", "TL-202", ""),
         TimetableEntry("ee_1_a_wed_3", "2025-26", "ee", "A", 1, "Wednesday", "III", "III", "10:50", "11:40", "BEE-110", "Basic Electrical Engineering", "LECTURE", null, null, "TL-202", "AK"),
         TimetableEntry("ee_1_a_wed_4", "2025-26", "ee", "A", 1, "Wednesday", "IV", "IV", "11:40", "12:30", "BEE-108A", "Electrical Wiring & Estimation", "LECTURE", null, null, "TL-202", "KBS"),
         TimetableEntry("ee_1_a_wed_6_t2", "2025-26", "ee", "A", 1, "Wednesday", "VI", "VI", "14:45", "15:30", "BSM-110", "Engineering Mathematics I", "TUTORIAL", "T2", null, "TL-202", "RK"),
-        TimetableEntry("ee_1_a_wed_7_p2", "2025-26", "ee", "A", 1, "Wednesday", "VII", "VII", "15:30", "16:15", "BHS-102", "Technical Writing and Professional Communication", "PRACTICAL", null, "P2", "TL-202"),
-        TimetableEntry("ee_1_a_wed_7_t1", "2025-26", "ee", "A", 1, "Wednesday", "VII", "VII", "15:30", "16:15", "BHS-102", "Technical Writing and Professional Communication", "TUTORIAL", "T1", null, "TL-202"),
-
-        // Thursday
+        TimetableEntry("ee_1_a_wed_7_p2", "2025-26", "ee", "A", 1, "Wednesday", "VII", "VII", "15:30", "16:15", "BHS-102", "Technical Writing and Professional Communication", "PRACTICAL", null, "P2", "TL-202", ""),
+        TimetableEntry("ee_1_a_wed_7_t1", "2025-26", "ee", "A", 1, "Wednesday", "VII", "VII", "15:30", "16:15", "BHS-102", "Technical Writing and Professional Communication", "TUTORIAL", "T1", null, "TL-202", ""),
         TimetableEntry("ee_1_a_thu_1", "2025-26", "ee", "A", 1, "Thursday", "I", "I", "09:10", "10:00", "BSM-140", "Environmental Science and Green Chemistry", "LECTURE", null, null, "TL-202", "PS"),
         TimetableEntry("ee_1_a_thu_2", "2025-26", "ee", "A", 1, "Thursday", "II", "II", "10:00", "10:50", "BSM-110", "Engineering Mathematics I", "LECTURE", null, null, "TL-202", "AKB"),
         TimetableEntry("ee_1_a_thu_3_4_p1", "2025-26", "ee", "A", 1, "Thursday", "III", "IV", "10:50", "12:30", "BEE-110", "Basic Electrical Engineering", "PRACTICAL", null, "P1", "Electrical Lab", "AK/US"),
         TimetableEntry("ee_1_a_thu_3_4_p2", "2025-26", "ee", "A", 1, "Thursday", "III", "IV", "10:50", "12:30", "BSM-140", "Environmental Science and Green Chemistry", "PRACTICAL", null, "P2", "Chemistry Lab", "SJ, Preeti, & RS"),
         TimetableEntry("ee_1_a_thu_6", "2025-26", "ee", "A", 1, "Thursday", "VI", "VI", "14:45", "15:30", "BEE-110", "Basic Electrical Engineering", "LECTURE", null, null, "TL-202", "AK"),
-
-        // Friday
         TimetableEntry("ee_1_a_fri_1", "2025-26", "ee", "A", 1, "Friday", "I", "I", "09:10", "10:00", "BSM-140", "Environmental Science and Green Chemistry", "LECTURE", null, null, "TL-202", "PS"),
         TimetableEntry("ee_1_a_fri_2", "2025-26", "ee", "A", 1, "Friday", "II", "II", "10:00", "10:50", "BSM-110", "Engineering Mathematics I", "LECTURE", null, null, "TL-202", "AKB"),
         TimetableEntry("ee_1_a_fri_3_4_p2", "2025-26", "ee", "A", 1, "Friday", "III", "IV", "10:50", "12:30", "BEE-110", "Basic Electrical Engineering", "PRACTICAL", null, "P2", "Electrical Lab", "RB/US"),
         TimetableEntry("ee_1_a_fri_3_4_p1", "2025-26", "ee", "A", 1, "Friday", "III", "IV", "10:50", "12:30", "BSM-140", "Environmental Science and Green Chemistry", "PRACTICAL", null, "P1", "Chemistry Lab", "PS, CL & RS"),
         TimetableEntry("ee_1_a_fri_7", "2025-26", "ee", "A", 1, "Friday", "VII", "VII", "15:30", "16:15", "BEE-108A", "Electrical Wiring & Estimation", "LECTURE", null, null, "TL-202", "KBS"),
-
-        // Saturday
         TimetableEntry("ee_1_a_sat_1", "2025-26", "ee", "A", 1, "Saturday", "I", "I", "09:10", "10:00", "BEE-108A", "Electrical Wiring & Estimation", "LECTURE", null, null, "TL-202", "KBS"),
         TimetableEntry("ee_1_a_sat_2_t1", "2025-26", "ee", "A", 1, "Saturday", "II", "II", "10:00", "10:50", "BSM-110", "Engineering Mathematics I", "TUTORIAL", "T1", null, "TL-202", "RK"),
         TimetableEntry("ee_1_a_sat_3_4_p2", "2025-26", "ee", "A", 1, "Saturday", "III", "IV", "10:50", "12:30", "BEE-108A", "Electrical Wiring & Estimation", "PRACTICAL", null, "P2", "Wiring Lab", "RSG/BS"),
 
         // =========================================================================
+        // PAGE 13: B.Tech (Electrical Engineering), Semester I, SEC-B, Room: TL-202
+        // =========================================================================
+        TimetableEntry("ee_1_b_mon_3", "2025-26", "ee", "B", 1, "Monday", "III", "III", "10:50", "11:40", "BEE-108A", "Electrical Wiring & Estimation", "LECTURE", null, null, "TL-202", "KBS"),
+        TimetableEntry("ee_1_b_mon_4", "2025-26", "ee", "B", 1, "Monday", "IV", "IV", "11:40", "12:30", "BEE-110", "Basic Electrical Engineering", "LECTURE", null, null, "TL-202", "RB"),
+        TimetableEntry("ee_1_b_mon_5_t2", "2025-26", "ee", "B", 1, "Monday", "V", "V", "14:00", "14:45", "BSM-110", "Engineering Mathematics I", "TUTORIAL", "T2", null, "TL-202", "VK"),
+        TimetableEntry("ee_1_b_mon_6_t2", "2025-26", "ee", "B", 1, "Monday", "VI", "VI", "14:45", "15:30", "BHS-102", "Technical Writing and Professional Communication", "TUTORIAL", "T2", null, "TL-202", ""),
+        TimetableEntry("ee_1_b_tue_1", "2025-26", "ee", "B", 1, "Tuesday", "I", "I", "09:10", "10:00", "BSM-140", "Environmental Science and Green Chemistry", "LECTURE", null, null, "TL-202", "SJ"),
+        TimetableEntry("ee_1_b_tue_2", "2025-26", "ee", "B", 1, "Tuesday", "II", "II", "10:00", "10:50", "BSM-110", "Engineering Mathematics I", "LECTURE", null, null, "TL-202", "AKB"),
+        TimetableEntry("ee_1_b_tue_3_4_p1", "2025-26", "ee", "B", 1, "Tuesday", "III", "IV", "10:50", "12:30", "BEE-110", "Basic Electrical Engineering", "PRACTICAL", null, "P1", "Electrical Lab", "PT/US"),
+        TimetableEntry("ee_1_b_tue_6", "2025-26", "ee", "B", 1, "Tuesday", "VI", "VI", "14:45", "15:30", "BEE-108A", "Electrical Wiring & Estimation", "LECTURE", null, null, "TL-202", "KBS"),
+        TimetableEntry("ee_1_b_tue_7_8_p1", "2025-26", "ee", "B", 1, "Tuesday", "VII", "VIII", "15:30", "17:00", "BHS-102", "Technical Writing and Professional Communication", "PRACTICAL", null, "P1", "TL-202", ""),
+        TimetableEntry("ee_1_b_wed_1", "2025-26", "ee", "B", 1, "Wednesday", "I", "I", "09:10", "10:00", "BSM-140", "Environmental Science and Green Chemistry", "LECTURE", null, null, "TL-202", "SJ"),
+        TimetableEntry("ee_1_b_wed_2", "2025-26", "ee", "B", 1, "Wednesday", "II", "II", "10:00", "10:50", "BSM-110", "Engineering Mathematics I", "LECTURE", null, null, "TL-202", "AKB"),
+        TimetableEntry("ee_1_b_wed_7_8_p2", "2025-26", "ee", "B", 1, "Wednesday", "VII", "VIII", "15:30", "17:00", "BEE-110", "Basic Electrical Engineering", "PRACTICAL", null, "P2", "Electrical Lab", "AK/US"),
+        TimetableEntry("ee_1_b_thu_1_2_p1", "2025-26", "ee", "B", 1, "Thursday", "I", "II", "09:10", "10:50", "BEE-108A", "Electrical Wiring & Estimation", "PRACTICAL", null, "P1", "Wiring Lab", "KBS/AV"),
+        TimetableEntry("ee_1_b_thu_3", "2025-26", "ee", "B", 1, "Thursday", "III", "III", "10:50", "11:40", "BEE-110", "Basic Electrical Engineering", "LECTURE", null, null, "TL-202", "RB"),
+        TimetableEntry("ee_1_b_thu_4", "2025-26", "ee", "B", 1, "Thursday", "IV", "IV", "11:40", "12:30", "BHS-102", "Technical Writing and Professional Communication", "LECTURE", null, null, "TL-202", ""),
+        TimetableEntry("ee_1_b_thu_7_p1", "2025-26", "ee", "B", 1, "Thursday", "VII", "VII", "15:30", "16:15", "BSM-140", "Environmental Science and Green Chemistry", "PRACTICAL", null, "P1", "Chemistry Lab", "PS, Preeti & RS"),
+        TimetableEntry("ee_1_b_thu_7_8_p2", "2025-26", "ee", "B", 1, "Thursday", "VII", "VIII", "15:30", "17:00", "BSM-140", "Environmental Science and Green Chemistry", "PRACTICAL", null, "P2", "Chemistry Lab", "PS, NK,& RS"),
+        TimetableEntry("ee_1_b_thu_8_t1", "2025-26", "ee", "B", 1, "Thursday", "VIII", "VIII", "16:15", "17:00", "BHS-102", "Technical Writing and Professional Communication", "TUTORIAL", "T1", null, "TL-202", ""),
+        TimetableEntry("ee_1_b_fri_3", "2025-26", "ee", "B", 1, "Friday", "III", "III", "10:50", "11:40", "BSM-140", "Environmental Science and Green Chemistry", "LECTURE", null, null, "TL-202", "SJ"),
+        TimetableEntry("ee_1_b_fri_4", "2025-26", "ee", "B", 1, "Friday", "IV", "IV", "11:40", "12:30", "BSM-110", "Engineering Mathematics I", "LECTURE", null, null, "TL-202", "AKB"),
+        TimetableEntry("ee_1_b_fri_5", "2025-26", "ee", "B", 1, "Friday", "V", "V", "14:00", "14:45", "BEE-108A", "Electrical Wiring & Estimation", "LECTURE", null, null, "TL-202", "KBS"),
+        TimetableEntry("ee_1_b_fri_6", "2025-26", "ee", "B", 1, "Friday", "VI", "VI", "14:45", "15:30", "BEE-110", "Basic Electrical Engineering", "LECTURE", null, null, "TL-202", "RB"),
+        TimetableEntry("ee_1_b_fri_7_8_p2", "2025-26", "ee", "B", 1, "Friday", "VII", "VIII", "15:30", "17:00", "BHS-102", "Technical Writing and Professional Communication", "PRACTICAL", null, "P2", "TL-202", ""),
+        TimetableEntry("ee_1_b_sat_1_2_p2", "2025-26", "ee", "B", 1, "Saturday", "I", "II", "09:10", "10:50", "BEE-108A", "Electrical Wiring & Estimation", "PRACTICAL", null, "P2", "Wiring Lab", "KBS/AV"),
+        TimetableEntry("ee_1_b_sat_3", "2025-26", "ee", "B", 1, "Saturday", "III", "III", "10:50", "11:40", "BHS-102", "Technical Writing and Professional Communication", "LECTURE", null, null, "TL-202", ""),
+        TimetableEntry("ee_1_b_sat_4_t1", "2025-26", "ee", "B", 1, "Saturday", "IV", "IV", "11:40", "12:30", "BSM-110", "Engineering Mathematics I", "TUTORIAL", "T1", null, "TL-202", "VK"),
+
+        // =========================================================================
         // PAGE 14: B.Tech (Electronics & Comm. Engineering), Semester I, SEC-A, Room: TL-207
         // =========================================================================
-        // Monday
         TimetableEntry("ece_1_a_mon_1", "2025-26", "ece", "A", 1, "Monday", "I", "I", "09:10", "10:00", "BSM-110", "Engineering Mathematics - I", "LECTURE", null, null, "TL-207", "HC"),
         TimetableEntry("ece_1_a_mon_2", "2025-26", "ece", "A", 1, "Monday", "II", "II", "10:00", "10:50", "BEE-110", "Basic Electrical Engineering", "LECTURE", null, null, "TL-207", "DDS"),
-        TimetableEntry("ece_1_a_mon_5", "2025-26", "ece", "A", 1, "Monday", "V", "V", "14:00", "14:45", "BHS-102", "Technical Writing and Professional Communication", "LECTURE", null, null, "TL-207"),
+        TimetableEntry("ece_1_a_mon_5", "2025-26", "ece", "A", 1, "Monday", "V", "V", "14:00", "14:45", "BHS-102", "Technical Writing and Professional Communication", "LECTURE", null, null, "TL-207", ""),
         TimetableEntry("ece_1_a_mon_6", "2025-26", "ece", "A", 1, "Monday", "VI", "VI", "14:45", "15:30", "BSM-140", "Environmental Science and Green Chemistry", "LECTURE", null, null, "TL-207", "PPP"),
         TimetableEntry("ece_1_a_mon_7_8_p1", "2025-26", "ece", "A", 1, "Monday", "VII", "VIII", "15:30", "17:00", "BEE-110", "Basic Electrical Engineering", "PRACTICAL", null, "P1", "Electrical Lab", "RB/AG"),
-
-        // Tuesday
         TimetableEntry("ece_1_a_tue_3_4_p1", "2025-26", "ece", "A", 1, "Tuesday", "III", "IV", "10:50", "12:30", "BSM-140", "Environmental Science and Green Chemistry", "PRACTICAL", null, "P1", "Chemistry Lab", "PS, NK & RS"),
         TimetableEntry("ece_1_a_tue_3_4_p2", "2025-26", "ece", "A", 1, "Tuesday", "III", "IV", "10:50", "12:30", "BEC-106", "Electronic Components Testing and Measurement", "PRACTICAL", null, "P2", "Electronics Lab", "PL/NK"),
-        TimetableEntry("ece_1_a_tue_5", "2025-26", "ece", "A", 1, "Tuesday", "V", "V", "14:00", "14:45", "BHS-102", "Technical Writing and Professional Communication", "LECTURE", null, null, "TL-207"),
+        TimetableEntry("ece_1_a_tue_5", "2025-26", "ece", "A", 1, "Tuesday", "V", "V", "14:00", "14:45", "BHS-102", "Technical Writing and Professional Communication", "LECTURE", null, null, "TL-207", ""),
         TimetableEntry("ece_1_a_tue_6", "2025-26", "ece", "A", 1, "Tuesday", "VI", "VI", "14:45", "15:30", "BSM-140", "Environmental Science and Green Chemistry", "LECTURE", null, null, "TL-207", "PPP"),
         TimetableEntry("ece_1_a_tue_7_8_p2", "2025-26", "ece", "A", 1, "Tuesday", "VII", "VIII", "15:30", "17:00", "BEE-110", "Basic Electrical Engineering", "PRACTICAL", null, "P2", "Electrical Lab", "RB/AG"),
-
-        // Wednesday
-        TimetableEntry("ece_1_a_wed_1_2_p1", "2025-26", "ece", "A", 1, "Wednesday", "I", "II", "09:10", "10:50", "BHS-102", "Technical Writing and Professional Communication", "PRACTICAL", null, "P1", "TL-207"),
+        TimetableEntry("ece_1_a_wed_1_2_p1", "2025-26", "ece", "A", 1, "Wednesday", "I", "II", "09:10", "10:50", "BHS-102", "Technical Writing and Professional Communication", "PRACTICAL", null, "P1", "TL-207", ""),
         TimetableEntry("ece_1_a_wed_3", "2025-26", "ece", "A", 1, "Wednesday", "III", "III", "10:50", "11:40", "BSM-140", "Environmental Science and Green Chemistry", "LECTURE", null, null, "TL-207", "PPP"),
         TimetableEntry("ece_1_a_wed_4", "2025-26", "ece", "A", 1, "Wednesday", "IV", "IV", "11:40", "12:30", "BEC-106", "Electronic Components Testing and Measurement", "LECTURE", null, null, "TL-207", "PL"),
-        TimetableEntry("ece_1_a_wed_6_7_p2", "2025-26", "ece", "A", 1, "Wednesday", "VI", "VII", "14:45", "16:15", "BHS-102", "Technical Writing and Professional Communication", "PRACTICAL", null, "P2", "TL-207"),
+        TimetableEntry("ece_1_a_wed_6_7_p2", "2025-26", "ece", "A", 1, "Wednesday", "VI", "VII", "14:45", "16:15", "BHS-102", "Technical Writing and Professional Communication", "PRACTICAL", null, "P2", "TL-207", ""),
         TimetableEntry("ece_1_a_wed_6_7_p1", "2025-26", "ece", "A", 1, "Wednesday", "VI", "VII", "14:45", "16:15", "BEC-106", "Electronic Components Testing and Measurement", "PRACTICAL", null, "P1", "Electronics Lab", "PL/CH"),
-
-        // Thursday
         TimetableEntry("ece_1_a_thu_1", "2025-26", "ece", "A", 1, "Thursday", "I", "I", "09:10", "10:00", "BSM-110", "Engineering Mathematics - I", "LECTURE", null, null, "TL-207", "HC"),
         TimetableEntry("ece_1_a_thu_2", "2025-26", "ece", "A", 1, "Thursday", "II", "II", "10:00", "10:50", "BEE-110", "Basic Electrical Engineering", "LECTURE", null, null, "TL-207", "DDS"),
         TimetableEntry("ece_1_a_thu_5_t1", "2025-26", "ece", "A", 1, "Thursday", "V", "V", "14:00", "14:45", "BSM-110", "Engineering Mathematics - I", "TUTORIAL", "T1", null, "TL-111", "PM"),
-
-        // Friday
         TimetableEntry("ece_1_a_fri_1", "2025-26", "ece", "A", 1, "Friday", "I", "I", "09:10", "10:00", "BSM-110", "Engineering Mathematics - I", "LECTURE", null, null, "TL-207", "HC"),
         TimetableEntry("ece_1_a_fri_2", "2025-26", "ece", "A", 1, "Friday", "II", "II", "10:00", "10:50", "BEE-110", "Basic Electrical Engineering", "LECTURE", null, null, "TL-207", "DDS"),
         TimetableEntry("ece_1_a_fri_5_t2", "2025-26", "ece", "A", 1, "Friday", "V", "V", "14:00", "14:45", "BSM-110", "Engineering Mathematics - I", "TUTORIAL", "T2", null, "TL-111", "PM"),
-        TimetableEntry("ece_1_a_fri_6_t2", "2025-26", "ece", "A", 1, "Friday", "VI", "VI", "14:45", "15:30", "BHS-102", "Technical Writing and Professional Communication", "TUTORIAL", "T2", null, "TL-207"),
-
-        // Saturday
+        TimetableEntry("ece_1_a_fri_6_t2", "2025-26", "ece", "A", 1, "Friday", "VI", "VI", "14:45", "15:30", "BHS-102", "Technical Writing and Professional Communication", "TUTORIAL", "T2", null, "TL-207", ""),
         TimetableEntry("ece_1_a_sat_1", "2025-26", "ece", "A", 1, "Saturday", "I", "I", "09:10", "10:00", "BEC-106", "Electronic Components Testing and Measurement", "LECTURE", null, null, "TL-207", "PL"),
-        TimetableEntry("ece_1_a_sat_2_t1", "2025-26", "ece", "A", 1, "Saturday", "II", "II", "10:00", "10:50", "BHS-102", "Technical Writing and Professional Communication", "TUTORIAL", "T1", null, "TL-207"),
-        TimetableEntry("ece_1_a_sat_3_4_p2", "2025-26", "ece", "A", 1, "Saturday", "III", "IV", "10:50", "12:30", "BSM-140", "Environmental Science and Green Chemistry", "PRACTICAL", null, "P2", "Chemistry Lab", "CL & RS")
+        TimetableEntry("ece_1_a_sat_2_t1", "2025-26", "ece", "A", 1, "Saturday", "II", "II", "10:00", "10:50", "BHS-102", "Technical Writing and Professional Communication", "TUTORIAL", "T1", null, "TL-207", ""),
+        TimetableEntry("ece_1_a_sat_3_4_p2", "2025-26", "ece", "A", 1, "Saturday", "III", "IV", "10:50", "12:30", "BSM-140", "Environmental Science and Green Chemistry", "PRACTICAL", null, "P2", "Chemistry Lab", "CL & RS"),
+
+        // =========================================================================
+        // PAGE 15: B.Tech (Electronics & Comm. Engineering), Semester I, SEC-B, Room: TL-207
+        // =========================================================================
+        TimetableEntry("ece_1_b_mon_3", "2025-26", "ece", "B", 1, "Monday", "III", "III", "10:50", "11:40", "BEC-106", "Electronic Components Testing and Measurement", "LECTURE", null, null, "TL-207", "SKM"),
+        TimetableEntry("ece_1_b_mon_4", "2025-26", "ece", "B", 1, "Monday", "IV", "IV", "11:40", "12:30", "BSM-140", "Environmental Science and Green Chemistry", "LECTURE", null, null, "TL-207", "PPP"),
+        TimetableEntry("ece_1_b_mon_7_t1", "2025-26", "ece", "B", 1, "Monday", "VII", "VII", "15:30", "16:15", "BSM-110", "Engineering Mathematics - I", "TUTORIAL", "T1", null, "TL-207", "KY"),
+        TimetableEntry("ece_1_b_tue_1", "2025-26", "ece", "B", 1, "Tuesday", "I", "I", "09:10", "10:00", "BEE-110", "Basic Electrical Engineering", "LECTURE", null, null, "TL-207", "AS"),
+        TimetableEntry("ece_1_b_tue_2", "2025-26", "ece", "B", 1, "Tuesday", "II", "II", "10:00", "10:50", "BSM-110", "Engineering Mathematics - I", "LECTURE", null, null, "TL-207", "HC"),
+        TimetableEntry("ece_1_b_tue_3", "2025-26", "ece", "B", 1, "Tuesday", "III", "III", "10:50", "11:40", "BHS-102", "Technical Writing and Professional Communication", "LECTURE", null, null, "TL-207", ""),
+        TimetableEntry("ece_1_b_tue_4", "2025-26", "ece", "B", 1, "Tuesday", "IV", "IV", "11:40", "12:30", "BSM-140", "Environmental Science and Green Chemistry", "LECTURE", null, null, "TL-207", "PPP"),
+        TimetableEntry("ece_1_b_tue_5_6_p1", "2025-26", "ece", "B", 1, "Tuesday", "V", "VI", "14:00", "15:30", "BHS-102", "Technical Writing and Professional Communication", "PRACTICAL", null, "P1", "TL-207", ""),
+        TimetableEntry("ece_1_b_tue_7", "2025-26", "ece", "B", 1, "Tuesday", "VII", "VII", "15:30", "16:15", "BEC-106", "Electronic Components Testing and Measurement", "LECTURE", null, null, "TL-207", "SKM"),
+        TimetableEntry("ece_1_b_wed_1", "2025-26", "ece", "B", 1, "Wednesday", "I", "I", "09:10", "10:00", "BEE-110", "Basic Electrical Engineering", "LECTURE", null, null, "TL-207", "AS"),
+        TimetableEntry("ece_1_b_wed_2", "2025-26", "ece", "B", 1, "Wednesday", "II", "II", "10:00", "10:50", "BSM-110", "Engineering Mathematics - I", "LECTURE", null, null, "TL-207", "HC"),
+        TimetableEntry("ece_1_b_wed_5_6_p1", "2025-26", "ece", "B", 1, "Wednesday", "V", "VI", "14:00", "15:30", "BHS-102", "Technical Writing and Professional Communication", "PRACTICAL", null, "P1", "TL-207", ""),
+        TimetableEntry("ece_1_b_wed_7", "2025-26", "ece", "B", 1, "Wednesday", "VII", "VII", "15:30", "16:15", "BHS-102", "Technical Writing and Professional Communication", "LECTURE", null, null, "TL-207", ""),
+        TimetableEntry("ece_1_b_thu_1_2_p1", "2025-26", "ece", "B", 1, "Thursday", "I", "II", "09:10", "10:50", "BSM-140", "Environmental Science and Green Chemistry", "PRACTICAL", null, "P1", "Chemistry Lab", "CL, BR & RS"),
+        TimetableEntry("ece_1_b_thu_1_4_p2", "2025-26", "ece", "B", 1, "Thursday", "I", "IV", "09:10", "12:30", "BEC-106", "Electronic Components Testing and Measurement", "PRACTICAL", null, "P2", "Electronics Lab", "SKM/GDB/P"),
+        TimetableEntry("ece_1_b_thu_3_t2", "2025-26", "ece", "B", 1, "Thursday", "III", "III", "10:50", "11:40", "BSM-110", "Engineering Mathematics - I", "TUTORIAL", "T2", null, "TL-207", "KY"),
+        TimetableEntry("ece_1_b_thu_4_t2", "2025-26", "ece", "B", 1, "Thursday", "IV", "IV", "11:40", "12:30", "BHS-102", "Technical Writing and Professional Communication", "TUTORIAL", "T2", null, "TL-207", ""),
+        TimetableEntry("ece_1_b_thu_5_6_p1", "2025-26", "ece", "B", 1, "Thursday", "V", "VI", "14:00", "15:30", "BEE-110", "Basic Electrical Engineering", "PRACTICAL", null, "P1", "Electrical Lab", "AS/SY"),
+        TimetableEntry("ece_1_b_fri_3", "2025-26", "ece", "B", 1, "Friday", "III", "III", "10:50", "11:40", "BSM-110", "Engineering Mathematics - I", "LECTURE", null, null, "TL-207", "HC"),
+        TimetableEntry("ece_1_b_fri_4", "2025-26", "ece", "B", 1, "Friday", "IV", "IV", "11:40", "12:30", "BEE-110", "Basic Electrical Engineering", "LECTURE", null, null, "TL-207", "AS"),
+        TimetableEntry("ece_1_b_fri_5_6_p2", "2025-26", "ece", "B", 1, "Friday", "V", "VI", "14:00", "15:30", "BEE-110", "Basic Electrical Engineering", "PRACTICAL", null, "P2", "Electrical Lab", "AS/SY"),
+        TimetableEntry("ece_1_b_fri_5_8_p1", "2025-26", "ece", "B", 1, "Friday", "V", "VIII", "14:00", "17:00", "BEC-106", "Electronic Components Testing and Measurement", "PRACTICAL", null, "P1", "Electronics Lab", "SKM/GDB"),
+        TimetableEntry("ece_1_b_sat_1_2_p2", "2025-26", "ece", "B", 1, "Saturday", "I", "II", "09:10", "10:50", "BSM-140", "Environmental Science and Green Chemistry", "PRACTICAL", null, "P2", "Chemistry Lab", "PPP, CL & RS"),
+        TimetableEntry("ece_1_b_sat_3", "2025-26", "ece", "B", 1, "Saturday", "III", "III", "10:50", "11:40", "BSM-140", "Environmental Science and Green Chemistry", "LECTURE", null, null, "TL-207", "PPP"),
+        TimetableEntry("ece_1_b_sat_4_t1", "2025-26", "ece", "B", 1, "Saturday", "IV", "IV", "11:40", "12:30", "BHS-102", "Technical Writing and Professional Communication", "TUTORIAL", "T1", null, "TL-207", ""),
+
+        // =========================================================================
+        // PAGE 16: B.Tech (Electronics & Comm. Engineering), Semester I, SEC-C, Room: TL-204
+        // =========================================================================
+        TimetableEntry("ece_1_c_mon_1_4_p1", "2025-26", "ece", "C", 1, "Monday", "I", "IV", "09:10", "12:30", "BEC-106", "Electronic Components Testing and Measurement", "PRACTICAL", null, "P1", "Electronics Lab", "R/VSC"),
+        TimetableEntry("ece_1_c_mon_1_2_p2", "2025-26", "ece", "C", 1, "Monday", "I", "II", "09:10", "10:50", "BEE-110", "Basic Electrical Engineering", "PRACTICAL", null, "P2", "Electrical Lab", "SS/AT"),
+        TimetableEntry("ece_1_c_mon_3_p2", "2025-26", "ece", "C", 1, "Monday", "III", "III", "10:50", "11:40", "BHS-102", "Technical Writing and Professional Communication", "PRACTICAL", null, "P2", "TL-204", ""),
+        TimetableEntry("ece_1_c_mon_6", "2025-26", "ece", "C", 1, "Monday", "VI", "VI", "14:45", "15:30", "BSM-140", "Environmental Science and Green Chemistry", "LECTURE", null, null, "TL-204", "SJ"),
+        TimetableEntry("ece_1_c_mon_7", "2025-26", "ece", "C", 1, "Monday", "VII", "VII", "15:30", "16:15", "BHS-102", "Technical Writing and Professional Communication", "LECTURE", null, null, "TL-204", ""),
+        TimetableEntry("ece_1_c_tue_3", "2025-26", "ece", "C", 1, "Tuesday", "III", "III", "10:50", "11:40", "BEE-110", "Basic Electrical Engineering", "LECTURE", null, null, "TL-204", "NK"),
+        TimetableEntry("ece_1_c_tue_4", "2025-26", "ece", "C", 1, "Tuesday", "IV", "IV", "11:40", "12:30", "BEC-106", "Electronic Components Testing and Measurement", "LECTURE", null, null, "TL-204", "PKK"),
+        TimetableEntry("ece_1_c_tue_5_8_p2", "2025-26", "ece", "C", 1, "Tuesday", "V", "VIII", "14:00", "17:00", "BEC-106", "Electronic Components Testing and Measurement", "PRACTICAL", null, "P2", "Electronics Lab", "PKK/VSC"),
+        TimetableEntry("ece_1_c_tue_6_8_p1", "2025-26", "ece", "C", 1, "Tuesday", "VI", "VIII", "14:45", "17:00", "BSM-140", "Environmental Science and Green Chemistry", "PRACTICAL", null, "P1", "Chemistry Lab", "SJ & RS"),
+        TimetableEntry("ece_1_c_wed_1", "2025-26", "ece", "C", 1, "Wednesday", "I", "I", "09:10", "10:00", "BEC-106", "Electronic Components Testing and Measurement", "LECTURE", null, null, "TL-204", "PKK"),
+        TimetableEntry("ece_1_c_wed_2", "2025-26", "ece", "C", 1, "Wednesday", "II", "II", "10:00", "10:50", "BEE-110", "Basic Electrical Engineering", "LECTURE", null, null, "TL-204", "NK"),
+        TimetableEntry("ece_1_c_wed_3_4_p2", "2025-26", "ece", "C", 1, "Wednesday", "III", "IV", "10:50", "12:30", "BSM-140", "Environmental Science and Green Chemistry", "PRACTICAL", null, "P2", "Chemistry Lab", "PS, NK & RS"),
+        TimetableEntry("ece_1_c_wed_6_t2", "2025-26", "ece", "C", 1, "Wednesday", "VI", "VI", "14:45", "15:30", "BSM-110", "Engineering Mathematics - I", "TUTORIAL", "T2", null, "TL-204", "ST"),
+        TimetableEntry("ece_1_c_wed_7_t2", "2025-26", "ece", "C", 1, "Wednesday", "VII", "VII", "15:30", "16:15", "BHS-102", "Technical Writing and Professional Communication", "TUTORIAL", "T2", null, "TL-204", ""),
+        TimetableEntry("ece_1_c_thu_1", "2025-26", "ece", "C", 1, "Thursday", "I", "I", "09:10", "10:00", "BSM-110", "Engineering Mathematics - I", "LECTURE", null, null, "TL-204", "MP"),
+        TimetableEntry("ece_1_c_thu_2", "2025-26", "ece", "C", 1, "Thursday", "II", "II", "10:00", "10:50", "BSM-140", "Environmental Science and Green Chemistry", "LECTURE", null, null, "TL-204", "SJ"),
+        TimetableEntry("ece_1_c_thu_6_t1", "2025-26", "ece", "C", 1, "Thursday", "VI", "VI", "14:45", "15:30", "BSM-110", "Engineering Mathematics - I", "TUTORIAL", "T1", null, "TL-204", "ST"),
+        TimetableEntry("ece_1_c_thu_7_t1", "2025-26", "ece", "C", 1, "Thursday", "VII", "VII", "15:30", "16:15", "BHS-102", "Technical Writing and Professional Communication", "TUTORIAL", "T1", null, "TL-204", ""),
+        TimetableEntry("ece_1_c_fri_1", "2025-26", "ece", "C", 1, "Friday", "I", "I", "09:10", "10:00", "BSM-110", "Engineering Mathematics - I", "LECTURE", null, null, "TL-204", "MP"),
+        TimetableEntry("ece_1_c_fri_2", "2025-26", "ece", "C", 1, "Friday", "II", "II", "10:00", "10:50", "BSM-140", "Environmental Science and Green Chemistry", "LECTURE", null, null, "TL-204", "SJ"),
+        TimetableEntry("ece_1_c_fri_6", "2025-26", "ece", "C", 1, "Friday", "VI", "VI", "14:45", "15:30", "BEE-110", "Basic Electrical Engineering", "LECTURE", null, null, "TL-204", "NK"),
+        TimetableEntry("ece_1_c_fri_7_8_p1", "2025-26", "ece", "C", 1, "Friday", "VII", "VIII", "15:30", "17:00", "BEE-110", "Basic Electrical Engineering", "PRACTICAL", null, "P1", "Electrical Lab", "SS/AT"),
+        TimetableEntry("ece_1_c_sat_1", "2025-26", "ece", "C", 1, "Saturday", "I", "I", "09:10", "10:00", "BSM-110", "Engineering Mathematics - I", "LECTURE", null, null, "TL-204", "MP"),
+        TimetableEntry("ece_1_c_sat_2", "2025-26", "ece", "C", 1, "Saturday", "II", "II", "10:00", "10:50", "BHS-102", "Technical Writing and Professional Communication", "LECTURE", null, null, "TL-204", ""),
+        TimetableEntry("ece_1_c_sat_3_4_p1", "2025-26", "ece", "C", 1, "Saturday", "III", "IV", "10:50", "12:30", "BHS-102", "Technical Writing and Professional Communication", "PRACTICAL", null, "P1", "TL-204", ""),
+
+        // =========================================================================
+        // PAGE 17: B.Tech,ECE(IOT), Semester I, SEC-A, Room: TL-204
+        // =========================================================================
+        TimetableEntry("eceiot_1_a_mon_1", "2025-26", "eceiot", "A", 1, "Monday", "I", "I", "09:10", "10:00", "BSM-110", "Engineering Mathematics - I", "LECTURE", null, null, "TL-204", "KV"),
+        TimetableEntry("eceiot_1_a_mon_2", "2025-26", "eceiot", "A", 1, "Monday", "II", "II", "10:00", "10:50", "BSM-140", "Environmental Science and Green Chemistry", "LECTURE", null, null, "TL-204", "PS"),
+        TimetableEntry("eceiot_1_a_mon_3_4", "2025-26", "eceiot", "A", 1, "Monday", "III", "IV", "10:50", "12:30", "BEC-106", "Electronic Components Testing and Measurement", "LECTURE", null, null, "TL-204", "RP"),
+        TimetableEntry("eceiot_1_a_mon_5_8_p2", "2025-26", "eceiot", "A", 1, "Monday", "V", "VIII", "14:00", "17:00", "BEC-106", "Electronic Components Testing and Measurement", "PRACTICAL", null, "P2", "Electronics Lab", "RP/RK"),
+        TimetableEntry("eceiot_1_a_mon_6_7_p1", "2025-26", "eceiot", "A", 1, "Monday", "VI", "VII", "14:45", "16:15", "BEE-110", "Basic Electrical Engineering", "PRACTICAL", null, "P1", "Electrical Lab", "VP/RB"),
+        TimetableEntry("eceiot_1_a_tue_1", "2025-26", "eceiot", "A", 1, "Tuesday", "I", "I", "09:10", "10:00", "BSM-110", "Engineering Mathematics - I", "LECTURE", null, null, "TL-204", "KV"),
+        TimetableEntry("eceiot_1_a_tue_2", "2025-26", "eceiot", "A", 1, "Tuesday", "II", "II", "10:00", "10:50", "BSM-140", "Environmental Science and Green Chemistry", "LECTURE", null, null, "TL-204", "PS"),
+        TimetableEntry("eceiot_1_a_tue_5", "2025-26", "eceiot", "A", 1, "Tuesday", "V", "V", "14:00", "14:45", "BHS-102", "Technical Writing and Professional Communication", "LECTURE", null, null, "TL-204", ""),
+        TimetableEntry("eceiot_1_a_tue_6_t1", "2025-26", "eceiot", "A", 1, "Tuesday", "VI", "VI", "14:45", "15:30", "BSM-110", "Engineering Mathematics - I", "TUTORIAL", "T1", null, "TL-204", "NT"),
+        TimetableEntry("eceiot_1_a_wed_3", "2025-26", "eceiot", "A", 1, "Wednesday", "III", "III", "10:50", "11:40", "BHS-102", "Technical Writing and Professional Communication", "LECTURE", null, null, "TL-204", ""),
+        TimetableEntry("eceiot_1_a_wed_4", "2025-26", "eceiot", "A", 1, "Wednesday", "IV", "IV", "11:40", "12:30", "BEE-110", "Basic Electrical Engineering", "LECTURE", null, null, "TL-204", "NP"),
+        TimetableEntry("eceiot_1_a_wed_5_t1", "2025-26", "eceiot", "A", 1, "Wednesday", "V", "V", "14:00", "14:45", "BHS-102", "Technical Writing and Professional Communication", "TUTORIAL", "T1", null, "TL-204", ""),
+        TimetableEntry("eceiot_1_a_thu_1_2_p2", "2025-26", "eceiot", "A", 1, "Thursday", "I", "II", "09:10", "10:50", "BHS-102", "Technical Writing and Professional Communication", "PRACTICAL", null, "P2", "TL-204", ""),
+        TimetableEntry("eceiot_1_a_thu_3", "2025-26", "eceiot", "A", 1, "Thursday", "III", "III", "10:50", "11:40", "BSM-110", "Engineering Mathematics - I", "LECTURE", null, null, "TL-204", "KV"),
+        TimetableEntry("eceiot_1_a_thu_4", "2025-26", "eceiot", "A", 1, "Thursday", "IV", "IV", "11:40", "12:30", "BSM-140", "Environmental Science and Green Chemistry", "LECTURE", null, null, "TL-204", "PS"),
+        TimetableEntry("eceiot_1_a_thu_5_8_p1", "2025-26", "eceiot", "A", 1, "Thursday", "V", "VIII", "14:00", "17:00", "BEC-106", "Electronic Components Testing and Measurement", "PRACTICAL", null, "P1", "Electronics Lab", "RP/SK"),
+        TimetableEntry("eceiot_1_a_thu_5_6_p2", "2025-26", "eceiot", "A", 1, "Thursday", "V", "VI", "14:00", "15:30", "BSM-140", "Environmental Science and Green Chemistry", "PRACTICAL", null, "P2", "Chemistry Lab", "PPP, NK & RS"),
+        TimetableEntry("eceiot_1_a_thu_7_8_p2", "2025-26", "eceiot", "A", 1, "Thursday", "VII", "VIII", "15:30", "17:00", "BEE-110", "Basic Electrical Engineering", "PRACTICAL", null, "P2", "Electrical Lab", "VP/SS"),
+        TimetableEntry("eceiot_1_a_fri_1_2_p1", "2025-26", "eceiot", "A", 1, "Friday", "I", "II", "09:10", "10:50", "BSM-140", "Environmental Science and Green Chemistry", "PRACTICAL", null, "P1", "Chemistry Lab", "NK & RS"),
+        TimetableEntry("eceiot_1_a_fri_3", "2025-26", "eceiot", "A", 1, "Friday", "III", "III", "10:50", "11:40", "BEC-106", "Electronic Components Testing and Measurement", "LECTURE", null, null, "TL-204", "RP"),
+        TimetableEntry("eceiot_1_a_fri_4", "2025-26", "eceiot", "A", 1, "Friday", "IV", "IV", "11:40", "12:30", "BEE-110", "Basic Electrical Engineering", "LECTURE", null, null, "TL-204", "NP"),
+        TimetableEntry("eceiot_1_a_fri_7_t2", "2025-26", "eceiot", "A", 1, "Friday", "VII", "VII", "15:30", "16:15", "BSM-110", "Engineering Mathematics - I", "TUTORIAL", "T2", null, "TL-204", "NT"),
+        TimetableEntry("eceiot_1_a_sat_1_2_p1", "2025-26", "eceiot", "A", 1, "Saturday", "I", "II", "09:10", "10:50", "BHS-102", "Technical Writing and Professional Communication", "PRACTICAL", null, "P1", "TL-204", ""),
+        TimetableEntry("eceiot_1_a_sat_3_t2", "2025-26", "eceiot", "A", 1, "Saturday", "III", "III", "10:50", "11:40", "BHS-102", "Technical Writing and Professional Communication", "TUTORIAL", "T2", null, "TL-204", ""),
+        TimetableEntry("eceiot_1_a_sat_4", "2025-26", "eceiot", "A", 1, "Saturday", "IV", "IV", "11:40", "12:30", "BEE-110", "Basic Electrical Engineering", "LECTURE", null, null, "TL-204", "NP"),
+
+        // =========================================================================
+        // PAGE 18: BBA, Semester I, SEC-A, Room: TL-113
+        // =========================================================================
+        TimetableEntry("bba_1_a_mon_2", "2025-26", "bba", "A", 1, "Monday", "II", "II", "10:00", "10:50", "BBA-114", "Financial Accounting", "LECTURE", null, null, "TL-113", "UG"),
+        TimetableEntry("bba_1_a_mon_3_t1", "2025-26", "bba", "A", 1, "Monday", "III", "III", "10:50", "11:40", "BBA-116", "Quantitative Techniques for Business Research", "TUTORIAL", "T1", null, "TL-113", "ST"),
+        TimetableEntry("bba_1_a_mon_4_t1", "2025-26", "bba", "A", 1, "Monday", "IV", "IV", "11:40", "12:30", "BBA-114", "Financial Accounting", "TUTORIAL", "T1", null, "TL-113", "SG"),
+        TimetableEntry("bba_1_a_mon_5_t1", "2025-26", "bba", "A", 1, "Monday", "V", "V", "14:00", "14:45", "BHM-121", "Industrial Psychology", "TUTORIAL", "T1", null, "TL-113", ""),
+        TimetableEntry("bba_1_a_tue_1", "2025-26", "bba", "A", 1, "Tuesday", "I", "I", "09:10", "10:00", "BHM-121", "Industrial Psychology", "LECTURE", null, null, "TL-113", ""),
+        TimetableEntry("bba_1_a_tue_3_t2", "2025-26", "bba", "A", 1, "Tuesday", "III", "III", "10:50", "11:40", "BBA-114", "Financial Accounting", "TUTORIAL", "T2", null, "TL-113", "SG"),
+        TimetableEntry("bba_1_a_tue_4", "2025-26", "bba", "A", 1, "Tuesday", "IV", "IV", "11:40", "12:30", "BBA-115", "Principles and Practices of Management", "LECTURE", null, null, "TL-113", "JA"),
+        TimetableEntry("bba_1_a_tue_5", "2025-26", "bba", "A", 1, "Tuesday", "V", "V", "14:00", "14:45", "BBA-A01", "Business Communication for Managers", "LECTURE", null, null, "TL-113", "AJ"),
+        TimetableEntry("bba_1_a_wed_1", "2025-26", "bba", "A", 1, "Wednesday", "I", "I", "09:10", "10:00", "BHM-121", "Industrial Psychology", "LECTURE", null, null, "TL-113", ""),
+        TimetableEntry("bba_1_a_wed_2", "2025-26", "bba", "A", 1, "Wednesday", "II", "II", "10:00", "10:50", "BBA-114", "Financial Accounting", "LECTURE", null, null, "TL-113", "UG"),
+        TimetableEntry("bba_1_a_wed_3_t2", "2025-26", "bba", "A", 1, "Wednesday", "III", "III", "10:50", "11:40", "BBA-116", "Quantitative Techniques for Business Research", "TUTORIAL", "T2", null, "TL-113", "ST"),
+        TimetableEntry("bba_1_a_wed_4_t1", "2025-26", "bba", "A", 1, "Wednesday", "IV", "IV", "11:40", "12:30", "BBA-115", "Principles and Practices of Management", "TUTORIAL", "T1", null, "TL-113", "AKS"),
+        TimetableEntry("bba_1_a_wed_5", "2025-26", "bba", "A", 1, "Wednesday", "V", "V", "14:00", "14:45", "BBA-116", "Quantitative Techniques for Business Research", "LECTURE", null, null, "TL-113", "PO"),
+        TimetableEntry("bba_1_a_wed_6_t2", "2025-26", "bba", "A", 1, "Wednesday", "VI", "VI", "14:45", "15:30", "BHM-121", "Industrial Psychology", "TUTORIAL", "T2", null, "TL-113", ""),
+        TimetableEntry("bba_1_a_thu_1", "2025-26", "bba", "A", 1, "Thursday", "I", "I", "09:10", "10:00", "BHM-121", "Industrial Psychology", "LECTURE", null, null, "TL-113", ""),
+        TimetableEntry("bba_1_a_thu_2", "2025-26", "bba", "A", 1, "Thursday", "II", "II", "10:00", "10:50", "AUC-108", "Intellectual Property Rights", "LECTURE", null, null, "TL-113", "AH"),
+        TimetableEntry("bba_1_a_thu_3_t2", "2025-26", "bba", "A", 1, "Thursday", "III", "III", "10:50", "11:40", "BBA-A01", "Business Communication for Managers", "TUTORIAL", "T2", null, "TL-113", "BAS"),
+        TimetableEntry("bba_1_a_thu_4", "2025-26", "bba", "A", 1, "Thursday", "IV", "IV", "11:40", "12:30", "BBA-115", "Principles and Practices of Management", "LECTURE", null, null, "TL-113", "JA"),
+        TimetableEntry("bba_1_a_thu_5", "2025-26", "bba", "A", 1, "Thursday", "V", "V", "14:00", "14:45", "BBA-A01", "Business Communication for Managers", "LECTURE", null, null, "TL-113", "AJ"),
+        TimetableEntry("bba_1_a_thu_6", "2025-26", "bba", "A", 1, "Thursday", "VI", "VI", "14:45", "15:30", "BBA-116", "Quantitative Techniques for Business Research", "LECTURE", null, null, "TL-113", "PO"),
+        TimetableEntry("bba_1_a_fri_2", "2025-26", "bba", "A", 1, "Friday", "II", "II", "10:00", "10:50", "AUC-108", "Intellectual Property Rights", "LECTURE", null, null, "TL-113", "AH"),
+        TimetableEntry("bba_1_a_fri_3_t1", "2025-26", "bba", "A", 1, "Friday", "III", "III", "10:50", "11:40", "BBA-A01", "Business Communication for Managers", "TUTORIAL", "T1", null, "TL-113", "BAS"),
+        TimetableEntry("bba_1_a_fri_4", "2025-26", "bba", "A", 1, "Friday", "IV", "IV", "11:40", "12:30", "BBA-115", "Principles and Practices of Management", "LECTURE", null, null, "TL-113", "JA"),
+        TimetableEntry("bba_1_a_fri_5", "2025-26", "bba", "A", 1, "Friday", "V", "V", "14:00", "14:45", "BBA-116", "Quantitative Techniques for Business Research", "LECTURE", null, null, "TL-113", "PO"),
+        TimetableEntry("bba_1_a_sat_1_t2", "2025-26", "bba", "A", 1, "Saturday", "I", "I", "09:10", "10:00", "BBA-115", "Principles and Practices of Management", "TUTORIAL", "T2", null, "TL-113", "AKS"),
+        TimetableEntry("bba_1_a_sat_2", "2025-26", "bba", "A", 1, "Saturday", "II", "II", "10:00", "10:50", "BBA-A01", "Business Communication for Managers", "LECTURE", null, null, "TL-113", "AJ"),
+        TimetableEntry("bba_1_a_sat_4", "2025-26", "bba", "A", 1, "Saturday", "IV", "IV", "11:40", "12:30", "BBA-114", "Financial Accounting", "LECTURE", null, null, "TL-113", "UG"),
+
+        // =========================================================================
+        // PAGE 19: BBA, Semester I, SEC-B, Room: TL-114
+        // =========================================================================
+        TimetableEntry("bba_1_b_mon_2", "2025-26", "bba", "B", 1, "Monday", "II", "II", "10:00", "10:50", "BBA-116", "Quantitative Techniques for Business Research", "LECTURE", null, null, "TL-114", "VS"),
+        TimetableEntry("bba_1_b_mon_3", "2025-26", "bba", "B", 1, "Monday", "III", "III", "10:50", "11:40", "BHM-121", "Industrial Psychology", "LECTURE", null, null, "TL-114", ""),
+        TimetableEntry("bba_1_b_mon_4_t1", "2025-26", "bba", "B", 1, "Monday", "IV", "IV", "11:40", "12:30", "BBA-115", "Principles and Practices of Management", "TUTORIAL", "T1", null, "TL-114", "AKJ"),
+        TimetableEntry("bba_1_b_mon_5", "2025-26", "bba", "B", 1, "Monday", "V", "V", "14:00", "14:45", "BBA-A01", "Business Communication for Managers", "LECTURE", null, null, "TL-114", "SS"),
+        TimetableEntry("bba_1_b_tue_2_t1", "2025-26", "bba", "B", 1, "Tuesday", "II", "II", "10:00", "10:50", "BBA-116", "Quantitative Techniques for Business Research", "TUTORIAL", "T1", null, "TL-114", "SY"),
+        TimetableEntry("bba_1_b_tue_3_t1", "2025-26", "bba", "B", 1, "Tuesday", "III", "III", "10:50", "11:40", "BHM-121", "Industrial Psychology", "TUTORIAL", "T1", null, "TL-114", ""),
+        TimetableEntry("bba_1_b_tue_4", "2025-26", "bba", "B", 1, "Tuesday", "IV", "IV", "11:40", "12:30", "BBA-114", "Financial Accounting", "LECTURE", null, null, "TL-114", "AS"),
+        TimetableEntry("bba_1_b_tue_5", "2025-26", "bba", "B", 1, "Tuesday", "V", "V", "14:00", "14:45", "BBA-115", "Principles and Practices of Management", "LECTURE", null, null, "TL-114", "IK"),
+        TimetableEntry("bba_1_b_tue_6", "2025-26", "bba", "B", 1, "Tuesday", "VI", "VI", "14:45", "15:30", "BBA-A01", "Business Communication for Managers", "LECTURE", null, null, "TL-114", "SS"),
+        TimetableEntry("bba_1_b_wed_1", "2025-26", "bba", "B", 1, "Wednesday", "I", "I", "09:10", "10:00", "BHM-121", "Industrial Psychology", "LECTURE", null, null, "TL-114", ""),
+        TimetableEntry("bba_1_b_wed_2", "2025-26", "bba", "B", 1, "Wednesday", "II", "II", "10:00", "10:50", "AUC-108", "Intellectual Property Rights", "LECTURE", null, null, "TL-114", "MO"),
+        TimetableEntry("bba_1_b_wed_3_t1", "2025-26", "bba", "B", 1, "Wednesday", "III", "III", "10:50", "11:40", "BBA-114", "Financial Accounting", "TUTORIAL", "T1", null, "TL-114", "SG"),
+        TimetableEntry("bba_1_b_wed_4", "2025-26", "bba", "B", 1, "Wednesday", "IV", "IV", "11:40", "12:30", "BBA-114", "Financial Accounting", "LECTURE", null, null, "TL-114", "AS"),
+        TimetableEntry("bba_1_b_wed_5_t2", "2025-26", "bba", "B", 1, "Wednesday", "V", "V", "14:00", "14:45", "BHM-121", "Industrial Psychology", "TUTORIAL", "T2", null, "TL-114", ""),
+        TimetableEntry("bba_1_b_wed_6_t1", "2025-26", "bba", "B", 1, "Wednesday", "VI", "VI", "14:45", "15:30", "BBA-A01", "Business Communication for Managers", "TUTORIAL", "T1", null, "TL-114", "KUS"),
+        TimetableEntry("bba_1_b_thu_1", "2025-26", "bba", "B", 1, "Thursday", "I", "I", "09:10", "10:00", "BBA-115", "Principles and Practices of Management", "LECTURE", null, null, "TL-114", "IK"),
+        TimetableEntry("bba_1_b_thu_2_t2", "2025-26", "bba", "B", 1, "Thursday", "II", "II", "10:00", "10:50", "BBA-116", "Quantitative Techniques for Business Research", "TUTORIAL", "T2", null, "TL-114", "SY"),
+        TimetableEntry("bba_1_b_thu_4", "2025-26", "bba", "B", 1, "Thursday", "IV", "IV", "11:40", "12:30", "BBA-116", "Quantitative Techniques for Business Research", "LECTURE", null, null, "TL-114", "VS"),
+        TimetableEntry("bba_1_b_thu_5_t2", "2025-26", "bba", "B", 1, "Thursday", "V", "V", "14:00", "14:45", "BBA-A01", "Business Communication for Managers", "TUTORIAL", "T2", null, "TL-114", "KUS"),
+        TimetableEntry("bba_1_b_thu_6_t2", "2025-26", "bba", "B", 1, "Thursday", "VI", "VI", "14:45", "15:30", "BBA-115", "Principles and Practices of Management", "TUTORIAL", "T2", null, "TL-114", "AKJ"),
+        TimetableEntry("bba_1_b_fri_2", "2025-26", "bba", "B", 1, "Friday", "II", "II", "10:00", "10:50", "AUC-108", "Intellectual Property Rights", "LECTURE", null, null, "TL-114", "MO"),
+        TimetableEntry("bba_1_b_fri_4", "2025-26", "bba", "B", 1, "Friday", "IV", "IV", "11:40", "12:30", "BBA-115", "Principles and Practices of Management", "LECTURE", null, null, "TL-114", "IK"),
+        TimetableEntry("bba_1_b_fri_5", "2025-26", "bba", "B", 1, "Friday", "V", "V", "14:00", "14:45", "BHM-121", "Industrial Psychology", "LECTURE", null, null, "TL-114", ""),
+        TimetableEntry("bba_1_b_fri_6", "2025-26", "bba", "B", 1, "Friday", "VI", "VI", "14:45", "15:30", "BBA-A01", "Business Communication for Managers", "LECTURE", null, null, "TL-114", "SS"),
+        TimetableEntry("bba_1_b_sat_1_t2", "2025-26", "bba", "B", 1, "Saturday", "I", "I", "09:10", "10:00", "BBA-114", "Financial Accounting", "TUTORIAL", "T2", null, "TL-114", "SG"),
+        TimetableEntry("bba_1_b_sat_3", "2025-26", "bba", "B", 1, "Saturday", "III", "III", "10:50", "11:40", "BBA-114", "Financial Accounting", "LECTURE", null, null, "TL-114", "AS"),
+        TimetableEntry("bba_1_b_sat_4", "2025-26", "bba", "B", 1, "Saturday", "IV", "IV", "11:40", "12:30", "BBA-116", "Quantitative Techniques for Business Research", "LECTURE", null, null, "TL-114", "VS"),
+
+        // =========================================================================
+        // PAGE 20: B.Pharm, Semester I, SEC-A, Room: L-115 / CH-206
+        // =========================================================================
+        TimetableEntry("bpharm_1_a_mon_1_2_p1", "2025-26", "bpharm", "A", 1, "Monday", "I", "II", "09:10", "10:50", "BPT108P", "Healthcare Psychology and Communication Skills", "PRACTICAL", null, "P1", "L-115", "SKS/SP"),
+        TimetableEntry("bpharm_1_a_mon_3_4_p2", "2025-26", "bpharm", "A", 1, "Monday", "III", "IV", "10:50", "12:30", "BPT108P", "Healthcare Psychology and Communication Skills", "PRACTICAL", null, "P2", "L-115", "SC/SKS"),
+        TimetableEntry("bpharm_1_a_mon_5_6_p1", "2025-26", "bpharm", "A", 1, "Monday", "V", "VI", "14:00", "15:30", "BPT109P", "Human Anatomy and Physiology I", "PRACTICAL", null, "P1", "HAP Lab", "RK/SY"),
+        TimetableEntry("bpharm_1_a_mon_5_6_p2", "2025-26", "bpharm", "A", 1, "Monday", "V", "VI", "14:00", "15:30", "BPT110P", "Introduction to Pharmacognosy", "PRACTICAL", null, "P2", "Micro Lab", "AV/AD"),
+        TimetableEntry("bpharm_1_a_mon_5_6_p3", "2025-26", "bpharm", "A", 1, "Monday", "V", "VI", "14:00", "15:30", "BPT111P", "Pharmaceutical Inorganic and Analytical Chemistry", "PRACTICAL", null, "P3", "Chemistry Lab", "GS/NK"),
+        TimetableEntry("bpharm_1_a_mon_5_6_p4", "2025-26", "bpharm", "A", 1, "Monday", "V", "VI", "14:00", "15:30", "BPT107P", "General Pharmacy", "PRACTICAL", null, "P4", "Pharmaceutics Lab GF", "AJ/RD"),
+        TimetableEntry("bpharm_1_a_tue_1", "2025-26", "bpharm", "A", 1, "Tuesday", "I", "I", "09:10", "10:00", "BPT105T", "Introduction to Pharmacognosy", "LECTURE", null, null, "CH-206", "AV"),
+        TimetableEntry("bpharm_1_a_tue_2", "2025-26", "bpharm", "A", 1, "Tuesday", "II", "II", "10:00", "10:50", "BPT104T", "Healthcare Psychology and Communication Skills", "LECTURE", null, null, "CH-206", "DSP"),
+        TimetableEntry("bpharm_1_a_tue_3", "2025-26", "bpharm", "A", 1, "Tuesday", "III", "III", "10:50", "11:40", "BPT106T", "Pharmaceutical Inorganic and Analytical Chemistry", "LECTURE", null, null, "CH-206", "GS"),
+        TimetableEntry("bpharm_1_a_tue_5_6_p3", "2025-26", "bpharm", "A", 1, "Tuesday", "V", "VI", "14:00", "15:30", "BPT108P", "Healthcare Psychology and Communication Skills", "PRACTICAL", null, "P3", "Micro Lab", "SC/SKS"),
+        TimetableEntry("bpharm_1_a_tue_7_8_p4", "2025-26", "bpharm", "A", 1, "Tuesday", "VII", "VIII", "15:30", "17:00", "BPT108P", "Healthcare Psychology and Communication Skills", "PRACTICAL", null, "P4", "Micro Lab", "SC/SKS"),
+        TimetableEntry("bpharm_1_a_wed_1", "2025-26", "bpharm", "A", 1, "Wednesday", "I", "I", "09:10", "10:00", "BPT104T", "Healthcare Psychology and Communication Skills", "LECTURE", null, null, "CH-206", "DSP"),
+        TimetableEntry("bpharm_1_a_wed_2", "2025-26", "bpharm", "A", 1, "Wednesday", "II", "II", "10:00", "10:50", "BPT102T", "General Pharmacy", "LECTURE", null, null, "CH-206", "AJ"),
+        TimetableEntry("bpharm_1_a_wed_3", "2025-26", "bpharm", "A", 1, "Wednesday", "III", "III", "10:50", "11:40", "BPT106T", "Pharmaceutical Inorganic and Analytical Chemistry", "LECTURE", null, null, "CH-206", "GS"),
+        TimetableEntry("bpharm_1_a_wed_4", "2025-26", "bpharm", "A", 1, "Wednesday", "IV", "IV", "11:40", "12:30", "BPT103T", "Human Anatomy, Physiology and Pathophysiology I", "LECTURE", null, null, "CH-206", "SC"),
+        TimetableEntry("bpharm_1_a_wed_5_6_p1", "2025-26", "bpharm", "A", 1, "Wednesday", "V", "VI", "14:00", "15:30", "BPT110P", "Introduction to Pharmacognosy", "PRACTICAL", null, "P1", "L-115", "AV/AD"),
+        TimetableEntry("bpharm_1_a_wed_5_6_p2", "2025-26", "bpharm", "A", 1, "Wednesday", "V", "VI", "14:00", "15:30", "BPT111P", "Pharmaceutical Inorganic and Analytical Chemistry", "PRACTICAL", null, "P2", "L-115", "GS/TA"),
+        TimetableEntry("bpharm_1_a_wed_5_6_p3", "2025-26", "bpharm", "A", 1, "Wednesday", "V", "VI", "14:00", "15:30", "BPT107P", "General Pharmacy", "PRACTICAL", null, "P3", "L-115", "AJ/RD"),
+        TimetableEntry("bpharm_1_a_wed_5_6_p4", "2025-26", "bpharm", "A", 1, "Wednesday", "V", "VI", "14:00", "15:30", "BPT109P", "Human Anatomy and Physiology I", "PRACTICAL", null, "P4", "L-115", "SK/PKV"),
+        TimetableEntry("bpharm_1_a_thu_2", "2025-26", "bpharm", "A", 1, "Thursday", "II", "II", "10:00", "10:50", "BPT101T", "Human Anatomy, Physiology and Pathophysiology I", "LECTURE", null, null, "CH-206", "SO"),
+        TimetableEntry("bpharm_1_a_thu_3", "2025-26", "bpharm", "A", 1, "Thursday", "III", "III", "10:50", "11:40", "BPT104T", "Healthcare Psychology and Communication Skills", "LECTURE", null, null, "CH-206", "DSP"),
+        TimetableEntry("bpharm_1_a_thu_4", "2025-26", "bpharm", "A", 1, "Thursday", "IV", "IV", "11:40", "12:30", "BPT105T", "Introduction to Pharmacognosy", "LECTURE", null, null, "CH-206", "AV"),
+        TimetableEntry("bpharm_1_a_thu_5_6_p1", "2025-26", "bpharm", "A", 1, "Thursday", "V", "VI", "14:00", "15:30", "BPT111P", "Pharmaceutical Inorganic and Analytical Chemistry", "PRACTICAL", null, "P1", "L-115", "GS/TA"),
+        TimetableEntry("bpharm_1_a_thu_5_6_p2", "2025-26", "bpharm", "A", 1, "Thursday", "V", "VI", "14:00", "15:30", "BPT107P", "General Pharmacy", "PRACTICAL", null, "P2", "L-115", "AJ/SH"),
+        TimetableEntry("bpharm_1_a_thu_5_6_p3", "2025-26", "bpharm", "A", 1, "Thursday", "V", "VI", "14:00", "15:30", "BPT109P", "Human Anatomy and Physiology I", "PRACTICAL", null, "P3", "L-115", "SK/PKV"),
+        TimetableEntry("bpharm_1_a_thu_5_6_p4", "2025-26", "bpharm", "A", 1, "Thursday", "V", "VI", "14:00", "15:30", "BPT110P", "Introduction to Pharmacognosy", "PRACTICAL", null, "P4", "L-115", "AV/AM"),
+        TimetableEntry("bpharm_1_a_fri_1", "2025-26", "bpharm", "A", 1, "Friday", "I", "I", "09:10", "10:00", "BPT102T", "General Pharmacy", "LECTURE", null, null, "CH-206", "AJ"),
+        TimetableEntry("bpharm_1_a_fri_2", "2025-26", "bpharm", "A", 1, "Friday", "II", "II", "10:00", "10:50", "BPT106T", "Pharmaceutical Inorganic and Analytical Chemistry", "LECTURE", null, null, "CH-206", "GS"),
+        TimetableEntry("bpharm_1_a_fri_3", "2025-26", "bpharm", "A", 1, "Friday", "III", "III", "10:50", "11:40", "BPT104T", "Healthcare Psychology and Communication Skills", "LECTURE", null, null, "CH-206", "DSP"),
+        TimetableEntry("bpharm_1_a_fri_5_6_p1", "2025-26", "bpharm", "A", 1, "Friday", "V", "VI", "14:00", "15:30", "BPT107P", "General Pharmacy", "PRACTICAL", null, "P1", "L-115", "AJ/SH"),
+        TimetableEntry("bpharm_1_a_fri_5_6_p2", "2025-26", "bpharm", "A", 1, "Friday", "V", "VI", "14:00", "15:30", "BPT109P", "Human Anatomy and Physiology I", "PRACTICAL", null, "P2", "L-115", "RK/SY"),
+        TimetableEntry("bpharm_1_a_fri_5_6_p3", "2025-26", "bpharm", "A", 1, "Friday", "V", "VI", "14:00", "15:30", "BPT110P", "Introduction to Pharmacognosy", "PRACTICAL", null, "P3", "L-115", "AV/AM"),
+        TimetableEntry("bpharm_1_a_fri_5_6_p4", "2025-26", "bpharm", "A", 1, "Friday", "V", "VI", "14:00", "15:30", "BPT111P", "Pharmaceutical Inorganic and Analytical Chemistry", "PRACTICAL", null, "P4", "L-115", "GS/NK"),
+        TimetableEntry("bpharm_1_a_sat_1", "2025-26", "bpharm", "A", 1, "Saturday", "I", "I", "09:10", "10:00", "BPT101T", "Human Anatomy, Physiology and Pathophysiology I", "LECTURE", null, null, "CH-206", "SO"),
+        TimetableEntry("bpharm_1_a_sat_2", "2025-26", "bpharm", "A", 1, "Saturday", "II", "II", "10:00", "10:50", "BPT105T", "Introduction to Pharmacognosy", "LECTURE", null, null, "CH-206", "AV"),
+        TimetableEntry("bpharm_1_a_sat_3", "2025-26", "bpharm", "A", 1, "Saturday", "III", "III", "10:50", "11:40", "BPT102T", "General Pharmacy", "LECTURE", null, null, "CH-206", "AJ"),
     )
 }

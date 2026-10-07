@@ -48,3 +48,9 @@ interface TelegramRepository {
     suspend fun getInviteLink(): RepoResult<String>
     suspend fun checkMembership(uid: String, telegramUserId: String?): RepoResult<Boolean>
 }
+
+interface MessMenuRepository {
+    suspend fun getWeeklyMenu(): RepoResult<com.mmmut.ero.data.model.MessWeeklyMenu>
+    suspend fun getDayMenu(dayName: String): RepoResult<com.mmmut.ero.data.model.MessDay>
+}
+

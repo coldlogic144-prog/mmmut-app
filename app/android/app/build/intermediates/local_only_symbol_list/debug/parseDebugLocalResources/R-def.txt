@@ -3,6 +3,9 @@ local
 color mmmut_gold
 color mmmut_indigo
 color mmmut_maroon
+drawable ic_launcher
+mipmap ic_launcher
+mipmap ic_launcher_round
 string app_name
 string gcm_defaultSenderId
 string google_api_key

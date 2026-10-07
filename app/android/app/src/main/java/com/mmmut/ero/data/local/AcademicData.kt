@@ -24,8 +24,8 @@ object AcademicData {
         "IOT" to "eceiot", "MED" to "me", "CHD" to "chemical", "ITC" to "it"
     )
     val ROLL_NUMBER_PATTERN = Regex("^\\d{10}$")
-    fun rosterBranchToId(b: String): String = ROSTER_BRANCH_TO_ID[b.trim().uppercase()] ?: "civil"
-    fun getBranch(id: String): Branch = BRANCHES.firstOrNull { it.id == id } ?: BRANCHES[0]
+    fun rosterBranchToId(b: String): String = ROSTER_BRANCH_TO_ID[b.trim().uppercase()] ?: ScheduleEngine.canonicalBranchId(b)
+    fun getBranch(id: String): Branch = AcademicDataExtra.ALL_BRANCHES.firstOrNull { it.id == ScheduleEngine.canonicalBranchId(id) } ?: BRANCHES[0]
     val BRANCHES = listOf(
         Branch("civil", "B.Tech — Civil Engineering", listOf("A", "B"), "TL-206", listOf(
             SubjectDef("BSM-110", "Engineering Mathematics I", 3, 1, 0),

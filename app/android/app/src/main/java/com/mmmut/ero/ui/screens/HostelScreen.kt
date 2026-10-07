@@ -3,6 +3,8 @@ package com.mmmut.ero.ui.screens
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Restaurant
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -12,7 +14,11 @@ import com.mmmut.ero.ui.components.*
 import com.mmmut.ero.ui.viewmodel.HostelViewModel
 
 @Composable
-fun HostelScreen(onOpen: (String) -> Unit, vm: HostelViewModel = androidx.lifecycle.viewmodel.compose.viewModel()) {
+fun HostelScreen(
+    onOpen: (String) -> Unit,
+    onMessMenu: () -> Unit = {},
+    vm: HostelViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
+) {
     val state by vm.state.collectAsState()
     LaunchedEffect(Unit) { vm.load() }
     Column(Modifier.fillMaxSize()) {
@@ -20,6 +26,15 @@ fun HostelScreen(onOpen: (String) -> Unit, vm: HostelViewModel = androidx.lifecy
             Column(Modifier.padding(16.dp)) {
                 Text("Hostel", style = MaterialTheme.typography.titleLarge)
                 Text("Allotment, mess timings and warden notices are published here by the university. Your profile hostel preference is shown on the Profile tab.", style = MaterialTheme.typography.bodySmall)
+                Spacer(Modifier.height(12.dp))
+                Button(
+                    onClick = onMessMenu,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Icon(Icons.Default.Restaurant, contentDescription = null, modifier = Modifier.size(18.dp))
+                    Spacer(Modifier.width(8.dp))
+                    Text("View Mess Menu")
+                }
             }
         }
         when (val s = state) {

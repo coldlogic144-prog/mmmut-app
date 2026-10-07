@@ -136,7 +136,11 @@ fun TimetableScreen(
                             items(data.todayCells, key = { it.id.ifBlank { it.periodKey + (it.tutorialGroup ?: "") + (it.practicalGroup ?: "") } }) { cell ->
                                 val isCurrent = data.currentCell?.id == cell.id || (data.currentCell != null && data.currentCell.periodKey == cell.periodKey && data.currentCell.subjectCode == cell.subjectCode)
 
-                                if (cell.periodKey.startsWith("V") && data.todayCells.any { it.periodKey == "IV" || it.periodKey.startsWith("I") }) {
+                                val isFirstAfternoonClass = cell.start >= "14:00" &&
+                                    data.todayCells.firstOrNull { it.start >= "14:00" }?.id == cell.id &&
+                                    data.todayCells.any { it.start < "14:00" }
+
+                                if (isFirstAfternoonClass) {
                                     Card(
                                         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
                                         modifier = Modifier.fillMaxWidth()
@@ -190,7 +194,11 @@ fun TimetableScreen(
                                 }
                             } else {
                                 items(dayCells, key = { it.id.ifBlank { it.periodKey + (it.tutorialGroup ?: "") + (it.practicalGroup ?: "") } }) { cell ->
-                                    if (cell.periodKey.startsWith("V") && dayCells.any { it.periodKey == "IV" || it.periodKey.startsWith("I") }) {
+                                    val isFirstAfternoonClass = cell.start >= "14:00" &&
+                                        dayCells.firstOrNull { it.start >= "14:00" }?.id == cell.id &&
+                                        dayCells.any { it.start < "14:00" }
+
+                                    if (isFirstAfternoonClass) {
                                         Card(
                                             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
                                             modifier = Modifier.fillMaxWidth()
@@ -242,7 +250,7 @@ fun TimetableScreen(
 
                                 Text("Practical Group", style = MaterialTheme.typography.labelMedium)
                                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                                    listOf("P1", "P2", "N/A").forEach { pg ->
+                                    listOf("P1", "P2", "P3", "P4", "N/A").forEach { pg ->
                                         FilterChip(
                                             selected = tempPrac == pg,
                                             onClick = { tempPrac = pg },

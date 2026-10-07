@@ -181,6 +181,7 @@ class FirebaseAdminRepository : AdminRepository {
                 "createdAt" to FieldValue.serverTimestamp()
             )
             db.collection(FirestoreCollections.POSTS).add(doc).await()
+            FirestoreNoticeRepository.clearCache()
             RepoResult.Ok(Unit)
         } catch (e: Exception) {
             RepoResult.Err("Could not publish notice: ${e.message}")
@@ -190,6 +191,7 @@ class FirebaseAdminRepository : AdminRepository {
     override suspend fun deleteNotice(id: String): RepoResult<Unit> = withContext(Dispatchers.IO) {
         try {
             db.collection(FirestoreCollections.POSTS).document(id).delete().await()
+            FirestoreNoticeRepository.clearCache()
             RepoResult.Ok(Unit)
         } catch (e: Exception) {
             RepoResult.Err("Could not delete notice: ${e.message}")

@@ -13,9 +13,41 @@ class FirebaseAuthRepository : AuthRepository {
     private val auth get() = FirebaseProvider.auth
     private val db get() = FirebaseProvider.firestore
 
+    companion object {
+        @Volatile
+        private var cachedProfile: StudentProfile? = null
+        @Volatile
+        private var lastFetchTime = 0L
+        private const val PROFILE_CACHE_TTL_MS = 5 * 60 * 1000L // 5 minutes cache
+
+        fun updateCachedProfile(profile: StudentProfile) {
+            cachedProfile = profile
+            lastFetchTime = System.currentTimeMillis()
+        }
+
+        fun clearCache() {
+            cachedProfile = null
+            lastFetchTime = 0L
+        }
+    }
+
     override suspend fun currentProfile(): StudentProfile? = withContext(Dispatchers.IO) {
-        val u = auth.currentUser ?: return@withContext null
-        profileOf(u.uid, null)
+        val u = auth.currentUser ?: run {
+            clearCache()
+            return@withContext null
+        }
+        val cached = cachedProfile
+        val now = System.currentTimeMillis()
+        if (cached != null && cached.uid == u.uid && (now - lastFetchTime < PROFILE_CACHE_TTL_MS)) {
+            return@withContext cached
+        }
+        val fresh = profileOf(u.uid, null)
+        if (fresh != null) {
+            updateCachedProfile(fresh)
+            fresh
+        } else {
+            cached
+        }
     }
 
     override suspend fun signIn(usernameOrRoll: String, password: String, useRoll: Boolean): RepoResult<StudentProfile> = withContext(Dispatchers.IO) {
@@ -40,6 +72,7 @@ class FirebaseAuthRepository : AuthRepository {
             auth.signInWithEmailAndPassword(AuthEmail.toEmail(username), password).await()
             val u = auth.currentUser ?: return@withContext RepoResult.Err("Sign-in succeeded but no session was returned.")
             val profile = profileOf(u.uid, username) ?: StudentProfile(uid = u.uid, name = username, username = username)
+            updateCachedProfile(profile)
             RepoResult.Ok(profile)
         } catch (e: Exception) {
             val code = (e as? com.google.firebase.auth.FirebaseAuthException)?.errorCode ?: e.message
@@ -48,6 +81,8 @@ class FirebaseAuthRepository : AuthRepository {
     }
 
     override suspend fun signOut() = withContext(Dispatchers.IO) {
+        clearCache()
+        com.mmmut.ero.data.local.ScheduleEngine.clearCache()
         try {
             val uid = auth.currentUser?.uid
             val token = try { FirebaseProvider.messaging.token.await() } catch (_: Exception) { null }

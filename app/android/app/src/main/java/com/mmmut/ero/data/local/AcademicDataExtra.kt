@@ -48,7 +48,7 @@ object AcademicDataExtra {
             SubjectDef("BPT106T", "Pharmaceutical Inorganic Chemistry", 3, 0, 2)))
     )
     val ALL_BRANCHES: List<Branch> get() = AcademicData.BRANCHES + MORE_BRANCHES
-    fun getBranch(id: String): Branch = ALL_BRANCHES.firstOrNull { it.id == id } ?: AcademicData.BRANCHES[1]
+    fun getBranch(id: String): Branch = ALL_BRANCHES.firstOrNull { it.id == ScheduleEngine.canonicalBranchId(id) } ?: ALL_BRANCHES[0]
     val BUILTIN_EVENTS = listOf(
         BuiltinEvent("2026-07-29", "2026-07-30", "Physical Reporting at MMMUT Gorakhpur"),
         BuiltinEvent("2026-07-31", "2026-07-31", "Orientation Program"),

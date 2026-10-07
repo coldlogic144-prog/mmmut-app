@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.mmmut.ero.TimetableArchitectureTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2026-10-02T07:23:35" hostname="LAPTOP-0ECMS234" time="0.113">
+  <properties/>
+  <testcase name="profile4_civil_I_A_T2_P2_verifications" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.031"/>
+  <testcase name="profile2_civil_I_A_T1_P2_verifications" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.002"/>
+  <testcase name="generateDebugReport" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.037"/>
+  <testcase name="branchAndSectionFilteringWorks" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.002"/>
+  <testcase name="testEceGroupIsolation" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.001"/>
+  <testcase name="currentAndNextClassDetection" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.001"/>
+  <testcase name="testMultiPeriodPracticalsAcrossBranches" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.004"/>
+  <testcase name="testAllBranchesAndSectionsLoadAccurateData" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.025"/>
+  <testcase name="profile3_civil_I_A_T2_P1_verifications" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.0"/>
+  <testcase name="profile1_civil_I_A_T1_P1_verifications" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.0"/>
+  <testcase name="sectionNormalizationTest" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.0"/>
+  <testcase name="multiPeriodPracticalsPreserved" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.0"/>
+  <testcase name="branchNormalizationTest" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.0"/>
+  <testcase name="simultaneousClassesPreservedInternally" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.001"/>
+  <system-out><![CDATA[==================================================
+Student: CIVIL / Sem 1 / Sec A / T1 / P1
+==================================================
+
+MONDAY
+09:10–10:00 | BSM-131 | LECTURE | Group: ALL | Room: TL-206 | Teacher: MH
+10:00–10:50 | BSM-110 | LECTURE | Group: ALL | Room: TL-206 | Teacher: MH
+10:50–11:40 | BIT-103 | LECTURE | Group: ALL | Room: TL-206 | Teacher: NiH
+15:30–16:15 | BHS-101 | LECTURE | Group: ALL | Room: TL-206 | Teacher: 
+16:15–17:00 | BSM-110 | TUTORIAL | Group: T1 | Room: TL-206 | Teacher: UF
+
+TUESDAY
+09:10–10:00 | BSM-131 | LECTURE | Group: ALL | Room: TL-206 | Teacher: MH
+10:00–10:50 | BSM-110 | LECTURE | Group: ALL | Room: TL-206 | Teacher: 
+10:50–11:40 | BHS-101 | TUTORIAL | Group: T1 | Room: TL-206 | Teacher: 
+
+WEDNESDAY
+09:10–10:00 | BSM-131 | LECTURE | Group: ALL | Room: TL-206 | Teacher: MH
+10:00–10:50 | BSM-110 | LECTURE | Group: ALL | Room: TL-206 | Teacher: 
+14:00–15:30 | BCE-121 | PRACTICAL | Group: P1 | Room: L-104 | Teacher: RPT/SU/AnS/CC
+
+THURSDAY
+10:50–11:40 | BIT-103 | LECTURE | Group: ALL | Room: TL-206 | Teacher: NiH
+14:00–15:30 | BSM-131 | PRACTICAL | Group: P1 | Room: Physics Lab | Teacher: 
+
+FRIDAY
+10:50–11:40 | BIT-103 | LECTURE | Group: ALL | Room: TL-206 | Teacher: NiH
+11:40–12:30 | BHS-101 | LECTURE | Group: ALL | Room: TL-206 | Teacher: 
+14:00–14:45 | BCE-121 | LECTURE | Group: ALL | Room: TL-206 | Teacher: NC
+
+SATURDAY
+09:10–10:50 | BIT-103 | PRACTICAL | Group: P1 | Room: ITRC-02 | Teacher: AK
+10:50–11:40 | BCE-121 | LECTURE | Group: ALL | Room: TL-206 | Teacher: NC
+11:40–12:30 | BHS-101 | LECTURE | Group: ALL | Room: TL-206 | Teacher: 
+==================================================
+Student: CIVIL / Sem 1 / Sec A / T1 / P2
+==================================================
+
+MONDAY
+09:10–10:00 | BSM-131 | LECTURE | Group: ALL | Room: TL-206 | Teacher: MH
+10:00–10:50 | BSM-110 | LECTURE | Group: ALL | Room: TL-206 | Teacher: MH
+10:50–11:40 | BIT-103 | LECTURE | Group: ALL | Room: TL-206 | Teacher: NiH
+15:30–16:15 | BHS-101 | LECTURE | Group: ALL | Room: TL-206 | Teacher: 
+16:15–17:00 | BSM-110 | TUTORIAL | Group: T1 | Room: TL-206 | Teacher: UF
+
+TUESDAY
+09:10–10:00 | BSM-131 | LECTURE | Group: ALL | Room: TL-206 | Teacher: MH
+10:00–10:50 | BSM-110 | LECTURE | Group: ALL | Room: TL-206 | Teacher: 
+10:50–11:40 | BHS-101 | TUTORIAL | Group: T1 | Room: TL-206 | Teacher: 
+
+WEDNESDAY
+09:10–10:00 | BSM-131 | LECTURE | Group: ALL | Room: TL-206 | Teacher: MH
+10:00–10:50 | BSM-110 | LECTURE | Group: ALL | Room: TL-206 | Teacher: 
+14:00–15:30 | BSM-131 | PRACTICAL | Group: P2 | Room: Physics Lab | Teacher: 
+
+THURSDAY
+09:10–10:50 | BIT-103 | PRACTICAL | Group: P2 | Room: ITRC-02 | Teacher: AK
+10:50–11:40 | BIT-103 | LECTURE | Group: ALL | Room: TL-206 | Teacher: NiH
+14:00–15:30 | BCE-121 | PRACTICAL | Group: P2 | Room: L-104 | Teacher: MM/AD/AkS/An
+
+FRIDAY
+10:50–11:40 | BIT-103 | LECTURE | Group: ALL | Room: TL-206 | Teacher: NiH
+11:40–12:30 | BHS-101 | LECTURE | Group: ALL | Room: TL-206 | Teacher: 
+14:00–14:45 | BCE-121 | LECTURE | Group: ALL | Room: TL-206 | Teacher: NC
+
+SATURDAY
+10:50–11:40 | BCE-121 | LECTURE | Group: ALL | Room: TL-206 | Teacher: NC
+11:40–12:30 | BHS-101 | LECTURE | Group: ALL | Room: TL-206 | Teacher: 
+==================================================
+Student: CIVIL / Sem 1 / Sec A / T2 / P1
+==================================================
+
+MONDAY
+09:10–10:00 | BSM-131 | LECTURE | Group: ALL | Room: TL-206 | Teacher: MH
+10:00–10:50 | BSM-110 | LECTURE | Group: ALL | Room: TL-206 | Teacher: MH
+10:50–11:40 | BIT-103 | LECTURE | Group: ALL | Room: TL-206 | Teacher: NiH
+15:30–16:15 | BHS-101 | LECTURE | Group: ALL | Room: TL-206 | Teacher: 
+
+TUESDAY
+09:10–10:00 | BSM-131 | LECTURE | Group: ALL | Room: TL-206 | Teacher: MH
+10:00–10:50 | BSM-110 | LECTURE | Group: ALL | Room: TL-206 | Teacher: 
+15:30–16:15 | BSM-110 | TUTORIAL | Group: T2 | Room: TL-206 | Teacher: UF
+
+WEDNESDAY
+09:10–10:00 | BSM-131 | LECTURE | Group: ALL | Room: TL-206 | Teacher: MH
+10:00–10:50 | BSM-110 | LECTURE | Group: ALL | Room: TL-206 | Teacher: 
+10:50–11:40 | BHS-101 | TUTORIAL | Group: T2 | Room: TL-206 | Teacher: 
+14:00–15:30 | BCE-121 | PRACTICAL | Group: P1 | Room: L-104 | Teacher: RPT/SU/AnS/CC
+
+THURSDAY
+10:50–11:40 | BIT-103 | LECTURE | Group: ALL | Room: TL-206 | Teacher: NiH
+14:00–15:30 | BSM-131 | PRACTICAL | Group: P1 | Room: Physics Lab | Teacher: 
+
+FRIDAY
+10:50–11:40 | BIT-103 | LECTURE | Group: ALL | Room: TL-206 | Teacher: NiH
+11:40–12:30 | BHS-101 | LECTURE | Group: ALL | Room: TL-206 | Teacher: 
+14:00–14:45 | BCE-121 | LECTURE | Group: ALL | Room: TL-206 | Teacher: NC
+
+SATURDAY
+09:10–10:50 | BIT-103 | PRACTICAL | Group: P1 | Room: ITRC-02 | Teacher: AK
+10:50–11:40 | BCE-121 | LECTURE | Group: ALL | Room: TL-206 | Teacher: NC
+11:40–12:30 | BHS-101 | LECTURE | Group: ALL | Room: TL-206 | Teacher: 
+==================================================
+Student: CIVIL / Sem 1 / Sec A / T2 / P2
+==================================================
+
+MONDAY
+09:10–10:00 | BSM-131 | LECTURE | Group: ALL | Room: TL-206 | Teacher: MH
+10:00–10:50 | BSM-110 | LECTURE | Group: ALL | Room: TL-206 | Teacher: MH
+10:50–11:40 | BIT-103 | LECTURE | Group: ALL | Room: TL-206 | Teacher: NiH
+15:30–16:15 | BHS-101 | LECTURE | Group: ALL | Room: TL-206 | Teacher: 
+
+TUESDAY
+09:10–10:00 | BSM-131 | LECTURE | Group: ALL | Room: TL-206 | Teacher: MH
+10:00–10:50 | BSM-110 | LECTURE | Group: ALL | Room: TL-206 | Teacher: 
+15:30–16:15 | BSM-110 | TUTORIAL | Group: T2 | Room: TL-206 | Teacher: UF
+
+WEDNESDAY
+09:10–10:00 | BSM-131 | LECTURE | Group: ALL | Room: TL-206 | Teacher: MH
+10:00–10:50 | BSM-110 | LECTURE | Group: ALL | Room: TL-206 | Teacher: 
+10:50–11:40 | BHS-101 | TUTORIAL | Group: T2 | Room: TL-206 | Teacher: 
+14:00–15:30 | BSM-131 | PRACTICAL | Group: P2 | Room: Physics Lab | Teacher: 
+
+THURSDAY
+09:10–10:50 | BIT-103 | PRACTICAL | Group: P2 | Room: ITRC-02 | Teacher: AK
+10:50–11:40 | BIT-103 | LECTURE | Group: ALL | Room: TL-206 | Teacher: NiH
+14:00–15:30 | BCE-121 | PRACTICAL | Group: P2 | Room: L-104 | Teacher: MM/AD/AkS/An
+
+FRIDAY
+10:50–11:40 | BIT-103 | LECTURE | Group: ALL | Room: TL-206 | Teacher: NiH
+11:40–12:30 | BHS-101 | LECTURE | Group: ALL | Room: TL-206 | Teacher: 
+14:00–14:45 | BCE-121 | LECTURE | Group: ALL | Room: TL-206 | Teacher: NC
+
+SATURDAY
+10:50–11:40 | BCE-121 | LECTURE | Group: ALL | Room: TL-206 | Teacher: NC
+11:40–12:30 | BHS-101 | LECTURE | Group: ALL | Room: TL-206 | Teacher: 
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

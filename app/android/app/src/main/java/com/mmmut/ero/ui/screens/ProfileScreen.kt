@@ -151,7 +151,7 @@ fun ProfileScreen(
                                         modifier = Modifier.menuAnchor().fillMaxWidth()
                                     )
                                     ExposedDropdownMenu(expanded = secExpanded, onDismissRequest = { secExpanded = false }) {
-                                        listOf("A", "B", "C").forEach { sec ->
+                                        listOf("A", "B", "C", "D").forEach { sec ->
                                             DropdownMenuItem(
                                                 text = { Text("Section $sec") },
                                                 onClick = { editSection = sec; secExpanded = false }
@@ -177,7 +177,7 @@ fun ProfileScreen(
 
                                 Text("Practical Group", style = MaterialTheme.typography.labelMedium)
                                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                                    listOf("P1", "P2", "N/A").forEach { pg ->
+                                    listOf("P1", "P2", "P3", "P4", "N/A").forEach { pg ->
                                         FilterChip(
                                             selected = editPracGroup == pg,
                                             onClick = { editPracGroup = pg },

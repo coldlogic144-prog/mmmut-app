@@ -28,6 +28,7 @@ fun HomeScreen(
     onAcademics: () -> Unit,
     onProfile: () -> Unit,
     onHostel: () -> Unit,
+    onMessMenu: () -> Unit = {},
     onNotifications: () -> Unit,
     onTelegram: () -> Unit,
     vm: HomeViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
@@ -42,12 +43,14 @@ fun HomeScreen(
         is UiState.Success -> {
             val d = s.data
             val p = d.profile
-            val branch = AcademicDataExtra.getBranch(p.branchId)
+            val branch = remember(p.branchId) { AcademicDataExtra.getBranch(p.branchId) }
 
-            val nowTimeStr = SimpleDateFormat("HH:mm", Locale.US).format(Date())
-            val currentCell = com.mmmut.ero.data.local.ScheduleEngine.getCurrentClass(d.todayCells, nowTimeStr)
-            val nextCell = com.mmmut.ero.data.local.ScheduleEngine.getNextClass(d.todayCells, nowTimeStr)
-            val activeOrNext = currentCell ?: nextCell
+            val (currentCell, _, activeOrNext) = remember(d.todayCells) {
+                val nowTimeStr = SimpleDateFormat("HH:mm", Locale.US).format(Date())
+                val cur = com.mmmut.ero.data.local.ScheduleEngine.getCurrentClass(d.todayCells, nowTimeStr)
+                val next = com.mmmut.ero.data.local.ScheduleEngine.getNextClass(d.todayCells, nowTimeStr)
+                Triple(cur, next, cur ?: next)
+            }
 
             LazyColumn(
                 Modifier.fillMaxSize(),
@@ -208,6 +211,11 @@ fun HomeScreen(
                             }
                             FilledTonalButton(onClick = onHostel, modifier = Modifier.weight(1f)) {
                                 Text("Hostel")
+                            }
+                        }
+                        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            FilledTonalButton(onClick = onMessMenu, modifier = Modifier.weight(1f)) {
+                                Text("Mess Menu")
                             }
                             FilledTonalButton(onClick = onNotices, modifier = Modifier.weight(1f)) {
                                 Text("Notices")

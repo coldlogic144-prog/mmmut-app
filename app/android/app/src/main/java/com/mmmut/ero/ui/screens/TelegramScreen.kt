@@ -35,6 +35,11 @@ fun TelegramScreen(
     var customHandle by remember { mutableStateOf("") }
 
     LaunchedEffect(Unit) { vm.load() }
+    DisposableEffect(Unit) {
+        onDispose {
+            vm.stopPolling()
+        }
+    }
 
     fun openUrl(url: String) {
         try {

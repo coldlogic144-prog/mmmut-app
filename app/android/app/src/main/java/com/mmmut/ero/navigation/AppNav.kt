@@ -41,21 +41,24 @@ fun AppNav(initialDeepLink: String? = null) {
         }
     }
 
-    val baseTabs = mutableListOf(
-        Routes.HOME to "Home",
-        Routes.TIMETABLE to "Schedule",
-        Routes.SYLLABUS to "Syllabus",
-        Routes.NOTICES to "Notices",
-        Routes.TELEGRAM to "Telegram",
-        Routes.PROFILE to "Profile"
-    )
-    if (isAdminUser) {
-        baseTabs.add(Routes.ADMIN to "Admin")
+    val baseTabs = remember(isAdminUser) {
+        val list = mutableListOf(
+            Routes.HOME to "Home",
+            Routes.TIMETABLE to "Schedule",
+            Routes.SYLLABUS to "Syllabus",
+            Routes.NOTICES to "Notices",
+            Routes.TELEGRAM to "Telegram",
+            Routes.PROFILE to "Profile"
+        )
+        if (isAdminUser) list.add(Routes.ADMIN to "Admin")
+        list.toList()
     }
+
+    val tabRoutes = remember(baseTabs) { baseTabs.map { it.first }.toSet() }
 
     val back by nav.currentBackStackEntryAsState()
     val route = back?.destination?.route
-    val showBar = authed && (route in baseTabs.map { it.first } || route == Routes.ACADEMICS || route == Routes.HOSTEL || route == Routes.NOTIFICATIONS || route?.startsWith("notice/") == true)
+    val showBar = authed && (route in tabRoutes || route == Routes.ACADEMICS || route == Routes.HOSTEL || route == Routes.MESS_MENU || route == Routes.NOTIFICATIONS || route?.startsWith("notice/") == true)
 
     Scaffold(bottomBar = {
         if (showBar) NavigationBar {
@@ -101,6 +104,7 @@ fun AppNav(initialDeepLink: String? = null) {
                     onAcademics = { nav.navigate(Routes.ACADEMICS) },
                     onProfile = { nav.navigate(Routes.PROFILE) },
                     onHostel = { nav.navigate(Routes.HOSTEL) },
+                    onMessMenu = { nav.navigate(Routes.MESS_MENU) },
                     onNotifications = { nav.navigate(Routes.NOTIFICATIONS) },
                     onTelegram = { nav.navigate(Routes.TELEGRAM) }
                 )
@@ -122,7 +126,15 @@ fun AppNav(initialDeepLink: String? = null) {
                     onTelegram = { nav.navigate(Routes.TELEGRAM) }
                 )
             }
-            composable(Routes.HOSTEL) { HostelScreen(onOpen = { nav.navigate(Routes.noticeDetail(it)) }) }
+            composable(Routes.HOSTEL) {
+                HostelScreen(
+                    onOpen = { nav.navigate(Routes.noticeDetail(it)) },
+                    onMessMenu = { nav.navigate(Routes.MESS_MENU) }
+                )
+            }
+            composable(Routes.MESS_MENU) {
+                MessMenuScreen(onBack = { nav.popBackStack() })
+            }
             composable(Routes.NOTIFICATIONS) { NotificationsScreen(onOpen = { nav.navigate(Routes.noticeDetail(it)) }) }
             composable(Routes.TELEGRAM) { TelegramScreen(onBack = { nav.popBackStack() }) }
             composable(Routes.ADMIN) { AdminScreen() }

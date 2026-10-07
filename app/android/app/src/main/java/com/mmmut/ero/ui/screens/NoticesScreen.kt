@@ -19,8 +19,12 @@ fun NoticesScreen(onOpen: (String) -> Unit, vm: NoticesViewModel = androidx.life
     LaunchedEffect(Unit) { vm.load() }
     Column(Modifier.fillMaxSize()) {
         OutlinedTextField(query, { query = it }, label = { Text("Search notices") }, modifier = Modifier.fillMaxWidth().padding(12.dp), singleLine = true)
-        Row(Modifier.padding(horizontal = 12.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            listOf("all", "general", "academic", "examination", "hostel", "events", "emergency").forEach { c ->
+        val categories = remember { listOf("all", "general", "academic", "examination", "hostel", "events", "emergency") }
+        androidx.compose.foundation.lazy.LazyRow(
+            Modifier.fillMaxWidth().padding(horizontal = 12.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            items(categories) { c ->
                 FilterChip(
                     selected = cat == c,
                     onClick = { cat = c },
@@ -37,9 +41,11 @@ fun NoticesScreen(onOpen: (String) -> Unit, vm: NoticesViewModel = androidx.life
             is UiState.Error -> ErrorView(s.message) { vm.load() }
             is UiState.Empty -> EmptyView("No announcements yet.")
             is UiState.Success -> {
-                val filtered = s.data.filter {
-                    (cat == "all" || it.category == cat || (cat == "examination" && it.category == "exam")) &&
-                    (query.isBlank() || it.title.contains(query, true) || it.content.contains(query, true))
+                val filtered = remember(s.data, cat, query) {
+                    s.data.filter {
+                        (cat == "all" || it.category == cat || (cat == "examination" && it.category == "exam")) &&
+                        (query.isBlank() || it.title.contains(query, true) || it.content.contains(query, true))
+                    }
                 }
                 if (filtered.isEmpty()) EmptyView("No notices match your filters.")
                 else LazyColumn(contentPadding = PaddingValues(vertical = 8.dp)) {

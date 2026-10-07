@@ -99,11 +99,16 @@ class TelegramViewModel(
         }
     }
 
-    private fun startPolling(token: String) {
+    fun stopPolling() {
         pollJob?.cancel()
+        pollJob = null
+    }
+
+    private fun startPolling(token: String) {
+        stopPolling()
         pollJob = viewModelScope.launch {
-            repeat(30) {
-                delay(3000)
+            repeat(12) { // 12 * 4s = 48s total
+                delay(4000)
                 when (val r = telegram.checkTokenStatus(token)) {
                     is RepoResult.Ok -> {
                         if (r.value) {
@@ -115,6 +120,7 @@ class TelegramViewModel(
                     else -> {}
                 }
             }
+            stopPolling()
         }
     }
 

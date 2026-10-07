@@ -60,7 +60,8 @@ data class TimetableCell(
     val tutorialGroup: String? = null,
     val practicalGroup: String? = null,
     val room: String = "TL-206",
-    val instructor: String = "",
+    val teacher: String = "",
+    val instructor: String = teacher,
     val notes: String = ""
 )
 
@@ -77,14 +78,16 @@ data class TimetableEntry(
     val endTime: String = "10:00",
     val subjectCode: String = "",
     val subjectName: String = "",
-    val classType: String = "LECTURE", // LECTURE, TUTORIAL, PRACTICAL, LUNCH, FREE
+    val type: String = "LECTURE", // LECTURE, TUTORIAL, PRACTICAL
     val tutorialGroup: String? = null, // "T1", "T2", or null (for all)
     val practicalGroup: String? = null, // "P1", "P2", "P3", "P4", or null (for all)
     val room: String = "TL-206",
-    val instructor: String = "",
+    val teacher: String = "",
     val notes: String = ""
 ) {
     val periodDisplay: String get() = if (startPeriod == endPeriod) startPeriod else "$startPeriod-$endPeriod"
+    val classType: String get() = type
+    val instructor: String get() = teacher
 
     fun toCell(): TimetableCell = TimetableCell(
         id = id,
@@ -94,13 +97,14 @@ data class TimetableEntry(
         endPeriod = endPeriod,
         subjectCode = subjectCode,
         subjectName = subjectName,
-        type = classType.lowercase().replaceFirstChar { it.uppercase() },
+        type = type.lowercase().replaceFirstChar { it.uppercase() },
         start = startTime,
         end = endTime,
         tutorialGroup = tutorialGroup,
         practicalGroup = practicalGroup,
         room = room,
-        instructor = instructor,
+        teacher = teacher,
+        instructor = teacher,
         notes = notes
     )
 }
@@ -190,3 +194,17 @@ data class SubjectSyllabus(
     val completedTopics: Int get() = units.sumOf { it.completedCount }
     val percent: Double get() = if (totalTopics == 0) 0.0 else (completedTopics * 100.0 / totalTopics)
 }
+
+data class MessDay(
+    val day: String = "",
+    val breakfast: List<String> = emptyList(),
+    val lunch: List<String> = emptyList(),
+    val snacks: List<String> = emptyList(),
+    val dinner: List<String> = emptyList()
+)
+
+data class MessWeeklyMenu(
+    val days: List<MessDay> = emptyList(),
+    val lastUpdated: Long = 0L,
+    val note: String = ""
+)

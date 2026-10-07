@@ -39,10 +39,10 @@ fun AcademicsScreen(vm: AcademicsViewModel = androidx.lifecycle.viewmodel.compos
 
                 when (tab) {
                     0 -> { // Attendance Redesign
-                        val (p, a, pct) = AttendanceUtils.summarize(d.map)
+                        val (p, a, pct) = remember(d.map) { AttendanceUtils.summarize(d.map) }
                         val total = p + a
-                        val leave = AttendanceUtils.computeLeaveInfo(p, a, 75.0)
-                        val subjectStats = AttendanceUtils.subjectBreakdown(d.map, branch.subjects)
+                        val leave = remember(p, a) { AttendanceUtils.computeLeaveInfo(p, a, 75.0) }
+                        val subjectStats = remember(d.map, branch.subjects) { AttendanceUtils.subjectBreakdown(d.map, branch.subjects) }
                         var detailSubject by remember { mutableStateOf<SubjectAttendanceStats?>(null) }
 
                         LazyColumn(
@@ -179,8 +179,12 @@ fun AcademicsScreen(vm: AcademicsViewModel = androidx.lifecycle.viewmodel.compos
                         }
 
                         detailSubject?.let { subStat ->
-                            val history = AttendanceUtils.historyForSubject(d.map, subStat.subjectCode)
-                            val subLeave = AttendanceUtils.computeLeaveInfo(subStat.present, subStat.absent, 75.0)
+                            val history = remember(subStat.subjectCode, d.map) {
+                                AttendanceUtils.historyForSubject(d.map, subStat.subjectCode)
+                            }
+                            val subLeave = remember(subStat.present, subStat.absent) {
+                                AttendanceUtils.computeLeaveInfo(subStat.present, subStat.absent, 75.0)
+                            }
 
                             AlertDialog(
                                 onDismissRequest = { detailSubject = null },

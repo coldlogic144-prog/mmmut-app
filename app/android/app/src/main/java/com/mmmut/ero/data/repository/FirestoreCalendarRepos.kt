@@ -51,7 +51,21 @@ class LocalTimetableRepository : TimetableRepository {
 
 class FirestoreCalendarRepository : CalendarRepository {
     private val db get() = FirebaseProvider.firestore
+
+    companion object {
+        @Volatile
+        private var cachedEvents: List<CalendarEvent>? = null
+        @Volatile
+        private var lastEventsFetch = 0L
+        private const val EVENTS_TTL_MS = 30 * 60 * 1000L // 30 minutes
+    }
+
     override suspend fun events(): RepoResult<List<CalendarEvent>> = withContext(Dispatchers.IO) {
+        val cached = cachedEvents
+        val now = System.currentTimeMillis()
+        if (cached != null && (now - lastEventsFetch < EVENTS_TTL_MS)) {
+            return@withContext RepoResult.Ok(cached)
+        }
         val out = AcademicDataExtra.BUILTIN_EVENTS.mapIndexed { i, e ->
             CalendarEvent("builtin-$i", e.title, e.start, e.end, "builtin")
         }.toMutableList()
@@ -69,22 +83,26 @@ class FirestoreCalendarRepository : CalendarRepository {
                 out.add(CalendarEvent(d.id, d.getString("title") ?: "Holiday", date, date, "holiday"))
             }
         } catch (_: Exception) { }
-        RepoResult.Ok(out.sortedBy { it.start })
+        val sorted = out.sortedBy { it.start }
+        cachedEvents = sorted
+        lastEventsFetch = now
+        RepoResult.Ok(sorted)
     }
+
     override suspend fun exams(): RepoResult<List<ExamInfo>> = withContext(Dispatchers.IO) {
         val builtin = listOf(
             ExamInfo("mid-sem", "Mid Semester Examinations", "As per academic calendar", "2026-09-21", "examination"),
             ExamInfo("end-practical", "End Semester Examinations (Practical)", "As per academic calendar", "2026-11-23", "examination"),
-            ExamInfo("end-theory", "End Semester Examinations (Theory)", "As per academic calendar", "2026-12-01", "examination"))
-        try {
-            val snap = db.collection(FirestoreCollections.POSTS).get().await()
-            val list = snap.documents.mapNotNull { d ->
-                val cat = (d.getString("category") ?: "").lowercase()
-                if (cat != "exam" && cat != "examination") return@mapNotNull null
-                ExamInfo(d.id, d.getString("title") ?: "", d.getString("content") ?: "", "", cat)
+            ExamInfo("end-theory", "End Semester Examinations (Theory)", "As per academic calendar", "2026-12-01", "examination")
+        )
+        when (val r = FirestoreNoticeRepository().notices()) {
+            is RepoResult.Ok -> {
+                val list = r.value.filter { it.category == "exam" || it.category == "examination" }
+                    .map { ExamInfo(it.id, it.title, it.content, "", it.category) }
+                RepoResult.Ok(builtin + list)
             }
-            RepoResult.Ok(builtin + list)
-        } catch (_: Exception) { RepoResult.Ok(builtin) }
+            is RepoResult.Err -> RepoResult.Ok(builtin)
+        }
     }
     override suspend fun results(uid: String): RepoResult<List<ResultEntry>> = withContext(Dispatchers.IO) {
         try {

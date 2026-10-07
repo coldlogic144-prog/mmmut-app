@@ -10,4 +10,5 @@ object FirestoreCollections {
     const val STUDENT_ROSTER = "studentRoster"
     const val USER_ROLLS = "userRolls"
     const val NOTIFICATION_TOKENS = "notificationTokens"
+    const val MESS_MENU = "messMenu"
 }

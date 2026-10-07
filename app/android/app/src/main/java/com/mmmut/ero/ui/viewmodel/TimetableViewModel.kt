@@ -46,13 +46,7 @@ class TimetableViewModel(
             }
             val branch = AcademicDataExtra.getBranch(profile.branchId)
             val weekGrid = try {
-                ttRepo.weekCells(
-                    branchId = profile.branchId,
-                    section = profile.section,
-                    tutorialGroup = profile.tutorialGroup,
-                    practicalGroup = profile.practicalGroup,
-                    semester = profile.semester
-                )
+                com.mmmut.ero.data.local.ScheduleEngine.getWeek(profile)
             } catch (_: Exception) { emptyMap() }
             val todayName = TimeUtils.todayName() ?: "Monday"
             val todayCells = weekGrid[todayName] ?: emptyList()

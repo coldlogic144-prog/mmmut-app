@@ -53,6 +53,8 @@ class FirebaseProfileRepository : ProfileRepository {
             val safe = mutableMapOf<String, Any>()
             fields.forEach { (k, v) -> if (k in allowed && v != null) safe[k] = v }
             db.collection(FirestoreCollections.USERS).document(uid).update(safe).await()
+            FirebaseAuthRepository.clearCache()
+            com.mmmut.ero.data.local.ScheduleEngine.clearCache()
             RepoResult.Ok(Unit)
         } catch (_: Exception) {
             RepoResult.Err("Could not save profile. Check your connection and retry.")

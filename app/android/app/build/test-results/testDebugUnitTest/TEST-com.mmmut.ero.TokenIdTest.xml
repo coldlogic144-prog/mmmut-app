@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.mmmut.ero.TokenIdTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-10-02T07:23:35" hostname="LAPTOP-0ECMS234" time="0.002">
+  <properties/>
+  <testcase name="tokenDocId_stableAndPrefixed" classname="com.mmmut.ero.TokenIdTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

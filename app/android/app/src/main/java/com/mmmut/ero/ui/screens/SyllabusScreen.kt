@@ -68,6 +68,7 @@ fun SyllabusScreen(
 
                     items(data.subjectSyllabi, key = { it.subjectCode }) { sub ->
                         var expanded by remember { mutableStateOf(false) }
+                        var expandedUnit by remember { mutableStateOf<String?>(null) }
 
                         Card(
                             modifier = Modifier
@@ -104,37 +105,74 @@ fun SyllabusScreen(
                                         Modifier
                                             .padding(top = 12.dp)
                                             .fillMaxWidth(),
-                                        verticalArrangement = Arrangement.spacedBy(12.dp)
+                                        verticalArrangement = Arrangement.spacedBy(8.dp)
                                     ) {
                                         HorizontalDivider()
 
                                         sub.units.forEach { unit ->
-                                            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                                                Text(
-                                                    "${unit.unitNumber}: ${unit.unitTitle} (${unit.completedCount}/${unit.totalCount})",
-                                                    style = MaterialTheme.typography.labelMedium,
-                                                    color = MaterialTheme.colorScheme.primary
-                                                )
-
-                                                unit.topics.forEach { topic ->
+                                            val isUnitOpen = expandedUnit == unit.unitNumber
+                                            Column(
+                                                Modifier
+                                                    .fillMaxWidth()
+                                                    .padding(vertical = 2.dp)
+                                            ) {
+                                                Surface(
+                                                    onClick = {
+                                                        expandedUnit = if (isUnitOpen) null else unit.unitNumber
+                                                    },
+                                                    color = if (isUnitOpen) MaterialTheme.colorScheme.surfaceVariant else MaterialTheme.colorScheme.surface,
+                                                    shape = MaterialTheme.shapes.small,
+                                                    modifier = Modifier.fillMaxWidth()
+                                                ) {
                                                     Row(
                                                         Modifier
                                                             .fillMaxWidth()
-                                                            .clickable { vm.toggleTopic(sub.subjectCode, topic.key, !topic.completed) },
+                                                            .padding(horizontal = 8.dp, vertical = 8.dp),
+                                                        horizontalArrangement = Arrangement.SpaceBetween,
                                                         verticalAlignment = Alignment.CenterVertically
                                                     ) {
-                                                        Checkbox(
-                                                            checked = topic.completed,
-                                                            onCheckedChange = { chk ->
-                                                                vm.toggleTopic(sub.subjectCode, topic.key, chk)
-                                                            }
+                                                        Text(
+                                                            "${unit.unitNumber}: ${unit.unitTitle} (${unit.completedCount}/${unit.totalCount})",
+                                                            style = MaterialTheme.typography.labelMedium,
+                                                            color = MaterialTheme.colorScheme.primary,
+                                                            modifier = Modifier.weight(1f)
                                                         )
-                                                        Spacer(Modifier.width(8.dp))
-                                                        Text(topic.name, style = MaterialTheme.typography.bodySmall)
+                                                        Icon(
+                                                            if (isUnitOpen) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
+                                                            contentDescription = if (isUnitOpen) "Collapse Module" else "Expand Module",
+                                                            modifier = Modifier.size(20.dp),
+                                                            tint = MaterialTheme.colorScheme.primary
+                                                        )
+                                                    }
+                                                }
+
+                                                if (isUnitOpen) {
+                                                    Column(
+                                                        Modifier
+                                                            .padding(start = 8.dp, top = 4.dp, end = 8.dp)
+                                                            .fillMaxWidth(),
+                                                        verticalArrangement = Arrangement.spacedBy(2.dp)
+                                                    ) {
+                                                        unit.topics.forEach { topic ->
+                                                            Row(
+                                                                Modifier
+                                                                    .fillMaxWidth()
+                                                                    .clickable { vm.toggleTopic(sub.subjectCode, topic.key, !topic.completed) },
+                                                                verticalAlignment = Alignment.CenterVertically
+                                                            ) {
+                                                                Checkbox(
+                                                                    checked = topic.completed,
+                                                                    onCheckedChange = { chk ->
+                                                                        vm.toggleTopic(sub.subjectCode, topic.key, chk)
+                                                                    }
+                                                                )
+                                                                Spacer(Modifier.width(8.dp))
+                                                                Text(topic.name, style = MaterialTheme.typography.bodySmall)
+                                                            }
+                                                        }
                                                     }
                                                 }
                                             }
-                                            HorizontalDivider()
                                         }
                                     }
                                 }

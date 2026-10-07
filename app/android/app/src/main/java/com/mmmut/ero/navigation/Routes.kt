@@ -13,6 +13,7 @@ object Routes {
     const val NOTICE_DETAIL = "notice/{noticeId}"
     const val PROFILE = "profile"
     const val HOSTEL = "hostel"
+    const val MESS_MENU = "mess_menu"
     const val NOTIFICATIONS = "notifications"
     const val TELEGRAM = "telegram"
     const val ADMIN = "admin"
