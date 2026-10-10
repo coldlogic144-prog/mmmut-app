@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.mmmut.ero.TimetableArchitectureTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2026-10-02T07:23:37" hostname="LAPTOP-0ECMS234" time="0.137">
+<testsuite name="com.mmmut.ero.TimetableArchitectureTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2026-10-07T18:06:21" hostname="LAPTOP-0ECMS234" time="0.053">
   <properties/>
-  <testcase name="profile4_civil_I_A_T2_P2_verifications" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.04"/>
-  <testcase name="profile2_civil_I_A_T1_P2_verifications" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.003"/>
-  <testcase name="generateDebugReport" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.055"/>
-  <testcase name="branchAndSectionFilteringWorks" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.002"/>
-  <testcase name="testEceGroupIsolation" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.002"/>
+  <testcase name="profile4_civil_I_A_T2_P2_verifications" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.019"/>
+  <testcase name="profile2_civil_I_A_T1_P2_verifications" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.001"/>
+  <testcase name="generateDebugReport" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.015"/>
+  <testcase name="branchAndSectionFilteringWorks" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.001"/>
+  <testcase name="testEceGroupIsolation" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.001"/>
   <testcase name="currentAndNextClassDetection" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.0"/>
-  <testcase name="testMultiPeriodPracticalsAcrossBranches" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.003"/>
-  <testcase name="testAllBranchesAndSectionsLoadAccurateData" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.027"/>
-  <testcase name="profile3_civil_I_A_T2_P1_verifications" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.001"/>
-  <testcase name="profile1_civil_I_A_T1_P1_verifications" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.0"/>
+  <testcase name="testMultiPeriodPracticalsAcrossBranches" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.002"/>
+  <testcase name="testAllBranchesAndSectionsLoadAccurateData" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.012"/>
+  <testcase name="profile3_civil_I_A_T2_P1_verifications" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.0"/>
+  <testcase name="profile1_civil_I_A_T1_P1_verifications" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.001"/>
   <testcase name="sectionNormalizationTest" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.0"/>
   <testcase name="multiPeriodPracticalsPreserved" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.0"/>
   <testcase name="branchNormalizationTest" classname="com.mmmut.ero.TimetableArchitectureTest" time="0.001"/>

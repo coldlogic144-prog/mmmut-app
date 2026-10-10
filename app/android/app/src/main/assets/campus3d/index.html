@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+<meta name="theme-color" content="#05070f" />
+<title>MMMUT Holographic Campus</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<canvas id="gl" aria-label="3D campus scene"></canvas>
+
+<!-- ============ HUD (CSS 3D layered over the WebGL scene) ============ -->
+<div id="hud" class="hud">
+
+  <header class="hud__top tilt">
+    <div class="brand">
+      <div class="brand__mark" aria-hidden="true">
+        <span class="brand__ring"></span>
+        <span class="brand__core">M</span>
+      </div>
+      <div class="brand__text">
+        <p class="brand__eyebrow">Madan Mohan Malaviya University of Technology</p>
+        <h1 class="brand__title">Holographic Campus</h1>
+        <p class="brand__sub" id="hudSubtitle">Gorakhpur &middot; Session 2026&ndash;27</p>
+      </div>
+    </div>
+    <button id="btnReset" class="chip chip--ghost" type="button" title="Reset camera">Reset view</button>
+  </header>
+
+  <div class="hud__stats" id="hudStats">
+    <div class="stat tilt">
+      <span class="stat__label">Attendance</span>
+      <span class="stat__value" id="statAttendance">&mdash;</span>
+      <span class="stat__bar"><i id="statAttendanceBar" style="width:0%"></i></span>
+    </div>
+    <div class="stat tilt">
+      <span class="stat__label">Active term</span>
+      <span class="stat__value" id="statTerm">2026&ndash;27</span>
+      <span class="stat__hint" id="statTermHint">Even semester</span>
+    </div>
+    <div class="stat tilt">
+      <span class="stat__label">Next class</span>
+      <span class="stat__value stat__value--sm" id="statNext">&mdash;</span>
+      <span class="stat__hint" id="statNextHint">No data</span>
+    </div>
+  </div>
+
+  <div class="hud__legend" id="hudLegend">
+    <button class="chip is-active" data-focus="all" type="button">All</button>
+    <button class="chip" data-focus="academic" type="button">Academic</button>
+    <button class="chip" data-focus="hostel" type="button">Hostel</button>
+    <button class="chip" data-focus="library" type="button">Library</button>
+    <button class="chip" data-focus="sports" type="button">Sports</button>
+  </div>
+
+  <footer class="hud__bottom">
+    <p class="hud__hint" id="hudHint">Drag to orbit &middot; Pinch or scroll to zoom</p>
+    <p class="hud__foot">MMMUT ERO &middot; The Ledger</p>
+  </footer>
+</div>
+
+<!-- ============ Fallback when WebGL is unavailable ============ -->
+<div id="fallback" class="fallback" hidden>
+  <div class="fallback__card tilt">
+    <div class="brand__mark" aria-hidden="true">
+      <span class="brand__ring"></span>
+      <span class="brand__core">M</span>
+    </div>
+    <h2>MMMUT Campus</h2>
+    <p>This device does not support WebGL, so the live 3D campus cannot be rendered. Everything else in the app keeps working normally.</p>
+  </div>
+</div>
+
+<script src="scene.js"></script>
+</body>
+</html>

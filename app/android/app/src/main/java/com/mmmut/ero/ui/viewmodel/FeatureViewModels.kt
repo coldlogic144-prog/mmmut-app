@@ -152,6 +152,18 @@ class NotificationsViewModel : ViewModel() {
             catch (_: Exception) { _history.value = emptyList() }
         }
     }
+
+    /** Removes the on-device history only; the notices themselves are untouched. */
+    fun clearHistory(ctx: android.content.Context) {
+        viewModelScope.launch {
+            try {
+                com.mmmut.ero.notifications.NotificationHistoryStore(ctx).clear()
+                _history.value = emptyList()
+            } catch (_: Exception) {
+                // Leave the list as-is; the screen reports its own message.
+            }
+        }
+    }
 }
 
 class VerifyRollViewModel(private val repo: RosterRepository = RosterRepositoryImpl()) : ViewModel() {

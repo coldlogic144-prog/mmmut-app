@@ -1,0 +1,314 @@
+/* ==========================================================================
+   MMMUT Holographic Campus — HUD layer
+   Sits above the WebGL canvas. Uses CSS 3D (perspective + translateZ) so the
+   interface itself reads as a dimensional layer, not a flat overlay.
+   ========================================================================== */
+
+:root {
+  --ink: #eaf0ff;
+  --ink-dim: #93a2c4;
+  --indigo: #5b6cff;
+  --indigo-soft: rgba(91, 108, 255, 0.16);
+  --gold: #ffc766;
+  --maroon: #b3273c;
+  --glass: rgba(12, 18, 38, 0.55);
+  --glass-line: rgba(140, 165, 255, 0.22);
+  --radius: 16px;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #05070f;
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* The scene canvas */
+#gl {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;   /* we handle drag/pinch ourselves */
+  cursor: grab;
+  background: radial-gradient(120% 90% at 50% 8%, #101a3c 0%, #070b1a 45%, #04060e 100%);
+}
+#gl:active { cursor: grabbing; }
+
+/* ========================================================================== */
+/* HUD                                                                        */
+/* ========================================================================== */
+
+.hud {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: calc(12px + var(--safe-top)) 14px calc(12px + var(--safe-bottom));
+  pointer-events: none;          /* let touches reach the canvas */
+  perspective: 1100px;           /* enables the CSS-3D tilt below */
+  perspective-origin: 50% 30%;
+}
+
+.hud > * { pointer-events: auto; }
+
+/* --- soft vignette so HUD text stays legible over the render ------------- */
+.hud::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(4, 7, 16, 0.82) 0%, rgba(4, 7, 16, 0) 22%),
+    linear-gradient(0deg,  rgba(4, 7, 16, 0.86) 0%, rgba(4, 7, 16, 0) 26%);
+}
+
+.hud__top, .hud__stats, .hud__legend, .hud__bottom {
+  position: relative;            /* above the vignette */
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.hud__top { justify-content: space-between; align-items: flex-start; }
+
+/* --- glass tilt panels --------------------------------------------------- */
+.tilt {
+  background: var(--glass);
+  border: 1px solid var(--glass-line);
+  border-radius: var(--radius);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  transform: rotateX(6deg) translateZ(0);
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+/* --- brand --------------------------------------------------------------- */
+.brand {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 14px;
+  max-width: min(78vw, 560px);
+}
+
+.brand__mark {
+  position: relative;
+  width: 46px;
+  height: 46px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+}
+
+.brand__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background:
+    linear-gradient(#0a1024, #0a1024) padding-box,
+    conic-gradient(from 0deg, var(--indigo), var(--gold), var(--maroon), var(--indigo)) border-box;
+  animation: spin 7s linear infinite;
+  opacity: 0.95;
+}
+
+.brand__core {
+  position: relative;
+  font-weight: 700;
+  font-size: 19px;
+  letter-spacing: 0.5px;
+  background: linear-gradient(180deg, #fff, var(--gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 18px rgba(255, 199, 102, 0.35);
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.brand__text { min-width: 0; }
+
+.brand__eyebrow {
+  margin: 0;
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.brand__title {
+  margin: 2px 0 0;
+  font-size: clamp(17px, 4.6vw, 24px);
+  font-weight: 650;
+  line-height: 1.12;
+  background: linear-gradient(92deg, #ffffff 0%, #b9c6ff 52%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.brand__sub { margin: 3px 0 0; font-size: 11px; color: var(--ink-dim); }
+
+/* --- stat cards ---------------------------------------------------------- */
+.hud__stats {
+  align-self: stretch;
+  justify-content: flex-start;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 2px 0 4px;
+  gap: 9px;
+}
+.hud__stats::-webkit-scrollbar { display: none; }
+
+.stat {
+  flex: none;
+  min-width: 116px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat__label {
+  font-size: 9.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
+.stat__value {
+  font-size: 21px;
+  font-weight: 660;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat__value--sm { font-size: 13.5px; font-weight: 600; line-height: 1.25; }
+
+.stat__hint { font-size: 10.5px; color: var(--ink-dim); }
+
+.stat__bar {
+  display: block;
+  height: 4px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.stat__bar > i {
+  display: block;
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--indigo), var(--gold));
+  box-shadow: 0 0 12px rgba(255, 199, 102, 0.5);
+  transition: width 500ms ease;
+}
+
+/* --- chips --------------------------------------------------------------- */
+.hud__legend { flex-wrap: wrap; justify-content: center; }
+
+.chip {
+  appearance: none;
+  border: 1px solid var(--glass-line);
+  background: var(--glass);
+  color: var(--ink-dim);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 7px 13px;
+  border-radius: 99px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: color 160ms ease, border-color 160ms ease, background 160ms ease, transform 160ms ease;
+}
+
+.chip.is-active {
+  color: #0a1024;
+  background: linear-gradient(180deg, #ffffff, #d8e0ff);
+  border-color: transparent;
+  box-shadow: 0 6px 18px rgba(120, 145, 255, 0.35);
+}
+
+.chip:active { transform: scale(0.96); }
+.chip--ghost { flex: none; }
+
+/* --- bottom -------------------------------------------------------------- */
+.hud__bottom {
+  flex-direction: column;
+  gap: 2px;
+  align-items: center;
+  text-align: center;
+}
+
+.hud__hint { margin: 0; font-size: 11px; color: var(--ink-dim); }
+
+.hud__foot {
+  margin: 0;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(147, 162, 196, 0.65);
+}
+
+/* ========================================================================== */
+/* Fallback                                                                   */
+/* ========================================================================== */
+
+.fallback {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: radial-gradient(120% 90% at 50% 10%, #101a3c 0%, #05070f 70%);
+  perspective: 900px;
+}
+
+.fallback[hidden] { display: none; }
+
+.fallback__card {
+  max-width: 420px;
+  padding: 26px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.fallback__card h2 { margin: 4px 0 0; font-size: 20px; }
+
+.fallback__card p { margin: 0; font-size: 13px; line-height: 1.55; color: var(--ink-dim); }
+
+/* ========================================================================== */
+/* Accessibility / misc                                                       */
+/* ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .brand__ring { animation: none; }
+  .tilt { transform: none; }
+  .stat__bar > i { transition: none; }
+}
+
+@media (max-height: 560px) {
+  .hud__legend { display: none; }
+  .brand { padding: 9px 11px; }
+  .stat { min-width: 104px; padding: 8px 10px; }
+}

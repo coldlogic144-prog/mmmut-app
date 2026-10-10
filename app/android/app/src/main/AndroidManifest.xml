@@ -33,6 +33,13 @@
             </intent-filter>
         </activity>
 
+        <!-- Full-screen WebView host for the bundled 3D campus frontend. -->
+        <activity
+            android:name=".ui.three.ThreeDActivity"
+            android:exported="false"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|smallestScreenSize|uiMode"
+            android:theme="@style/Theme.MMMUT" />
+
         <service
             android:name=".notifications.MmmutFirebaseMessagingService"
             android:exported="false">

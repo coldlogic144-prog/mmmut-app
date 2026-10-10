@@ -749,6 +749,7 @@
 -keep class com.mmmut.ero.MainActivity { <init>(); }
 -keep class com.mmmut.ero.MmmutApp { <init>(); }
 -keep class com.mmmut.ero.notifications.MmmutFirebaseMessagingService { <init>(); }
+-keep class com.mmmut.ero.ui.three.ThreeDActivity { <init>(); }
 -keep class androidx.browser.browseractions.BrowserActionsFallbackMenuView { <init>(android.content.Context, android.util.AttributeSet); }
 
 

@@ -175,6 +175,7 @@ data class TopicItem(
 data class SyllabusUnit(
     val unitNumber: String = "",
     val unitTitle: String = "",
+    val hours: Int = 0,
     val topics: List<TopicItem> = emptyList()
 ) {
     val completedCount: Int get() = topics.count { it.completed }
@@ -188,7 +189,12 @@ data class SubjectSyllabus(
     val category: String = "",
     val credits: Int = 4,
     val ltp: String = "",
-    val units: List<SyllabusUnit> = emptyList()
+    val units: List<SyllabusUnit> = emptyList(),
+    val prerequisite: String = "",
+    val assessment: String = "",
+    val objectives: String = "",
+    val courseOutcomes: List<String> = emptyList(),
+    val referenceBooks: List<String> = emptyList()
 ) {
     val totalTopics: Int get() = units.sumOf { it.totalCount }
     val completedTopics: Int get() = units.sumOf { it.completedCount }

@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:2:1-48:12
-INJECTED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:2:1-48:12
-INJECTED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:2:1-48:12
-INJECTED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:2:1-48:12
+ADDED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:2:1-55:12
+INJECTED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:2:1-55:12
+INJECTED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:2:1-55:12
+INJECTED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:2:1-55:12
 MERGED from [androidx.navigation:navigation-common:2.7.7] C:\Users\Tanish\.gradle\caches\transforms-4\b8ca8740733127f3288fca106b410f0a\transformed\navigation-common-2.7.7\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.navigation:navigation-runtime:2.7.7] C:\Users\Tanish\.gradle\caches\transforms-4\f90773a0a28ece60104f11e7dc853074\transformed\navigation-runtime-2.7.7\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.navigation:navigation-common-ktx:2.7.7] C:\Users\Tanish\.gradle\caches\transforms-4\364d6c68fa27a09a4cb2bfab8eeadb84\transformed\navigation-common-ktx-2.7.7\AndroidManifest.xml:2:1-7:12
@@ -169,8 +169,8 @@ MERGED from [com.google.firebase:firebase-messaging:24.0.0] C:\Users\Tanish\.gra
 	android:name
 		ADDED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:7:22-74
 application
-ADDED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:9:5-47:19
-INJECTED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:9:5-47:19
+ADDED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:9:5-54:19
+INJECTED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:9:5-54:19
 MERGED from [com.google.firebase:firebase-auth-ktx:23.0.0] C:\Users\Tanish\.gradle\caches\transforms-4\4cbf9d25c954aeb5eca8018c39275ef5\transformed\firebase-auth-ktx-23.0.0\AndroidManifest.xml:7:5-15:19
 MERGED from [com.google.firebase:firebase-auth-ktx:23.0.0] C:\Users\Tanish\.gradle\caches\transforms-4\4cbf9d25c954aeb5eca8018c39275ef5\transformed\firebase-auth-ktx-23.0.0\AndroidManifest.xml:7:5-15:19
 MERGED from [com.google.firebase:firebase-auth:23.0.0] C:\Users\Tanish\.gradle\caches\transforms-4\f721a5195d3b7dd8c2c042884f27fc45\transformed\firebase-auth-23.0.0\AndroidManifest.xml:28:5-73:19
@@ -299,24 +299,34 @@ data
 ADDED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:32:17-48
 	android:scheme
 		ADDED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:32:23-45
-service#com.mmmut.ero.notifications.MmmutFirebaseMessagingService
-ADDED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:36:9-42:19
+activity#com.mmmut.ero.ui.three.ThreeDActivity
+ADDED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:37:9-41:50
 	android:exported
-		ADDED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:38:13-37
+		ADDED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:39:13-37
+	android:configChanges
+		ADDED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:40:13-113
+	android:theme
+		ADDED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:41:13-47
 	android:name
-		ADDED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:37:13-72
+		ADDED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:38:13-52
+service#com.mmmut.ero.notifications.MmmutFirebaseMessagingService
+ADDED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:43:9-49:19
+	android:exported
+		ADDED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:45:13-37
+	android:name
+		ADDED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:44:13-72
 intent-filter#action:name:com.google.firebase.MESSAGING_EVENT
-ADDED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:39:13-41:29
+ADDED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:46:13-48:29
 action#com.google.firebase.MESSAGING_EVENT
-ADDED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:40:17-78
+ADDED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:47:17-78
 	android:name
-		ADDED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:40:25-75
+		ADDED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:47:25-75
 meta-data#com.google.firebase.messaging.default_notification_channel_id
-ADDED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:44:9-46:45
+ADDED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:51:9-53:45
 	android:value
-		ADDED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:46:13-42
+		ADDED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:53:13-42
 	android:name
-		ADDED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:45:13-89
+		ADDED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml:52:13-89
 uses-sdk
 INJECTED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\web\mmmut\app\mmmut app\app\android\app\src\main\AndroidManifest.xml

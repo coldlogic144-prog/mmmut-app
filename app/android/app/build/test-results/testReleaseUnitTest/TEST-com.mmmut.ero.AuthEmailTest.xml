@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.mmmut.ero.AuthEmailTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-10-02T07:23:37" hostname="LAPTOP-0ECMS234" time="0.018">
+<testsuite name="com.mmmut.ero.AuthEmailTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-10-07T18:06:21" hostname="LAPTOP-0ECMS234" time="0.009">
   <properties/>
-  <testcase name="emailMapping_matchesWeb" classname="com.mmmut.ero.AuthEmailTest" time="0.017"/>
-  <testcase name="validation_matchesWeb" classname="com.mmmut.ero.AuthEmailTest" time="0.001"/>
+  <testcase name="emailMapping_matchesWeb" classname="com.mmmut.ero.AuthEmailTest" time="0.009"/>
+  <testcase name="validation_matchesWeb" classname="com.mmmut.ero.AuthEmailTest" time="0.0"/>
   <testcase name="friendlyErrors" classname="com.mmmut.ero.AuthEmailTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
